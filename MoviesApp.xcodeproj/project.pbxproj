@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7519242E2453156B00472CD5 /* UIView+setSubviewsForAutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7519242D2453156B00472CD5 /* UIView+setSubviewsForAutoLayout.swift */; };
 		7579823D2452DA460059BFA0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7579823C2452DA460059BFA0 /* AppDelegate.swift */; };
 		7579823F2452DA460059BFA0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7579823E2452DA460059BFA0 /* SceneDelegate.swift */; };
 		757982412452DA460059BFA0 /* MoviesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757982402452DA460059BFA0 /* MoviesVC.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7519242D2453156B00472CD5 /* UIView+setSubviewsForAutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+setSubviewsForAutoLayout.swift"; sourceTree = "<group>"; };
 		757982392452DA460059BFA0 /* MoviesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoviesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7579823C2452DA460059BFA0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7579823E2452DA460059BFA0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +39,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7519242C2453154500472CD5 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7519242D2453156B00472CD5 /* UIView+setSubviewsForAutoLayout.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		757982302452DA460059BFA0 = {
 			isa = PBXGroup;
 			children = (
@@ -60,6 +70,7 @@
 				757982592452E3110059BFA0 /* Models */,
 				7579825A2452E3270059BFA0 /* Views */,
 				7579825B2452E3360059BFA0 /* ViewModels */,
+				7519242C2453154500472CD5 /* Extensions */,
 				757982532452E0C00059BFA0 /* Resources */,
 			);
 			path = MoviesApp;
@@ -181,6 +192,7 @@
 				7579823D2452DA460059BFA0 /* AppDelegate.swift in Sources */,
 				757982472452DA460059BFA0 /* MoviesApp.xcdatamodeld in Sources */,
 				7579823F2452DA460059BFA0 /* SceneDelegate.swift in Sources */,
+				7519242E2453156B00472CD5 /* UIView+setSubviewsForAutoLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -35,29 +35,29 @@ extension MoviesVC: UISearchBarDelegate {
     ]
     navigationController?.navigationBar.titleTextAttributes = attrs
     navigationItem.title = "Movies"
-    
-    
   }
   
   private func setupSearchBar() {
+    //create search bar with frame right below navigaation bar
     let searchBar = UISearchBar(frame: CGRect(x: 0, y: navigationController?.navigationBar.frame.maxY ?? 0
       , width: view.frame.width, height: 0))
+    //
     searchBar.delegate = self
     searchBar.sizeToFit()
     searchBar.barTintColor = #colorLiteral(red: 1, green: 0.1473975487, blue: 0.4460660192, alpha: 1)
     searchBar.tintColor = .white
-    for view in searchBar.subviews {
+    for view in searchBar.subviews {    //change text field background color, text color
         for subview in view.subviews {
             if subview is UITextField {
-                let textField: UITextField = subview as! UITextField
+              guard let textField = subview as? UITextField else { return }
               textField.backgroundColor = #colorLiteral(red: 0.5496635658, green: 0.08103376437, blue: 0.2457754123, alpha: 1)
               textField.textColor = .white
             }
         }
     }
-    searchBar.backgroundColor = .black
+    searchBar.backgroundColor = .black  //outline color
     searchBar.showsCancelButton = true
-    searchBar.searchBarStyle = .prominent
+    searchBar.searchBarStyle = .default
     searchBar.placeholder = "Type To Search Movies"
     searchBar.enablesReturnKeyAutomatically = true
     view.addSubview(searchBar)

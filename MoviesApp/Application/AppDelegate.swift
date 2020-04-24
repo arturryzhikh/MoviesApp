@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       // do nothing
     }
     window = UIWindow(frame: UIScreen.main.bounds)
-    let homeVC = MoviesVC()
+    let homeVC = MoviesVC(collectionViewLayout: UICollectionViewLayout())
     let rootVC = UINavigationController(rootViewController: homeVC)
     window?.rootViewController = rootVC
     window?.makeKeyAndVisible()

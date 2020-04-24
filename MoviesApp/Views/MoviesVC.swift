@@ -16,12 +16,17 @@ class MoviesVC: UICollectionViewController {
     self.view.setSubviewsForAutoLayout([searchBar,collectionView])
     layoutSearchBar()
     NSLayoutConstraint.activate([collectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
-                                 collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                                 collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                                 collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)])
-     
-    collectionView.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.01176470611, blue: 0.5607843399, alpha: 1)
+                                   collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                                   collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                                   collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)])
     
+    collectionView.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.01176470611, blue: 0.5607843399, alpha: 1)
+    collectionView.register(FavoritesCell.self, forCellWithReuseIdentifier: FavoritesCell.reuseID)
+    collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+    collectionView.delegate = self
+    collectionView.dataSource = self
+    
+   
     
   }
   
@@ -81,4 +86,32 @@ private extension MoviesVC {
     navigationItem.title = "Movies"
   }
   
+}
+//MARK: UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout
+
+extension MoviesVC: UICollectionViewDelegateFlowLayout {
+  
+  
+  override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return 10
+  }
+  override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    if indexPath.row == 0 {
+      return collectionView.dequeueReusableCell(withReuseIdentifier: FavoritesCell.reuseID, for: indexPath)
+      
+    }
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+    cell.backgroundColor = .yellow
+    return cell
+  }
+
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    if indexPath.row == 0 {
+      return CGSize(width: view.frame.width, height: 200)
+    }
+    return CGSize(width: view.frame.width, height: 100)
+  }
+
+
+
 }

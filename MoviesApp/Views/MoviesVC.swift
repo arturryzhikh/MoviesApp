@@ -12,12 +12,15 @@ class MoviesVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    setupNavigationBar()
+      self.view.setSubviewsForAutoLayout([searchBar])
+      layoutSearchBar()
     
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    setupViews()
+
   }
     
   
@@ -42,12 +45,7 @@ extension MoviesVC: UISearchBarDelegate {
  
 }
 private extension MoviesVC {
-  func setupViews() {
-    self.view.setSubviewsForAutoLayout([searchBar])
-    layoutSearchBar()
-    setupNavigationBar()
-    searchBar.delegate = self
-  }
+
   func layoutSearchBar() {
     if #available(iOS 11.0, *) {
       NSLayoutConstraint.activate([searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -72,7 +70,7 @@ private extension MoviesVC {
     //color and font of title
     let attrs = [
       NSAttributedString.Key.foregroundColor: UIColor.white,
-      NSAttributedString.Key.font: UIFont.systemFont(ofSize: 24, weight: .bold)
+      NSAttributedString.Key.font: UIFont.systemFont(ofSize: 22, weight: .bold)
     ]
     navigationController?.navigationBar.titleTextAttributes = attrs
     navigationItem.title = "Movies"

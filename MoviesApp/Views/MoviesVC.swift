@@ -25,7 +25,7 @@ class MoviesVC: UICollectionViewController {
     collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
     collectionView.delegate = self
     collectionView.dataSource = self
-    
+    print(FavoritesCell.reuseID)
    
     
   }
@@ -90,8 +90,7 @@ private extension MoviesVC {
 //MARK: UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout
 
 extension MoviesVC: UICollectionViewDelegateFlowLayout {
-  
-  
+ 
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return 10
   }
@@ -107,9 +106,9 @@ extension MoviesVC: UICollectionViewDelegateFlowLayout {
 
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     if indexPath.row == 0 {
-      return CGSize(width: view.frame.width, height: 200)
+      return CGSize(width: view.frame.width, height: view.frame.height / 7)
     }
-    return CGSize(width: view.frame.width, height: 100)
+    return CGSize(width: view.frame.width, height: view.frame.height / 4)
   }
 
 

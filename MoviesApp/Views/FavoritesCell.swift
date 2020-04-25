@@ -8,8 +8,12 @@
 
 import UIKit
 
+
 class FavoritesCell: UICollectionViewCell {
-  static let reuseID = "FavoritesCell"
+  
+  static var reuseID : String {
+    return self.description()
+  }
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -34,6 +38,7 @@ class FavoritesCell: UICollectionViewCell {
       self.topAnchor).isActive = true
     horizontalCollectionView.bottomAnchor.constraint(equalTo:
       self.bottomAnchor).isActive = true
+    horizontalCollectionView.contentInset = UIEdgeInsets(top: 5 , left: 0, bottom: 0, right: 0)
   }
   //MARK: Subviews
   let horizontalCollectionView: UICollectionView = {
@@ -65,12 +70,14 @@ extension FavoritesCell: UICollectionViewDelegate, UICollectionViewDataSource {
 //MARK: Collection View Delegate Flow Layout
 extension FavoritesCell: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: 100, height: frame.height)
+    return CGSize(width: (self.frame.width / 2.5) , height: frame.height - 16)
   }
 }
 //MARK: Horizontal Cell
 class HorizontalCell: UICollectionViewCell {
-  static let reuseID = "HorizontalCell"
+  static var reuseID : String {
+    return self.description()
+  }
   override init(frame: CGRect) {
     super.init(frame: frame)
     setupView()

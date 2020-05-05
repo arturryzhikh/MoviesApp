@@ -9,12 +9,19 @@
 import UIKit
 
 class MoviesVC: UICollectionViewController {
-  
+  private weak var searchBar: UISearchBar!
   override func viewDidLoad() {
     super.viewDidLoad()
     setupNavigationBar()
-    self.view.setSubviewsForAutoLayout([searchBar,collectionView])
-    layoutSearchBar()
+    searchBar = setupSearchBar()
+    setupCollectionView()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+
+  }
+  private func setupCollectionView() {
     NSLayoutConstraint.activate([collectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
                                    collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                                    collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -25,18 +32,12 @@ class MoviesVC: UICollectionViewController {
     collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
     collectionView.delegate = self
     collectionView.dataSource = self
-    print(FavoritesCell.reuseID)
-   
+    collectionView.translatesAutoresizingMaskIntoConstraints = false
     
-  }
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-
   }
   //MARK: Subviews
   //SearchBar
-  let searchBar: UISearchBar = {
+  private func setupSearchBar() -> UISearchBar {
     let sb = UISearchBar(frame: .zero)
     sb.sizeToFit()
     sb.barTintColor = #colorLiteral(red: 1, green: 0.1473975487, blue: 0.4460660192, alpha: 1)
@@ -45,34 +46,24 @@ class MoviesVC: UICollectionViewController {
     sb.showsCancelButton = true
     sb.searchBarStyle = .default
     sb.enablesReturnKeyAutomatically = true
-    return sb
-   }()
-   
-}
-
-extension MoviesVC: UISearchBarDelegate {
-  
- 
-}
-private extension MoviesVC {
-  //place search bar right under navigation bar
-  func layoutSearchBar() {
+    sb.translatesAutoresizingMaskIntoConstraints = false
+    self.view.addSubview(sb)
     if #available(iOS 11.0, *) {
-      NSLayoutConstraint.activate([searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-      searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)])
+      NSLayoutConstraint.activate([sb.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      sb.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      sb.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)])
       
     } else {
       NSLayoutConstraint.activate([
-      searchBar.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor),
-      searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+      sb.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor),
+      sb.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      sb.trailingAnchor.constraint(equalTo: view.trailingAnchor)
       ])
     }
-  }
-  
+   
+    return sb
+   }
   private func setupNavigationBar() {
-  
     //color of navigation
     navigationController?.navigationBar.barTintColor = #colorLiteral(red: 1, green: 0.1473975487, blue: 0.4460660192, alpha: 1)
     //color of bar button items
@@ -85,8 +76,13 @@ private extension MoviesVC {
     navigationController?.navigationBar.titleTextAttributes = attrs
     navigationItem.title = "Movies"
   }
-  
+   
 }
+
+
+  
+
+
 //MARK: UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout
 
 extension MoviesVC: UICollectionViewDelegateFlowLayout {

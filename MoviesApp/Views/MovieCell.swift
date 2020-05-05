@@ -9,7 +9,7 @@
 import UIKit
 
 //MARK: Horizontal Cell
-class MovieCell: UICollectionViewCell {
+public class MovieCell: UICollectionViewCell {
   //MARK: instance properties
   static var reuseID : String {
     return self.description()

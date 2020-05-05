@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FeaturedMovieCell: UICollectionViewCell {
+public class FeaturedMovieCell: UICollectionViewCell {
   
   static var reuseID : String {
     return self.description()
@@ -16,13 +16,33 @@ class FeaturedMovieCell: UICollectionViewCell {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    self.layer.cornerRadius = 4
-    backgroundColor = .blue
+    setupView()
+   
   }
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+  //MARK: Subviews
+  private let posterIV: UIImageView = {
+    let iv = UIImageView()
+    iv.contentMode = .scaleAspectFit
+    iv.backgroundColor = .yellow
+    return iv
+  }()
+  //MARK: Initial setup
+  private func setupView() {
+    self.layer.cornerRadius = 4 // slightly rounded corners
+    //add subviews
+    self.setSubviewsForAutoLayout(posterIV)
+    //constraint poster image view
+    NSLayoutConstraint.activate([
+      posterIV.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+      posterIV.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+      posterIV.topAnchor.constraint(equalTo: self.topAnchor),
+      posterIV.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+    ])
+    
+  }
   
 }

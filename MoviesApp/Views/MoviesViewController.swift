@@ -79,7 +79,7 @@ extension MoviesViewController {
     }
   
    private func setupNavigationBar() {
-     //TODO:- make global color management
+    //TODO:- make global color management
     navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)
      //color of bar button items
      navigationController?.navigationBar.tintColor = .white
@@ -117,7 +117,7 @@ extension MoviesViewController: UICollectionViewDelegateFlowLayout {
     case 0 :
        return CGSize(width: view.frame.width, height: view.frame.height / 6)
     default:
-       return CGSize(width: view.frame.width - 10, height: view.frame.height / 4)
+       return CGSize(width: view.frame.width - 10, height: view.frame.height / 6)
     }
     
    

@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class FeaturedMovieCell: UICollectionViewCell {
+class FeaturedMovieCell: UICollectionViewCell {
   
   static var reuseID : String {
     return self.description()

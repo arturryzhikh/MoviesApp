@@ -67,7 +67,7 @@ class MovieCell: UICollectionViewCell {
     return tv
   }()
    private func setupView() {
-    self.layer.cornerRadius = 4 // slightly rounded corners
+    self.layer.cornerRadius = 4 
     self.backgroundColor = .green
    //add subviews
    self.setSubviewsForAutoLayout(posterIV,titleLabel,yearLabel,descriptionLabel)

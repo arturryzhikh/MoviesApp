@@ -8,14 +8,12 @@
 
 import UIKit
 
-
 class FeaturedCell: UICollectionViewCell {
   //MARK: Instance properties
   
   static var reuseID : String {
     return self.description()
   }
-  
   //MARK: life cycle
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -48,11 +46,7 @@ class FeaturedCell: UICollectionViewCell {
       featuredCollectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
      ])
   }
- 
-  
-  
-  
-}
+ }
 //MARK: Collection View Delegate & DataSource
 extension FeaturedCell: UICollectionViewDelegate, UICollectionViewDataSource {
  

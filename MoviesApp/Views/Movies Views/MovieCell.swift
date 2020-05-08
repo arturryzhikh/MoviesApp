@@ -29,7 +29,7 @@ class MovieCell: UICollectionViewCell {
   }
   
    //MARK:Subviews
-  private let posterIV: UIImageView = {
+  private lazy var posterIV: UIImageView = {
     let iv = UIImageView()
     iv.contentMode = .scaleAspectFit
     iv.backgroundColor = .yellow
@@ -71,7 +71,6 @@ class MovieCell: UICollectionViewCell {
     self.backgroundColor = .green
    //add subviews
    self.setSubviewsForAutoLayout(posterIV,titleLabel,yearLabel,descriptionLabel)
-   
    NSLayoutConstraint.activate([
     //constraint poster image view
      posterIV.leadingAnchor.constraint(equalTo: self.leadingAnchor,constant: 5),
@@ -88,7 +87,7 @@ class MovieCell: UICollectionViewCell {
     yearLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 2),
     yearLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
     yearLabel.widthAnchor.constraint(equalTo: titleLabel.widthAnchor,multiplier: 0.15),
-    // constraint description text view
+    // constraint description label
     descriptionLabel.topAnchor.constraint(equalTo: yearLabel.bottomAnchor, constant: 1),
     descriptionLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor,constant: -5),
     descriptionLabel.leadingAnchor.constraint(equalTo: posterIV.trailingAnchor, constant: 8),

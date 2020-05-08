@@ -105,16 +105,16 @@ extension MoviesViewController {
                                cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
       switch indexPath.row  {
       case 0 :
-      return collectionView.dequeueReusableCell(withReuseIdentifier: FeaturedCell.reuseID, for: indexPath)
+      return collectionView.dequeueReusableCell(
+        withReuseIdentifier: FeaturedCell.reuseID, for: indexPath)
       default:
-      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reuseID, for: indexPath)
+      let cell = collectionView.dequeueReusableCell(
+        withReuseIdentifier: MovieCell.reuseID, for: indexPath)
       return cell
     }
   }
-  override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    if indexPath.row == 0 {
-      return
-    }
-    self.show(MovieDetailViewController(),sender: nil)
+  override func collectionView(_ collectionView: UICollectionView,
+                               didSelectItemAt indexPath: IndexPath) {
+   
   }
 }

@@ -76,6 +76,8 @@ extension MoviesViewController {
     }
   
    private func setupNavigationBar() {
+    //FIXME: navigation controoller bar tin color appears as window background color while returning from movie detail vc
+    navigationController?.navigationBar.isTranslucent = false
     navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)  //TODO:- make global color management
     navigationController?.navigationBar.tintColor = .white  //color of bar button items
     let attrs = [ //color and font of title

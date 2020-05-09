@@ -22,8 +22,10 @@ class MovieDetailViewController: UICollectionViewController {
     setupCollectionViewLayout(with: padding)
   }
   
+  
   //MARK: Subview
   private func setupNavigationBar() {
+    navigationController?.navigationBar.isTranslucent = true
     //make bar transparent
     navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
     //make bar separator transparent

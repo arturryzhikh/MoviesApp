@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       // do nothing
     }
     window = UIWindow(frame: UIScreen.main.bounds)
+    window?.backgroundColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)
     let homeVC = MoviesViewController(collectionViewLayout: UICollectionViewFlowLayout())
     let rootVC = UINavigationController(rootViewController: homeVC)
     window?.rootViewController = rootVC

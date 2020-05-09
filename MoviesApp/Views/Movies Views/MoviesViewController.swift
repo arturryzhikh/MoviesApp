@@ -29,18 +29,19 @@ class MoviesViewController: UICollectionViewController {
 //MARK: Subviews
 extension MoviesViewController {
   private func setupCollectionView() {
-     collectionView.translatesAutoresizingMaskIntoConstraints = false
-     NSLayoutConstraint.activate([
-      collectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
-      collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-      collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+    collectionView.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+    collectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
+    collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+    collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+    collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
      ])
-     collectionView.backgroundColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)
-     collectionView.register(FeaturedCell.self, forCellWithReuseIdentifier: FeaturedCell.reuseID)
-     collectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.reuseID)
-     collectionView.delegate = self
-     collectionView.dataSource = self
+    collectionView.backgroundColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)
+    collectionView.register(FeaturedCell.self, forCellWithReuseIdentifier: FeaturedCell.reuseID)
+    collectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.reuseID)
+    collectionView.delegate = self
+    collectionView.dataSource = self
+    self.automaticallyAdjustsScrollViewInsets = false
   }
   private func makeSearchBar() -> UISearchBar {
     let sb = UISearchBar(frame: .zero)
@@ -90,7 +91,8 @@ extension MoviesViewController {
 
 extension MoviesViewController: UICollectionViewDelegateFlowLayout {
  func collectionView(_ collectionView: UICollectionView,
-                     layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+                     layout collectionViewLayout: UICollectionViewLayout,
+                     sizeForItemAt indexPath: IndexPath) -> CGSize {
     return CGSize(width: view.frame.width, height: view.frame.height / 6)
   }
   
@@ -98,7 +100,8 @@ extension MoviesViewController: UICollectionViewDelegateFlowLayout {
 //MARK: UICollectionViewDelegate, UICollectionViewDataSource
 
 extension MoviesViewController {
-  override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+  override func collectionView(_ collectionView: UICollectionView,
+                               numberOfItemsInSection section: Int) -> Int {
       return 10
   }
   override func collectionView(_ collectionView: UICollectionView,
@@ -115,6 +118,9 @@ extension MoviesViewController {
   }
   override func collectionView(_ collectionView: UICollectionView,
                                didSelectItemAt indexPath: IndexPath) {
-   
+    navigationController?.show(MovieDetailViewController(collectionViewLayout: MovieDetailFlowLayout()), sender: nil)
+    //send movie object here
+    
+    
   }
 }

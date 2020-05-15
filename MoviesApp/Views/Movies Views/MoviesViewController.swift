@@ -23,6 +23,11 @@ class MoviesViewController: UICollectionViewController {
     setupNavigationBar()
     searchBar = makeSearchBar()
     setupCollectionView()
+    let service = NetworkService()
+    service.searchMovies(query: "Terminator") { (results, error) in
+      print(results)
+      }
+    
   }
 }
 

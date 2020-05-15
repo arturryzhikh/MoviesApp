@@ -20,6 +20,7 @@
 		75A4C5242461568100504026 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A4C5232461568100504026 /* MovieCell.swift */; };
 		75A4C52A246173EB00504026 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A4C529246173EB00504026 /* UIView+Extensions.swift */; };
 		75B453C12461DA24006AFFC8 /* FeaturedMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B453C02461DA24006AFFC8 /* FeaturedMovieCell.swift */; };
+		75C51A8E246BF868006A0685 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C51A8D246BF868006A0685 /* NetworkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		75A4C5232461568100504026 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		75A4C529246173EB00504026 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		75B453C02461DA24006AFFC8 /* FeaturedMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedMovieCell.swift; sourceTree = "<group>"; };
+		75C51A8D246BF868006A0685 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkService.swift; path = MoviesApp/NetworkService.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,8 +64,10 @@
 		7519243524533B6500472CD5 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				75C51A8D246BF868006A0685 /* NetworkService.swift */,
 			);
-			path = Services;
+			name = Services;
+			path = Application/Services;
 			sourceTree = "<group>";
 		};
 		757982302452DA460059BFA0 = {
@@ -86,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				757982582452E2F50059BFA0 /* Application */,
+				7519243524533B6500472CD5 /* Services */,
 				757982592452E3110059BFA0 /* Models */,
 				7579825A2452E3270059BFA0 /* Views */,
 				7579825B2452E3360059BFA0 /* ViewModels */,
@@ -110,7 +115,6 @@
 				7579823E2452DA460059BFA0 /* SceneDelegate.swift */,
 				7579823C2452DA460059BFA0 /* AppDelegate.swift */,
 				7579824A2452DA470059BFA0 /* LaunchScreen.storyboard */,
-				7519243524533B6500472CD5 /* Services */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -240,6 +244,7 @@
 				751924322453329300472CD5 /* FeaturedCell.swift in Sources */,
 				750EBC3B246571B7004E032E /* MovieDetailViewController.swift in Sources */,
 				75A4C52A246173EB00504026 /* UIView+Extensions.swift in Sources */,
+				75C51A8E246BF868006A0685 /* NetworkService.swift in Sources */,
 				750EBC3F2465D18C004E032E /* MovieHeader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

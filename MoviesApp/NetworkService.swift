@@ -8,30 +8,16 @@
 
 import Foundation
 
-struct SearchMoviesResult: Decodable {
-  
-  let page, totalResults, totalPages : Int?
-  let results: [Result]?
-    struct Result: Decodable {
-      let popularity, voteAvarage: Double?
-      let voteCount, id: Int?
-      let video,adult: Bool?
-      let originalLanguage,
-      originalTitle,
-      backdropPath,
-      posterPath,
-      overview,
-      releaseDate,title : String?
-      let genreIDS: [Int]?
-    }
-     
-}
-
 final class NetworkService {
+  
+  static let  shared = NetworkService()
   private let apiKey = "be0534e846d5abd01a6b93c899d51676"
   private let baseURL = "https://api.themoviedb.org/3"
   private let searchMoves = "/search/movie"
   private let session = URLSession.shared
+  func fetchImage(from url: URL) {
+    
+  }
   
   func searchMovies(query: String, completion: @escaping (_ searchMoviesResult: SearchMoviesResult?, _ error: Error?) -> Void ) {
     var urlComponents = URLComponents(string: baseURL + searchMoves )
@@ -52,7 +38,6 @@ final class NetworkService {
                 completion(nil, error)
                 return
             }
-        
             let translations =  self.decodeJSON(from: data, into: SearchMoviesResult.self)
             completion(translations,nil)
             }
@@ -63,9 +48,11 @@ final class NetworkService {
 
 }
 private extension NetworkService {
-  func decodeJSON<T:Decodable>(from data: Data?, into: T.Type) -> T? {
-    guard let data = data else { print("error")
-      return nil }
+  func decodeJSON<T:Decodable>(from data: Data?, into model: T.Type) -> T? {
+    guard let data = data else {
+      print("error decoding JSON into \(model)")
+      return nil
+    }
     let decoder = JSONDecoder()
     decoder.keyDecodingStrategy = .convertFromSnakeCase
     let decodedJSON = try? decoder.decode(T.self, from: data)

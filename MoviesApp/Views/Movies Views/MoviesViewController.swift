@@ -11,11 +11,12 @@ import UIKit
 class MoviesViewController: UICollectionViewController {
  //MARK: Instance properties
   private var searchBar: UISearchBar!
-  
-//MARK: life cycle
+  private var networkService : NetworkService!
+  private var searchMovieResults: SearchMoviesResult?
+ //MARK: life cycle
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    networkService = NetworkService.shared
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -23,11 +24,6 @@ class MoviesViewController: UICollectionViewController {
     setupNavigationBar()
     searchBar = makeSearchBar()
     setupCollectionView()
-    let service = NetworkService()
-    service.searchMovies(query: "Terminator") { (results, error) in
-      print(results)
-      }
-    
   }
 }
 
@@ -50,6 +46,7 @@ extension MoviesViewController {
   }
   private func makeSearchBar() -> UISearchBar {
     let sb = UISearchBar(frame: .zero)
+    sb.delegate = self //DELEGATE
     //TODO:- make global color management
     sb.barTintColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)
     if #available(iOS 13.0, *) {
@@ -94,7 +91,7 @@ extension MoviesViewController {
    }
 }
 
-//MARK: UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout
+//MARK: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 
 extension MoviesViewController: UICollectionViewDelegateFlowLayout {
  func collectionView(_ collectionView: UICollectionView,
@@ -109,19 +106,16 @@ extension MoviesViewController: UICollectionViewDelegateFlowLayout {
 extension MoviesViewController {
   override func collectionView(_ collectionView: UICollectionView,
                                numberOfItemsInSection section: Int) -> Int {
-      return 10
+    return searchMovieResults?.results?.count ?? 0
   }
   override func collectionView(_ collectionView: UICollectionView,
                                cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-      switch indexPath.row  {
-      case 0 :
-      return collectionView.dequeueReusableCell(
-        withReuseIdentifier: FeaturedCell.reuseID, for: indexPath)
-      default:
+      
       let cell = collectionView.dequeueReusableCell(
-        withReuseIdentifier: MovieCell.reuseID, for: indexPath)
+        withReuseIdentifier: MovieCell.reuseID, for: indexPath) as! MovieCell
+    
       return cell
-    }
+    
   }
   override func collectionView(_ collectionView: UICollectionView,
                                didSelectItemAt indexPath: IndexPath) {
@@ -129,5 +123,14 @@ extension MoviesViewController {
     //send movie object here
     
     
+  }
+}
+//MARK: UISearchBar Delegate
+extension MoviesViewController: UISearchBarDelegate {
+  
+  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    networkService.searchMovies(query: searchText) { (results, error) in
+      
+    }
   }
 }

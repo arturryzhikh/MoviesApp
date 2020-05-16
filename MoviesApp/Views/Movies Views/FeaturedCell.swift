@@ -7,7 +7,6 @@
 //
 
 import UIKit
-
 class FeaturedCell: UICollectionViewCell {
   //MARK: Instance properties
   
@@ -47,6 +46,7 @@ class FeaturedCell: UICollectionViewCell {
      ])
   }
  }
+
 //MARK: Collection View Delegate & DataSource
 extension FeaturedCell: UICollectionViewDelegate, UICollectionViewDataSource {
  

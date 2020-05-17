@@ -15,10 +15,6 @@ final class NetworkService {
   private let baseURL = "https://api.themoviedb.org/3"
   private let searchMoves = "/search/movie"
   private let session = URLSession.shared
-  func fetchImage(from url: URL) {
-    
-  }
-  
   func searchMovies(query: String, completion: @escaping (_ searchMoviesResult: SearchMoviesResult?, _ error: Error?) -> Void ) {
     var urlComponents = URLComponents(string: baseURL + searchMoves )
     var queryItems = [URLQueryItem]()

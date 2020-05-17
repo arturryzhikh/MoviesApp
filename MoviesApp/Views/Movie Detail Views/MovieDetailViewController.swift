@@ -10,10 +10,12 @@ import UIKit
 fileprivate let reuseID = "cell"
 
 class MovieDetailViewController: UICollectionViewController {
+
   private let padding: CGFloat = 8
 //MARK: life cycle
   override func viewDidLoad() {
     super.viewDidLoad()
+    
   }
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
@@ -65,10 +67,12 @@ extension MovieDetailViewController {
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseID, for: indexPath)
     cell.backgroundColor = .blue
+    
     return cell
   }
   override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-    let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MovieHeader.reuseID, for: indexPath)
+    let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MovieHeader.reuseID, for: indexPath) as! MovieHeader
+   
     return header
   }
   

@@ -11,12 +11,11 @@ import UIKit
 class MoviesViewController: UICollectionViewController {
  //MARK: Instance properties
   private var searchBar: UISearchBar!
-  private var networkService : NetworkService!
-  private var searchMovieResults: SearchMoviesResult?
+  private var resultViewModels = [ResultViewModel]()
  //MARK: life cycle
   override func viewDidLoad() {
     super.viewDidLoad()
-    networkService = NetworkService.shared
+    
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -106,20 +105,22 @@ extension MoviesViewController: UICollectionViewDelegateFlowLayout {
 extension MoviesViewController {
   override func collectionView(_ collectionView: UICollectionView,
                                numberOfItemsInSection section: Int) -> Int {
-    return searchMovieResults?.results?.count ?? 0
+    return resultViewModels.count
   }
   override func collectionView(_ collectionView: UICollectionView,
                                cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
       
       let cell = collectionView.dequeueReusableCell(
         withReuseIdentifier: MovieCell.reuseID, for: indexPath) as! MovieCell
-    
-      return cell
+    let resultViewModel = resultViewModels[indexPath.row]
+    cell.resultViewModel = resultViewModel
+    return cell
     
   }
   override func collectionView(_ collectionView: UICollectionView,
                                didSelectItemAt indexPath: IndexPath) {
-    navigationController?.show(MovieDetailViewController(collectionViewLayout: MovieDetailFlowLayout()), sender: nil)
+    let movieDetailVC = MovieDetailViewController(collectionViewLayout: MovieDetailFlowLayout())
+    navigationController?.show(movieDetailVC, sender: nil)
     //send movie object here
     
     
@@ -128,9 +129,22 @@ extension MoviesViewController {
 //MARK: UISearchBar Delegate
 extension MoviesViewController: UISearchBarDelegate {
   
-  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-    networkService.searchMovies(query: searchText) { (results, error) in
-      
+  private func fetchMovies(text: String) {
+    NetworkService.shared.searchMovies(query: text) { (result, error) in
+      if let error = error {
+        print("error searching courses,\(error)")
+      }
+      if let results = result?.results {
+        self.resultViewModels = results.map { ResultViewModel(from: $0) }
+        print(self.resultViewModels.count)
+        self.collectionView.reloadData()
+      }
     }
+  }
+  
+  
+  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+   
+    fetchMovies(text: searchText)
   }
 }

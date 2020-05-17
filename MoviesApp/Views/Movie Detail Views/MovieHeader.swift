@@ -29,6 +29,7 @@ class MovieHeader: UICollectionReusableView {
    }()
   private func setupView() {
     setSubviewsForAutoLayout(posterIV)
+    self.contentMode = .scaleAspectFill
     //Constraint poster image view
     NSLayoutConstraint.activate ([
       posterIV.trailingAnchor.constraint(equalTo: self.trailingAnchor),

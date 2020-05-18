@@ -18,9 +18,7 @@ final class NetworkService {
       completion(nil,nil)
       return
     }
-   let imageKey = url.absoluteString as NSString
-    print(imageChache.object(forKey: imageKey))
-       print(url)
+    let imageKey = url.absoluteString as NSString
     if let cachedImage = imageChache.object(forKey: imageKey) {
       completion(cachedImage,nil)
       

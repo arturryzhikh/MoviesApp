@@ -17,9 +17,11 @@ class MovieCell: UICollectionViewCell {
       titleLabel.text = resultViewModel.title
       yearLabel.text = String(resultViewModel.releaseDate?.prefix(4) ?? "Year")
       overviewLabel.text = resultViewModel.overview
-      posterIV.image = resultViewModel.backdropImage
+      posterImageView.setImage(from: resultViewModel.posterPath)
     }
+    
   }
+  
   
   
   static var reuseID: String {
@@ -39,10 +41,11 @@ class MovieCell: UICollectionViewCell {
   }
   
    //MARK:Subviews
-  private let posterIV: UIImageView = {
+  private let posterImageView: UIImageView = {
     let iv = UIImageView()
     iv.contentMode = .scaleAspectFit
     iv.backgroundColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)
+    iv.image = #imageLiteral(resourceName: "TMBdLogo")
     return iv
   }()
   private let titleLabel: UILabel = {
@@ -50,9 +53,9 @@ class MovieCell: UICollectionViewCell {
     lbl.backgroundColor = #colorLiteral(red: 0.003921568627, green: 0.7058823529, blue: 0.8941176471, alpha: 1)
     lbl.numberOfLines = 0
     lbl.textAlignment = .natural
-    lbl.lineBreakMode = .byCharWrapping
+    lbl.lineBreakMode = .byWordWrapping
     lbl.font = UIFont.boldSystemFont(ofSize: 12)
-    lbl.textColor = .white
+    lbl.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     lbl.text = "Загадочная история Бенжамина Баттона"
     return lbl
   }()
@@ -60,8 +63,7 @@ class MovieCell: UICollectionViewCell {
     let lbl = UILabel()
     lbl.backgroundColor = #colorLiteral(red: 0.003921568627, green: 0.7058823529, blue: 0.8941176471, alpha: 1)
     lbl.numberOfLines = 0
-    lbl.textAlignment = .center
-    lbl.lineBreakMode = .byCharWrapping
+    lbl.textAlignment = .left
     lbl.font = UIFont.systemFont(ofSize: 10)
     lbl.textColor = .black
     lbl.text = "1998"
@@ -70,9 +72,9 @@ class MovieCell: UICollectionViewCell {
   private let overviewLabel: UILabel = {
     let tv = UILabel()
     tv.font = UIFont.systemFont(ofSize: 10)
-    tv.textColor = .white
+    tv.textColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)
     tv.numberOfLines = 0
-    tv.lineBreakMode = .byCharWrapping
+    tv.lineBreakMode = .byWordWrapping
     tv.backgroundColor = #colorLiteral(red: 0.003921568627, green: 0.7058823529, blue: 0.8941176471, alpha: 1)
     return tv
   }()
@@ -80,16 +82,16 @@ class MovieCell: UICollectionViewCell {
     self.layer.cornerRadius = 4 
     self.backgroundColor = #colorLiteral(red: 0.003921568627, green: 0.7058823529, blue: 0.8941176471, alpha: 1)
    //add subviews
-   self.setSubviewsForAutoLayout(posterIV,titleLabel,yearLabel,overviewLabel)
+   self.setSubviewsForAutoLayout(posterImageView,titleLabel,yearLabel,overviewLabel)
    NSLayoutConstraint.activate([
     //constraint poster image view
-     posterIV.leadingAnchor.constraint(equalTo: self.leadingAnchor,constant: 5),
-     posterIV.topAnchor.constraint(equalTo: self.topAnchor,constant: 5),
-     posterIV.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4),
-     posterIV.bottomAnchor.constraint(equalTo: self.bottomAnchor,constant:  -5),
+     posterImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor,constant: 5),
+     posterImageView.topAnchor.constraint(equalTo: self.topAnchor,constant: 5),
+     posterImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.2),
+     posterImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor,constant:  -5),
     //constraint title
      titleLabel.topAnchor.constraint(equalTo: self.topAnchor,constant: 5),
-     titleLabel.leadingAnchor.constraint(equalTo: posterIV.trailingAnchor,constant: 8),
+     titleLabel.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor,constant: 8),
      titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5),
      titleLabel.heightAnchor.constraint(equalTo: self.heightAnchor,multiplier: 0.25),
      //constraint year label
@@ -100,7 +102,7 @@ class MovieCell: UICollectionViewCell {
     // constraint description label
     overviewLabel.topAnchor.constraint(equalTo: yearLabel.bottomAnchor, constant: 1),
     overviewLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor,constant: -5),
-    overviewLabel.leadingAnchor.constraint(equalTo: posterIV.trailingAnchor, constant: 8),
+    overviewLabel.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: 8),
     overviewLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: -5)
     
   ])

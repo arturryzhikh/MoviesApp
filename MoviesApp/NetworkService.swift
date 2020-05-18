@@ -6,19 +6,44 @@
 //  Copyright © 2020 Artur Ryzhikh. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 final class NetworkService {
   
   static let  shared = NetworkService()
-  private let apiKey = "be0534e846d5abd01a6b93c899d51676"
-  private let baseURL = "https://api.themoviedb.org/3"
-  private let searchMoves = "/search/movie"
+  
   private let session = URLSession.shared
+  
+  func fetchImage(from path: String, completion : @escaping (_ image: UIImage?, _ error: Error?) -> Void) {
+   guard let url = URL(string: TMDbApi.imageBaseUrl + path) else {
+      completion(nil,nil)
+      return
+    }
+    print(url)
+    let task = session.dataTask(with: url) { data,response,error in
+      DispatchQueue.main.async {
+                 guard let data = data,
+                 let response = response as? HTTPURLResponse,
+                 (200 ..< 300).contains(response.statusCode),
+                 error == nil else {
+                  completion(nil, error)
+                  print("Error downloading image \(String(describing: error))")
+                  return
+                 }
+              completion(UIImage(data: data),nil)
+            }
+      
+    }
+    task.resume()
+    
+
+    
+    
+  }
   func searchMovies(query: String, completion: @escaping (_ searchMoviesResult: SearchMoviesResult?, _ error: Error?) -> Void ) {
-    var urlComponents = URLComponents(string: baseURL + searchMoves )
+    var urlComponents = URLComponents(string: TMDbApi.searchMovies)
     var queryItems = [URLQueryItem]()
-    queryItems.append(URLQueryItem(name: "api_key", value: apiKey))
+    queryItems.append(URLQueryItem(name: "api_key", value: TMDbApi.apiKey))
     queryItems.append(URLQueryItem(name: "query", value: query))
     urlComponents?.queryItems = queryItems
     guard let url = urlComponents?.url else { return }

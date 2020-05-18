@@ -136,7 +136,6 @@ extension MoviesViewController: UISearchBarDelegate {
       }
       if let results = result?.results {
         self.resultViewModels = results.map { ResultViewModel(from: $0) }
-        print(self.resultViewModels.count)
         self.collectionView.reloadData()
       }
     }

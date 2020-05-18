@@ -12,33 +12,18 @@ struct ResultViewModel {
   var title: String? = "Title"
   var releaseDate: String? = "Year"
   var overview: String? = "Overview"
-  var backdropImage: UIImage = #imageLiteral(resourceName: "TMBdLogo")
-  var backdropPath: String?
+  var poster: UIImage?
+  let posterPath: String?
   //Initialization
  init(from result: Result) {
   self.title = result.title
   self.releaseDate = result.releaseDate
   self.overview = result.overview
-//  if let backdropPath = result.backdropPath {
-//    self.backdropImage = self.loadBackdropImage(backdropPath: backdropPath)
-//  }
-  
+  self.posterPath = result.posterPath
   }
-  
 }
 
 
-private extension ResultViewModel {
-  mutating func loadBackdropImage(backdropPath: String) -> UIImage? {
-    
-    let url = URL(string: "https://image.tmdb.org/t/p/w500\(backdropPath)")
-      if let data = try? Data(contentsOf: url!) {
-        if let image = UIImage(data: data) {
-            return image
-        }
-      }
-    return nil
-  }
-  
-}
+
+
 

@@ -8,20 +8,21 @@
 
 import UIKit
 
-struct ResultViewModel {
-  var title: String? = "Title"
-  var releaseDate: String? = "Year"
-  var overview: String? = "Overview"
-  var poster: UIImage?
+struct MovieViewModel {
+  let title: String?
+  let releaseDate: String?
+  let overview: String?
+  let poster: UIImage? = nil
   let posterPath: String?
   //Initialization
- init(from result: Result) {
+ init(from result: MovieListResult) {
   self.title = result.title
   self.releaseDate = result.releaseDate
   self.overview = result.overview
   self.posterPath = result.posterPath
   }
 }
+
 
 
 

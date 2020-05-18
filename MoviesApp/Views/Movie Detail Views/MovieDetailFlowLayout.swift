@@ -12,7 +12,7 @@ class MovieDetailFlowLayout: UICollectionViewFlowLayout {
  
   override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
     let layoutAttributes = super.layoutAttributesForElements(in: rect)
-    layoutAttributes?.forEach({ (attributes) in
+    layoutAttributes?.forEach( { (attributes) in
       //is there header view?
       if attributes.representedElementKind == UICollectionView.elementKindSectionHeader && attributes.indexPath.section == 0 {
         //is there collection view managed by this class?

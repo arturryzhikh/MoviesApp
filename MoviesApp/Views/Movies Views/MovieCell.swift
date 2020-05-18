@@ -12,23 +12,18 @@ import UIKit
 //MARK: Horizontal Cell
 class MovieCell: UICollectionViewCell {
   
-  var resultViewModel: ResultViewModel! {
-    didSet {
-      titleLabel.text = resultViewModel.title
-      yearLabel.text = String(resultViewModel.releaseDate?.prefix(4) ?? "Year")
-      overviewLabel.text = resultViewModel.overview
-      posterImageView.setImage(from: resultViewModel.posterPath)
-    }
-    
-  }
-  
-  
-  
   static var reuseID: String {
     return self.description()
   }
-  
   //MARK: instance properties
+  var movieViewModel: MovieViewModel! {
+    didSet {
+      titleLabel.text = movieViewModel.title
+      yearLabel.text = String(movieViewModel.releaseDate?.prefix(4) ?? "Year")
+      overviewLabel.text = movieViewModel.overview
+      posterImageView.setImage(from: movieViewModel.posterPath)
+    }
+   }
   
   //MARK: Life cycle
   override init(frame: CGRect) {
@@ -43,9 +38,10 @@ class MovieCell: UICollectionViewCell {
    //MARK:Subviews
   private let posterImageView: UIImageView = {
     let iv = UIImageView()
-    iv.contentMode = .scaleAspectFit
+    iv.contentMode = .scaleAspectFill
     iv.backgroundColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)
     iv.image = #imageLiteral(resourceName: "TMBdLogo")
+    iv.clipsToBounds = true
     return iv
   }()
   private let titleLabel: UILabel = {

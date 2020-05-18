@@ -7,43 +7,71 @@
 //
 
 import UIKit
-
 final class NetworkService {
-  
   static let  shared = NetworkService()
-  
   private let session = URLSession.shared
+  private let imageChache = NSCache<NSString,UIImage>()
+  private let api = TMDbApi(key: "be0534e846d5abd01a6b93c899d51676")
   
   func fetchImage(from path: String, completion : @escaping (_ image: UIImage?, _ error: Error?) -> Void) {
-   guard let url = URL(string: TMDbApi.imageBaseUrl + path) else {
+   guard let url = URL(string: api.imageBaseUrl + path) else {
       completion(nil,nil)
       return
     }
-    print(url)
-    let task = session.dataTask(with: url) { data,response,error in
-      DispatchQueue.main.async {
-                 guard let data = data,
-                 let response = response as? HTTPURLResponse,
-                 (200 ..< 300).contains(response.statusCode),
-                 error == nil else {
-                  completion(nil, error)
-                  print("Error downloading image \(String(describing: error))")
-                  return
-                 }
-              completion(UIImage(data: data),nil)
-            }
+   let imageKey = url.absoluteString as NSString
+    print(imageChache.object(forKey: imageKey))
+       print(url)
+    if let cachedImage = imageChache.object(forKey: imageKey) {
+      completion(cachedImage,nil)
       
+    } else {
+      let task = session.dataTask(with: url) { data,response,error in
+             DispatchQueue.main.async {
+               guard let data = data,
+                let response = response as? HTTPURLResponse,
+                 (200 ..< 300).contains(response.statusCode),
+                 error == nil, let image = UIImage(data: data) else { completion(nil, error)
+                 print("Error downloading image \(String(describing: error))")
+                 return
+                 }
+               self.imageChache.setObject(image, forKey: imageKey)
+               completion(image,nil)
+             }
+           }
+           task.resume()
+           
     }
-    task.resume()
-    
-
-    
+   
+    }
+  func getTrending(for mediaType: String = "movie", timeWindow: String = "week", completion: @escaping (_ searchMoviesResult: SearchMoviesResult?, _ error: Error?) -> Void  ) {
+    var urlComponents = URLComponents(string: api.trendingBaseUrl)
+     var queryItems = [URLQueryItem]()
+     queryItems.append(URLQueryItem(name: "api_key", value: api.apiKey))
+      urlComponents?.queryItems = queryItems
+     guard let url = urlComponents?.url else { return }
+     print(url)
+     var request = URLRequest(url: url)
+     request.httpMethod = "GET"
+     let task = self.session.dataTask(with: request) { (data, response , error) in
+         DispatchQueue.main.async {
+             guard let data = data,
+             let response = response as? HTTPURLResponse,
+             (200 ..< 300).contains(response.statusCode),
+             error == nil else {
+                 completion(nil, error)
+                 return
+             }
+             let translations =  self.decodeJSON(from: data, into: SearchMoviesResult.self)
+             completion(translations,nil)
+             }
+         }
+     task.resume()
     
   }
   func searchMovies(query: String, completion: @escaping (_ searchMoviesResult: SearchMoviesResult?, _ error: Error?) -> Void ) {
-    var urlComponents = URLComponents(string: TMDbApi.searchMovies)
+    var urlComponents = URLComponents(string: api.searchMovies)
     var queryItems = [URLQueryItem]()
-    queryItems.append(URLQueryItem(name: "api_key", value: TMDbApi.apiKey))
+    queryItems.append(URLQueryItem(name: "api_key", value: api.apiKey))
     queryItems.append(URLQueryItem(name: "query", value: query))
     urlComponents?.queryItems = queryItems
     guard let url = urlComponents?.url else { return }
@@ -80,3 +108,5 @@ private extension NetworkService {
     return decodedJSON
   }
 }
+
+

@@ -72,7 +72,6 @@ extension MovieDetailViewController {
   }
   override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
     let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MovieHeader.reuseID, for: indexPath) as! MovieHeader
-   
     return header
   }
   

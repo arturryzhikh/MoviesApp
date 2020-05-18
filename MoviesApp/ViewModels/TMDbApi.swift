@@ -8,10 +8,15 @@
 
 import Foundation
 struct TMDbApi {
-  static let apiKey = "be0534e846d5abd01a6b93c899d51676"
-  static let baseURL = "https://api.themoviedb.org/3"
-  static let searchMoviesEndpoint = "/search/movie"
-  static let imageBaseUrl = "https://image.tmdb.org/t/p/w92"
-  static let searchMovies = TMDbApi.baseURL + TMDbApi.searchMoviesEndpoint
+  let apiKey: String
+  private let baseURL = "https://api.themoviedb.org/3"
+  private let searchMoviesEndpoint = "/search/movie"
+  let imageBaseUrl = "https://image.tmdb.org/t/p/w200"
+  let trendingBaseUrl = "https://api.themoviedb.org/3/trending/movie/week"
+  let searchMovies: String
+  init(key: String) {
+    self.apiKey = key
+    self.searchMovies =  baseURL + searchMoviesEndpoint
+  }
 }
 

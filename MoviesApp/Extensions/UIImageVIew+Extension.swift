@@ -8,8 +8,8 @@
 import UIKit
 extension UIImageView {
   func setImage(from path: String?) {
-      guard let path = path else { return  }
-      NetworkService.shared.fetchImage(from : path) { [weak self](image, error) in
+    guard let path = path else { return  }
+    NetworkService.shared.fetchImage(from : path) { [weak self] (image, error) in
       guard let image = image else { return }
       self?.image = image
       }

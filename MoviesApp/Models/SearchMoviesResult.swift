@@ -10,9 +10,9 @@
 struct SearchMoviesResult: Decodable {
   
   let page, totalResults, totalPages : Int?
-  let results: [Result]?
+  let results: [MovieListResult]?
 }
-struct Result: Decodable {
+struct MovieListResult: Decodable {
   let popularity, voteAvarage: Double?
   let voteCount, id: Int?
   let video,adult: Bool?

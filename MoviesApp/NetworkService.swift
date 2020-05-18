@@ -72,7 +72,6 @@ final class NetworkService {
     queryItems.append(URLQueryItem(name: "query", value: query))
     urlComponents?.queryItems = queryItems
     guard let url = urlComponents?.url else { return }
-    print(url)
     var request = URLRequest(url: url)
     request.httpMethod = "GET"
     let task = self.session.dataTask(with: request) { (data, response , error) in

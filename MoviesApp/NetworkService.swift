@@ -47,8 +47,7 @@ final class NetworkService {
      queryItems.append(URLQueryItem(name: "api_key", value: api.apiKey))
       urlComponents?.queryItems = queryItems
      guard let url = urlComponents?.url else { return }
-     print(url)
-     var request = URLRequest(url: url)
+    var request = URLRequest(url: url)
      request.httpMethod = "GET"
      let task = self.session.dataTask(with: request) { (data, response , error) in
          DispatchQueue.main.async {

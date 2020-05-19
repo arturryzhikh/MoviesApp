@@ -8,7 +8,6 @@
 
 
 struct SearchMoviesResult: Decodable {
-  
   let page, totalResults, totalPages : Int?
   let results: [MovieListResult]?
 }

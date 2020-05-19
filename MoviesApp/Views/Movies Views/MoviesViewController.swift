@@ -36,7 +36,7 @@ extension MoviesViewController {
     collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
      ])
     collectionView.backgroundColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)
-    collectionView.register(TrendingCell.self, forCellWithReuseIdentifier: TrendingCell.reuseID)
+    collectionView.register(TrendingsCell.self, forCellWithReuseIdentifier: TrendingsCell.reuseID)
     collectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.reuseID)
     collectionView.delegate = self
     collectionView.dataSource = self
@@ -118,8 +118,8 @@ extension MoviesViewController {
                                cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     switch indexPath.section {
     case 0:
-      let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: TrendingCell.reuseID,
-                                                     for: indexPath) as! TrendingCell
+      let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: TrendingsCell.reuseID,
+                                                     for: indexPath) as! TrendingsCell
       return cell
     default:
       let cell = collectionView.dequeueReusableCell(

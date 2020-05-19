@@ -7,27 +7,20 @@
 //
 
 import UIKit
-class TrendingCell: UICollectionViewCell {
-  //MARK: Instance properties
-  private var trendingMovieViewModels = [TrendingMovieViewModel]()
+
+class TrendingsCell: UICollectionViewCell {
   static var reuseID : String {
     return self.description()
   }
+  //MARK: Instance properties
+  private var trendingMovieViewModels = [TrendingMovieViewModel]()
+  
   //MARK: life cycle
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     setupView()
-    
-    //
-    NetworkService.shared.getTrending { [ weak self ](result, error) in
-      if let error = error {
-        print("error getting trending movies \(error)")
-      }
-      guard let results = result?.results else { return }
-      self?.trendingMovieViewModels = results.map { TrendingMovieViewModel(from: $0)}
-      self?.trendingCollectionView.reloadData()
-      
-    }
+    fetchTrendingMovies()
   }
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
@@ -61,7 +54,7 @@ class TrendingCell: UICollectionViewCell {
  }
 
 //MARK: Collection View Delegate & DataSource
-extension TrendingCell: UICollectionViewDelegate, UICollectionViewDataSource {
+extension TrendingsCell: UICollectionViewDelegate, UICollectionViewDataSource {
  
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return trendingMovieViewModels.count
@@ -77,7 +70,7 @@ extension TrendingCell: UICollectionViewDelegate, UICollectionViewDataSource {
   
 }
 //MARK: Collection View Delegate Flow Layout
-extension TrendingCell: UICollectionViewDelegateFlowLayout {
+extension TrendingsCell: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     return CGSize(width: (self.frame.width / 2) , height: frame.height )
   }
@@ -86,3 +79,19 @@ extension TrendingCell: UICollectionViewDelegateFlowLayout {
   
 }
 
+//MARK: Networking
+extension TrendingsCell {
+  private func fetchTrendingMovies() {
+    //
+    NetworkService.shared.getTrending { [ weak self ](result, error) in
+      if let error = error {
+        print("error getting trending movies \(error)")
+      }
+      guard let results = result?.results else { return }
+      self?.trendingMovieViewModels = results.map { TrendingMovieViewModel(from: $0)}
+      self?.trendingCollectionView.reloadData()
+      
+    }
+  }
+  
+}

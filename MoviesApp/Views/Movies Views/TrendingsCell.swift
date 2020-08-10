@@ -14,9 +14,7 @@ class TrendingsCell: UICollectionViewCell {
   }
   //MARK: Instance properties
   private var trendingMovieViewModels = [TrendingMovieViewModel]()
-  
   //MARK: life cycle
-  
   override init(frame: CGRect) {
     super.init(frame: frame)
     setupView()
@@ -42,7 +40,6 @@ class TrendingsCell: UICollectionViewCell {
     trendingCollectionView.delegate = self
     trendingCollectionView.dataSource = self
     trendingCollectionView.backgroundColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)
-    
     //Constraint Collection View
     NSLayoutConstraint.activate([
       trendingCollectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
@@ -50,48 +47,40 @@ class TrendingsCell: UICollectionViewCell {
       trendingCollectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
       trendingCollectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
      ])
-  }
+    }
  }
 
 //MARK: Collection View Delegate & DataSource
 extension TrendingsCell: UICollectionViewDelegate, UICollectionViewDataSource {
- 
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+ func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return trendingMovieViewModels.count
   }
-  
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrendingMovieCell.reuseID, for: indexPath) as! TrendingMovieCell
     let trendingMoviewViewModel = trendingMovieViewModels[indexPath.row]
     cell.movieViewModel = trendingMoviewViewModel
     return cell
-  }
- 
-  
-}
+   }
+ }
 //MARK: Collection View Delegate Flow Layout
 extension TrendingsCell: UICollectionViewDelegateFlowLayout {
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+  func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
     return CGSize(width: (self.frame.width / 2) , height: frame.height )
   }
-  
-  
-  
 }
 
 //MARK: Networking
 extension TrendingsCell {
   private func fetchTrendingMovies() {
-    //
-    NetworkService.shared.getTrending { [ weak self ](result, error) in
+    NetworkService.shared.getTrending { [ weak self ] (result, error) in
       if let error = error {
         print("error getting trending movies \(error)")
       }
       guard let results = result?.results else { return }
       self?.trendingMovieViewModels = results.map { TrendingMovieViewModel(from: $0)}
       self?.trendingCollectionView.reloadData()
-      
     }
   }
-  
 }

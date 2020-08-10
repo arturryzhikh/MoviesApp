@@ -12,7 +12,8 @@ public extension UISearchBar {
   var textField : UITextField {
     let subviews = self.subviews.flatMap  { $0.subviews }
     guard let textField = (subviews.filter { $0  is UITextField }).first as? UITextField else {
-      return UITextField() }
+      return UITextField()
+    }
     return textField
   }
 }

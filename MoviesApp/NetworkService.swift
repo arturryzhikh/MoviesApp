@@ -7,11 +7,14 @@
 //
 
 import UIKit
+
 final class NetworkService {
+  
   static let shared = NetworkService()
   private let session = URLSession.shared
   private let imageChache = NSCache<NSString,UIImage>()
   private let api = TMDbApi(key: "be0534e846d5abd01a6b93c899d51676")
+  
   func fetchImage(from path: String, completion : @escaping (_ image: UIImage?, _ error: Error?) -> Void) {
    guard let url = URL(string: api.imageBaseUrl + path) else {
       completion(nil,nil)
@@ -24,20 +27,20 @@ final class NetworkService {
     } else {
       let task = session.dataTask(with: url) { data,response,error in
              DispatchQueue.main.async {
-               guard let data = data,
+                guard let data = data,
                 let response = response as? HTTPURLResponse,
-                 (200 ..< 300).contains(response.statusCode),
-                 error == nil, let image = UIImage(data: data) else { completion(nil, error)
-                 print("Error downloading image \(String(describing: error))")
-                 return
-                 }
+                (200 ..< 300).contains(response.statusCode),
+                error == nil, let image = UIImage(data: data) else {
+                  completion(nil, error)
+                  print("Error downloading image \(String(describing: error))")
+                  return
+                }
                self.imageChache.setObject(image, forKey: imageKey)
                completion(image,nil)
              }
            }
            task.resume()
-           
-    }
+        }
    
     }
   func getTrending(for mediaType: String = "movie", timeWindow: String = "week", completion: @escaping (_ searchMoviesResult: SearchMoviesResult?, _ error: Error?) -> Void  ) {
@@ -80,17 +83,18 @@ final class NetworkService {
             error == nil else {
                 completion(nil, error)
                 return
-            }
+              }
             let translations =  self.decodeJSON(from: data, into: SearchMoviesResult.self)
             completion(translations,nil)
-            }
-        }
+          }
+      }
     task.resume()
     
   }
 
 }
 private extension NetworkService {
+  
   func decodeJSON<T:Decodable>(from data: Data?, into model: T.Type) -> T? {
     guard let data = data else {
       print("error decoding JSON into \(model)")
@@ -101,6 +105,7 @@ private extension NetworkService {
     let decodedJSON = try? decoder.decode(T.self, from: data)
     return decodedJSON
   }
+  
 }
 
 

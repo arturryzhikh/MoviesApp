@@ -10,12 +10,14 @@ import UIKit
 
 struct MovieViewModel {
   
-  
   let title: String?
   let releaseDate: String?
   let overview: String?
   let poster: UIImage? = nil
   let posterPath: String?
+  var year: String? {
+    return String(releaseDate?.prefix(4) ?? "Year")
+  }
   //Initialization
  init(from result: MovieListResult) {
   self.title = result.title

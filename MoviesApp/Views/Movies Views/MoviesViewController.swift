@@ -9,6 +9,7 @@
 import UIKit
 
 class MoviesViewController: UICollectionViewController {
+  
  //MARK: Instance properties
   private var searchBar: UISearchBar!
   private var movieViewModels = [MovieViewModel]()
@@ -73,7 +74,7 @@ extension MoviesViewController {
        ])
      }
     return sb
-    }
+  }
   
    private func setupNavigationBar() {
     //FIXME: navigation controoller bar tin color appears as window background color while returning from movie detail vc

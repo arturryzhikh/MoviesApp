@@ -19,10 +19,10 @@ class MovieCell: UICollectionViewCell {
   var movieViewModel: MovieViewModel! {
     didSet {
       titleLabel.text = movieViewModel.title
-      yearLabel.text = String(movieViewModel.releaseDate?.prefix(4) ?? "Year")
+      yearLabel.text = movieViewModel.year
       overviewLabel.text = movieViewModel.overview
       posterImageView.setImage(from: movieViewModel.posterPath)
-    }
+      }
    }
   
   //MARK: Life cycle
@@ -91,7 +91,7 @@ class MovieCell: UICollectionViewCell {
      titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5),
      titleLabel.heightAnchor.constraint(equalTo: self.heightAnchor,multiplier: 0.25),
      //constraint year label
-    yearLabel.heightAnchor.constraint(equalTo: titleLabel.heightAnchor,multiplier: 0.25),
+    yearLabel.heightAnchor.constraint(equalTo: titleLabel.heightAnchor,multiplier: 0.27),
     yearLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 2),
     yearLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
     yearLabel.widthAnchor.constraint(equalTo: titleLabel.widthAnchor,multiplier: 0.15),

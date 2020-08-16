@@ -9,7 +9,6 @@
 import UIKit
 
 struct MovieViewModel {
-  
   let title: String?
   let releaseDate: String?
   let overview: String?

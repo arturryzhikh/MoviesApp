@@ -35,13 +35,13 @@ class TrendingMovieCell: UICollectionViewCell {
     iv.layer.cornerRadius = 4
     return iv
   }()
-  //MARK: Initial setup
+  //MARK: Initial settings
   private func setupView() {
-    //add subviews
     self.layer.cornerRadius = 4
     self.clipsToBounds = true
+    //add subviews
     self.setSubviewsForAutoLayout(backdropImageView)
-    //fill super view constraints
+    //fill super view with backdrop
     NSLayoutConstraint.activate ([
       backdropImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
       backdropImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),

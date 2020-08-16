@@ -74,7 +74,7 @@ class MovieCell: UICollectionViewCell {
     tv.backgroundColor = #colorLiteral(red: 0.003921568627, green: 0.7058823529, blue: 0.8941176471, alpha: 1)
     return tv
   }()
-   private func setupView() {
+  private func setupView() {
     self.layer.cornerRadius = 4 
     self.backgroundColor = #colorLiteral(red: 0.003921568627, green: 0.7058823529, blue: 0.8941176471, alpha: 1)
    //add subviews
@@ -100,7 +100,6 @@ class MovieCell: UICollectionViewCell {
     overviewLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor,constant: -5),
     overviewLabel.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: 8),
     overviewLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: -5)
-    
-  ])
+    ])
   }
 }

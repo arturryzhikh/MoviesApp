@@ -9,6 +9,7 @@
 
 
 import UIKit
+
 struct TrendingMovieViewModel {
   let title: String?
   let releaseDate: String?

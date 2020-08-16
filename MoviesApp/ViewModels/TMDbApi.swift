@@ -15,11 +15,12 @@ struct TMDbApi {
   private let searchMoviesEndpoint = "/search/movie"
   let imageBaseUrl = "https://image.tmdb.org/t/p/w200"
   let trendingBaseUrl = "https://api.themoviedb.org/3/trending/movie/week"
-  let searchMovies: String
+  var searchMovies: String {
+    baseURL + searchMoviesEndpoint
+  }
   
   init(key: String) {
     self.apiKey = key
-    self.searchMovies =  baseURL + searchMoviesEndpoint
-  }
+   }
 }
 

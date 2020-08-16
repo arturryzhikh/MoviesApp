@@ -55,8 +55,10 @@ extension TrendingsCell: UICollectionViewDelegate, UICollectionViewDataSource {
  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return trendingMovieViewModels.count
   }
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrendingMovieCell.reuseID, for: indexPath) as! TrendingMovieCell
+  func collectionView(_ collectionView: UICollectionView,
+                      cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrendingMovieCell.reuseID,
+                                                  for: indexPath) as! TrendingMovieCell
     let trendingMoviewViewModel = trendingMovieViewModels[indexPath.row]
     cell.movieViewModel = trendingMoviewViewModel
     return cell

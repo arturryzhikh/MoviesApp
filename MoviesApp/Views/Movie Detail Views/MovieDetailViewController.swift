@@ -11,7 +11,8 @@ import UIKit
 
 
 class MovieDetailViewController: UICollectionViewController {
-  
+//MARK: instance properties
+  weak var coordinator: AppCoordinator?
   private let reuseID = "cell"
   private let padding: CGFloat = 8
 //MARK: life cycle

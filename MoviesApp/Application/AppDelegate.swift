@@ -10,18 +10,17 @@ import UIKit
 import CoreData
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate  {
+  var coordinator: AppCoordinator?
   var window: UIWindow?
-  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+  func application(_ application: UIApplication,
+                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     if #available(iOS 13, *) {
-      // do nothing
+      //...
     }
     window = UIWindow(frame: UIScreen.main.bounds)
-    window?.backgroundColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)
-    let homeVC = MoviesViewController(collectionViewLayout: UICollectionViewFlowLayout())
-    let rootVC = UINavigationController(rootViewController: homeVC)
-    window?.rootViewController = rootVC
-    window?.makeKeyAndVisible()
+    coordinator = AppCoordinator(window!)
+    coordinator?.start()
     return true
   }
 

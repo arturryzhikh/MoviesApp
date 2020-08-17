@@ -12,18 +12,16 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
   var window: UIWindow?
-
+  var coordinator: AppCoordinator?
 
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
     guard let windowScene = scene as? UIWindowScene else {
       return
     }
     window = UIWindow(windowScene: windowScene)
-    window?.backgroundColor =  #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)
-    let homeVC = MoviesViewController(collectionViewLayout: UICollectionViewFlowLayout())
-    let rootVC = UINavigationController(rootViewController: homeVC)
-    window?.rootViewController = rootVC
-    window?.makeKeyAndVisible()
+    coordinator = AppCoordinator(window!)
+    coordinator?.start()
+    
   }
 
   func sceneDidDisconnect(_ scene: UIScene) {

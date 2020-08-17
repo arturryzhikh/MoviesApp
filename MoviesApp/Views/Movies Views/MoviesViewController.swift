@@ -11,6 +11,7 @@ import UIKit
 class MoviesViewController: UICollectionViewController {
   
  //MARK: Instance properties
+  weak var coordinator: AppCoordinator?
   private var searchBar: UISearchBar!
   private var movieViewModels = [MovieViewModel]()
   //MARK: life cycle
@@ -23,6 +24,7 @@ class MoviesViewController: UICollectionViewController {
     setupNavigationBar()
     searchBar = makeSearchBar()
     setupCollectionView()
+    
   }
 }
 
@@ -77,7 +79,6 @@ extension MoviesViewController {
   }
   
    private func setupNavigationBar() {
-    //FIXME: navigation controoller bar tin color appears as window background color while returning from movie detail vc
     navigationController?.navigationBar.isTranslucent = false
     navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)  //TODO:- make global color management
     navigationController?.navigationBar.tintColor = .white  //color of bar button items
@@ -100,7 +101,7 @@ extension MoviesViewController: UICollectionViewDelegateFlowLayout {
   }
   
 }
-//MARK: UICollectionViewDelegate, UICollectionViewDataSource
+//MARK: UICollectionViewDataSource
 
 extension MoviesViewController {
   override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -130,16 +131,18 @@ extension MoviesViewController {
       return cell
     }
   }
+//MARK: UICollectionViewDelegate
   
   override func collectionView(_ collectionView: UICollectionView,
                                didSelectItemAt indexPath: IndexPath) {
-    let movieDetailVC = MovieDetailViewController(collectionViewLayout: MovieDetailFlowLayout())
-    navigationController?.show(movieDetailVC, sender: nil)
+    coordinator?.movieDetail()
     //send movie object here
     
     
   }
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+  func collectionView(_ collectionView: UICollectionView,
+                      layout collectionViewLayout: UICollectionViewLayout,
+                      insetForSectionAt section: Int) -> UIEdgeInsets {
     return UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
   }
   

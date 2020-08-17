@@ -135,7 +135,9 @@ extension MoviesViewController {
   
   override func collectionView(_ collectionView: UICollectionView,
                                didSelectItemAt indexPath: IndexPath) {
-    coordinator?.movieDetail()
+    let movie = movieViewModels[indexPath.row]
+    coordinator?.movieDetail(movie)
+    
     //send movie object here
     
     

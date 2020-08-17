@@ -13,16 +13,17 @@ class AppCoordinator: Coordinator {
   var navigation = UINavigationController()
   
   func start() {
-    let moviesVC = MoviesViewController(collectionViewLayout: UICollectionViewFlowLayout())
+    let moviesVC = MoviesViewController(
+      collectionViewLayout: UICollectionViewFlowLayout())
     moviesVC.coordinator = self
     navigation.pushViewController(moviesVC, animated: false)
     window?.rootViewController = navigation
     window?.makeKeyAndVisible()
   }
   
-  func movieDetail() {
+  func movieDetail(_ movieViewModel: MovieViewModel) {
     let movieDetailVC = MovieDetailViewController(collectionViewLayout: MovieDetailFlowLayout())
-    movieDetailVC.coordinator = self
+    movieDetailVC.movieViewModel = movieViewModel
     navigation.show(movieDetailVC, sender: nil)
   }
   

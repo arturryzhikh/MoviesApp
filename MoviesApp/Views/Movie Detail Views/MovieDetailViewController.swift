@@ -12,8 +12,8 @@ import UIKit
 
 class MovieDetailViewController: UICollectionViewController {
 //MARK: instance properties
-  weak var coordinator: AppCoordinator?
-  private let reuseID = "cell"
+  var movieViewModel: MovieViewModel?
+  private let reuseID = "cell" // create custom cells
   private let padding: CGFloat = 8
 //MARK: life cycle
   override func viewDidLoad() {
@@ -36,7 +36,7 @@ class MovieDetailViewController: UICollectionViewController {
     //make bar separator transparent
     navigationController?.navigationBar.shadowImage = UIImage()
     //color of bar button items
-    navigationController?.navigationBar.tintColor = .white
+    navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
     
   }
   private func setupCollectionViewLayout(with padding: CGFloat) {
@@ -80,8 +80,12 @@ extension MovieDetailViewController {
     return cell
   }
   override func collectionView(_ collectionView: UICollectionView,
-                               viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-    let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MovieHeader.reuseID, for: indexPath) as! MovieHeader
+                               viewForSupplementaryElementOfKind kind: String,
+                               at indexPath: IndexPath) -> UICollectionReusableView {
+    let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader,
+                                                                 withReuseIdentifier: MovieHeader.reuseID,
+                                                                 for: indexPath) as! MovieHeader
+    header.movieViewModel = movieViewModel
     return header
   }
   

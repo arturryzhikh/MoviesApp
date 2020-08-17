@@ -12,6 +12,11 @@ class MovieHeader: UICollectionReusableView {
   static var reuseID: String {
     return self.description()
   }
+  var movieViewModel: MovieViewModel! {
+    didSet {
+      posterIV.setImage(from: movieViewModel.posterPath)
+    }
+  }
   override init(frame: CGRect) {
     super.init(frame: frame)
     setupView()

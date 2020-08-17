@@ -63,6 +63,7 @@ extension TrendingsCell: UICollectionViewDelegate, UICollectionViewDataSource {
     cell.movieViewModel = trendingMoviewViewModel
     return cell
    }
+  
  }
 //MARK: Collection View Delegate Flow Layout
 extension TrendingsCell: UICollectionViewDelegateFlowLayout {

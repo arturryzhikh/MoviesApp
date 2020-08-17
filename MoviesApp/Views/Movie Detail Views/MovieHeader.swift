@@ -29,7 +29,6 @@ class MovieHeader: UICollectionReusableView {
   private let posterIV: UIImageView = {
     let iv = UIImageView()
     iv.contentMode = .scaleAspectFill
-    iv.image = #imageLiteral(resourceName: "westworld-wallpaper-1200x630")
     return iv
    }()
   private func setupView() {

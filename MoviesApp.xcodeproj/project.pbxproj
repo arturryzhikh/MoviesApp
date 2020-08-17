@@ -103,7 +103,7 @@
 		7579823B2452DA460059BFA0 /* MoviesApp */ = {
 			isa = PBXGroup;
 			children = (
-				75CA954E24EABD1F00356F0E /* Coordinator */,
+				75CA954E24EABD1F00356F0E /* Coordinators */,
 				757982582452E2F50059BFA0 /* Application */,
 				7519243524533B6500472CD5 /* Networking */,
 				757982592452E3110059BFA0 /* Models */,
@@ -130,7 +130,6 @@
 				7579823E2452DA460059BFA0 /* SceneDelegate.swift */,
 				7579823C2452DA460059BFA0 /* AppDelegate.swift */,
 				7579824A2452DA470059BFA0 /* LaunchScreen.storyboard */,
-				75CA955324EABEF100356F0E /* AppCoordinator */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -182,20 +181,13 @@
 			path = "Movie Detail Views";
 			sourceTree = "<group>";
 		};
-		75CA954E24EABD1F00356F0E /* Coordinator */ = {
+		75CA954E24EABD1F00356F0E /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
 				75CA954F24EABD4B00356F0E /* Coordinator.swift */,
-			);
-			path = Coordinator;
-			sourceTree = "<group>";
-		};
-		75CA955324EABEF100356F0E /* AppCoordinator */ = {
-			isa = PBXGroup;
-			children = (
 				75CA955124EABEE000356F0E /* AppCoordinator.swift */,
 			);
-			path = AppCoordinator;
+			path = Coordinators;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

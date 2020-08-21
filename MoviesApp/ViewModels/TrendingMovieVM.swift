@@ -15,7 +15,6 @@ struct TrendingMovieVM {
   let title: String?
   let releaseDate: String?
   let overview: String?
-  let backgrop: UIImage? = nil
   let backdropPath: String?
   //Initialization
  init(from result: MovieListResult) {

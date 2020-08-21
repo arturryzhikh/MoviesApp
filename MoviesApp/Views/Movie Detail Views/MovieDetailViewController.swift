@@ -12,7 +12,8 @@ import UIKit
 
 class MovieDetailViewController: UICollectionViewController {
 //MARK: instance properties
-  var movieViewModel: MovieViewModel?
+  var movieVM: MovieVM?
+  var trendingMovieVM: TrendingMovieVM?
   private let reuseID = "cell" // create custom cells
   private let padding: CGFloat = 8
 //MARK: life cycle
@@ -82,10 +83,10 @@ extension MovieDetailViewController {
   override func collectionView(_ collectionView: UICollectionView,
                                viewForSupplementaryElementOfKind kind: String,
                                at indexPath: IndexPath) -> UICollectionReusableView {
-    let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader,
-                                                                 withReuseIdentifier: MovieHeader.reuseID,
+    let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MovieHeader.reuseID,
                                                                  for: indexPath) as! MovieHeader
-    header.movieViewModel = movieViewModel
+    header.movieVM = movieVM
+    header.trendingMovieVM = trendingMovieVM
     return header
   }
   

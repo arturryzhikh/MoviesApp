@@ -12,9 +12,14 @@ class MovieHeader: UICollectionReusableView {
   static var reuseID: String {
     return self.description()
   }
-  var movieViewModel: MovieViewModel! {
+  var movieVM: MovieVM? {
     didSet {
-      posterIV.setImage(from: movieViewModel.posterPath)
+      posterIV.setImage(from: movieVM?.posterPath)
+    }
+  }
+  var trendingMovieVM: TrendingMovieVM? {
+    didSet {
+      posterIV.setImage(from: trendingMovieVM?.backdropPath)
     }
   }
   override init(frame: CGRect) {

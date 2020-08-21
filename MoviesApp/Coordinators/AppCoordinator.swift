@@ -21,9 +21,14 @@ class AppCoordinator: Coordinator {
     window?.makeKeyAndVisible()
   }
   
-  func movieDetail(_ movieViewModel: MovieViewModel) {
+  func movieDetail(_ movieViewModel: MovieVM) {
     let movieDetailVC = MovieDetailViewController(collectionViewLayout: MovieDetailFlowLayout())
-    movieDetailVC.movieViewModel = movieViewModel
+    movieDetailVC.movieVM = movieViewModel
+    navigation.show(movieDetailVC, sender: nil)
+  }
+  func trendingMovieDetail(_ trendingMovieVM: TrendingMovieVM) {
+    let movieDetailVC = MovieDetailViewController(collectionViewLayout: MovieDetailFlowLayout())
+    movieDetailVC.trendingMovieVM = trendingMovieVM
     navigation.show(movieDetailVC, sender: nil)
   }
   

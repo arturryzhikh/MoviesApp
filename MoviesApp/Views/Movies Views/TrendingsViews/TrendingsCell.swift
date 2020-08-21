@@ -8,12 +8,17 @@
 
 import UIKit
 
+protocol CollectionViewCellDelegate: class {
+  func collectionView(didSelectItemWith viewModel: TrendingMovieVM)
+  }
+
 class TrendingsCell: UICollectionViewCell {
+  weak var cellDelegate: CollectionViewCellDelegate?
   static var reuseID : String {
     return self.description()
   }
   //MARK: Instance properties
-  private var trendingMovieViewModels = [TrendingMovieViewModel]()
+  private var trendingMovieViewModels = [TrendingMovieVM]()
   //MARK: life cycle
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -50,9 +55,16 @@ class TrendingsCell: UICollectionViewCell {
     }
  }
 
+
 //MARK: Collection View Delegate & DataSource
 extension TrendingsCell: UICollectionViewDelegate, UICollectionViewDataSource {
- func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    cellDelegate?.collectionView(didSelectItemWith: trendingMovieViewModels[indexPath.row])
+    
+  }
+ 
+ func collectionView(_ collectionView: UICollectionView,
+                     numberOfItemsInSection section: Int) -> Int {
     return trendingMovieViewModels.count
   }
   func collectionView(_ collectionView: UICollectionView,
@@ -60,7 +72,7 @@ extension TrendingsCell: UICollectionViewDelegate, UICollectionViewDataSource {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrendingMovieCell.reuseID,
                                                   for: indexPath) as! TrendingMovieCell
     let trendingMoviewViewModel = trendingMovieViewModels[indexPath.row]
-    cell.movieViewModel = trendingMoviewViewModel
+    cell.trendingMovieVM = trendingMoviewViewModel
     return cell
    }
   
@@ -82,7 +94,7 @@ extension TrendingsCell {
         print("error getting trending movies \(error)")
       }
       guard let results = result?.results else { return }
-      self?.trendingMovieViewModels = results.map { TrendingMovieViewModel(from: $0)}
+      self?.trendingMovieViewModels = results.map { TrendingMovieVM(from: $0)}
       self?.trendingCollectionView.reloadData()
     }
   }

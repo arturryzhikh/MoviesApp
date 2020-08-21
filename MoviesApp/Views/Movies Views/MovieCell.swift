@@ -16,7 +16,7 @@ class MovieCell: UICollectionViewCell {
     return self.description()
   }
   //MARK: instance properties
-  var movieViewModel: MovieViewModel! {
+  var movieViewModel: MovieVM! {
     didSet {
       titleLabel.text = movieViewModel.title
       yearLabel.text = movieViewModel.year

@@ -1,35 +1,27 @@
 //
-//  MovieViewModel.swift
+//  TrendingMovieViewModel.swift
 //  MoviesApp
 //
-//  Created by Artur R on 17.05.2020.
+//  Created by Artur R on 18.05.2020.
 //  Copyright © 2020 Artur Ryzhikh. All rights reserved.
 //
 
+
+
 import UIKit
 
-struct MovieViewModel {
+
+struct TrendingMovieVM {
   let title: String?
   let releaseDate: String?
   let overview: String?
-  let poster: UIImage? = nil
-  let posterPath: String?
-  var year: String? {
-    return String(releaseDate?.prefix(4) ?? "Year")
-  }
+  let backgrop: UIImage? = nil
+  let backdropPath: String?
   //Initialization
  init(from result: MovieListResult) {
   self.title = result.title
   self.releaseDate = result.releaseDate
   self.overview = result.overview
-  self.posterPath = result.posterPath
+  self.backdropPath = result.backdropPath
   }
 }
-
-
-
-
-
-
-
-

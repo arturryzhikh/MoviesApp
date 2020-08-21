@@ -8,12 +8,12 @@
 
 import UIKit
 
-class MoviesViewController: UICollectionViewController {
-  
+class MoviesViewController: UICollectionViewController{
+ 
  //MARK: Instance properties
   weak var coordinator: AppCoordinator?
   private var searchBar: UISearchBar!
-  private var movieViewModels = [MovieViewModel]()
+  private var movieViewModels = [MovieVM]()
   //MARK: life cycle
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -122,6 +122,7 @@ extension MoviesViewController {
     case 0:
       let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: TrendingsCell.reuseID,
                                                      for: indexPath) as! TrendingsCell
+      cell.cellDelegate = self
       return cell
     default:
       let cell = collectionView.dequeueReusableCell(
@@ -158,7 +159,7 @@ extension MoviesViewController: UISearchBarDelegate {
         print("error searching courses,\(error)")
       }
       if let results = result?.results {
-        self.movieViewModels = results.map { MovieViewModel(from: $0) }
+        self.movieViewModels = results.map { MovieVM(from: $0) }
         self.collectionView.reloadData()
       }
     }
@@ -169,4 +170,13 @@ extension MoviesViewController: UISearchBarDelegate {
    
     fetchMovies(text: searchText + " ")
   }
+}
+//MARK: CollectionView Cell Delegate
+extension MoviesViewController: CollectionViewCellDelegate {
+  func collectionView(didSelectItemWith model: TrendingMovieVM) {
+    coordinator?.trendingMovieDetail(model)
+  }
+  
+ 
+  
 }

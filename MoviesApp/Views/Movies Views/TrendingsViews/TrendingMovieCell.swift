@@ -10,9 +10,9 @@ import UIKit
 
 class TrendingMovieCell: UICollectionViewCell {
   
-  var movieViewModel: TrendingMovieViewModel! {
+  var trendingMovieVM: TrendingMovieVM! {
     didSet {
-      backdropImageView.setImage(from: movieViewModel.backdropPath)
+      backdropImageView.setImage(from: trendingMovieVM.backdropPath)
     }
    }
   static var reuseID : String {

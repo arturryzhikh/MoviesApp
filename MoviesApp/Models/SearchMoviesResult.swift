@@ -6,20 +6,26 @@
 //  Copyright © 2020 Artur Ryzhikh. All rights reserved.
 //
 
-
 struct SearchMoviesResult: Decodable {
-  let page, totalResults, totalPages : Int?
   let results: [MovieListResult]?
+//  let page: Int?
+//  let totalResults: Int?
+//  let totalPages: Int?
+  
 }
 struct MovieListResult: Decodable {
-  let popularity, voteAvarage: Double?
-  let voteCount, id: Int?
-  let video,adult: Bool?
-  let originalLanguage,
-  originalTitle,
-  backdropPath,
-  posterPath,
-  overview,
-  releaseDate,title : String?
-  let genreIDS: [Int]?
+  let title : String?
+  let releaseDate: String?
+  let overview: String?
+  let backdropPath: String?
+  let posterPath: String?
+//  let popularity: Double?
+//  let voteAvarage: Double?
+//  let voteCount: Int?
+//  let id: Int?
+//  let video: Bool?
+//  let adult: Bool?
+//  let originalLanguage: String?
+//  let originalTitle: String?
+//  let genreIDS: [Int]?
 }

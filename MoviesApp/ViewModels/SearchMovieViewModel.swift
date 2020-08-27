@@ -13,7 +13,7 @@ class SearchMovieViewModel {
   //    private var photos: [Photo] = [Photo]()
   private var cellViewModels  = [SearchMovieCellViewModel]() {
         didSet {
-            self.reloadTableViewClosure?()
+            self.reloadDataClosure?()
         }
     }
   var isLoading: Bool = false {
@@ -31,7 +31,7 @@ class SearchMovieViewModel {
   }
     
 
-  var reloadTableViewClosure: (()-> Void)?
+  var reloadDataClosure: (()-> Void)?
   var updateLoadingStatus: (()-> Void)?
   var showAlertClosure: (() -> Void)?
   
@@ -48,6 +48,7 @@ class SearchMovieViewModel {
       } else {
         if let movies = movies?.results {
           self?.cellViewModels = movies.map { SearchMovieCellViewModel(movie: $0)}
+          
         }
       }
       

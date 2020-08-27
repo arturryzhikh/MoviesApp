@@ -25,6 +25,7 @@ class SearchMovieViewController: UICollectionViewController{
     setupNavigationBar()
     searchBar = makeSearchBar()
     setupCollectionView()
+    bindViewModel()
     
   }
 
@@ -92,15 +93,15 @@ extension SearchMovieViewController {
     navigationItem.title = "TMDb"
    }
   //MARK: Naive binding
-  private func initVM() {
-    viewModel.showAlertClosure = { [weak self] in
-          DispatchQueue.main.async {
-              if let message = self?.viewModel.alertMessage {
+  private func bindViewModel() {
+//    viewModel.showAlertClosure = { [weak self] in
+//          DispatchQueue.main.async {
+//              if let message = self?.viewModel.alertMessage {
 //                  self?.showAlert( message )
-              }
-          }
-      }
-      
+//              }
+//          }
+//      }
+//
       viewModel.updateLoadingStatus = { [weak self] () in
           DispatchQueue.main.async {
               let isLoading = self?.viewModel.isLoading ?? false
@@ -118,10 +119,10 @@ extension SearchMovieViewController {
           }
       }
       
-      viewModel.reloadTableViewClosure = { [weak self] () in
-//          DispatchQueue.main.async {
-//              self?.tableView.reloadData()
-//          }
+      viewModel.reloadDataClosure = { [weak self] () in
+          DispatchQueue.main.async {
+              self?.collectionView.reloadData()
+          }
       }
     
   }
@@ -192,8 +193,7 @@ extension SearchMovieViewController {
 extension SearchMovieViewController: UISearchBarDelegate {
 
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-    viewModel.searchMovies(searchText: searchText)
-      collectionView.reloadData()
+    viewModel.searchMovies(searchText: searchText + " ")
   }
 }
 

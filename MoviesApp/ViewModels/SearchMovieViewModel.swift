@@ -8,9 +8,9 @@
 
 import UIKit
 
+
 class SearchMovieViewModel {
   
-  //MARK: TODO: add reachibility service
   private var cellViewModels  = [SearchMovieCellViewModel]() {
         didSet {
             self.reloadDataClosure?()

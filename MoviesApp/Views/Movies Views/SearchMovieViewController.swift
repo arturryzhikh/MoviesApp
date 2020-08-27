@@ -96,9 +96,10 @@ extension SearchMovieViewController {
     navigationItem.title = "TMDb"
     //Add activity indicator
     activityIndicator = UIActivityIndicatorView(style: .white)
+    activityIndicator.hidesWhenStopped = true
     let rightBarButton = UIBarButtonItem(customView: activityIndicator)
     self.navigationItem.rightBarButtonItem = rightBarButton
-    activityIndicator.startAnimating()
+    
    }
   //MARK: Naive binding
   private func bindViewModel() {
@@ -114,15 +115,15 @@ extension SearchMovieViewController {
           DispatchQueue.main.async {
               let isLoading = self?.viewModel.isLoading ?? false
               if isLoading {
-//                  self?.activityIndicator.startAnimating()
-//                  UIView.animate(withDuration: 0.2, animations: {
-//                      self?.tableView.alpha = 0.0
-//                  })
+                  self?.activityIndicator.startAnimating()
+                  UIView.animate(withDuration: 0.2, animations: {
+                      self?.collectionView.alpha = 0.0
+                })
               } else {
-//                  self?.activityIndicator.stopAnimating()
-//                  UIView.animate(withDuration: 0.2, animations: {
-//                      self?.tableView.alpha = 1.0
-//                  })
+                  self?.activityIndicator.stopAnimating()
+                  UIView.animate(withDuration: 0.2, animations: {
+                      self?.collectionView.alpha = 1.0
+                  })
               }
           }
       }

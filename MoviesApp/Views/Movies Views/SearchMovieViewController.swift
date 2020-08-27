@@ -13,8 +13,8 @@ class SearchMovieViewController: UICollectionViewController{
  //MARK: Instance properties
   weak var coordinator: AppCoordinator?
   private var searchBar: UISearchBar!
-  private var timer: Timer?
   private var viewModel = SearchMovieViewModel()
+  private var activityIndicator: UIActivityIndicatorView!
   //MARK: life cycle
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -27,13 +27,14 @@ class SearchMovieViewController: UICollectionViewController{
     setupCollectionView()
     bindViewModel()
     
+    
   }
 
 }
 
 //MARK: Subviews
 extension SearchMovieViewController {
-  private func setupCollectionView() {
+ private func setupCollectionView() {
     collectionView.translatesAutoresizingMaskIntoConstraints = false
     NSLayoutConstraint.activate([
     collectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
@@ -42,8 +43,10 @@ extension SearchMovieViewController {
     collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
      ])
     collectionView.backgroundColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)
-    collectionView.register(TrendingsCell.self, forCellWithReuseIdentifier: TrendingsCell.reuseID)
-    collectionView.register(SearchMovieCell.self, forCellWithReuseIdentifier: SearchMovieCell.reuseID)
+    collectionView
+      .register(TrendingsCell.self, forCellWithReuseIdentifier: TrendingsCell.reuseID)
+    collectionView
+      .register(SearchMovieCell.self, forCellWithReuseIdentifier: SearchMovieCell.reuseID)
     collectionView.delegate = self
     collectionView.dataSource = self
     self.automaticallyAdjustsScrollViewInsets = false
@@ -91,6 +94,11 @@ extension SearchMovieViewController {
      ]
     navigationController?.navigationBar.titleTextAttributes = attrs
     navigationItem.title = "TMDb"
+    //Add activity indicator
+    activityIndicator = UIActivityIndicatorView(style: .white)
+    let rightBarButton = UIBarButtonItem(customView: activityIndicator)
+    self.navigationItem.rightBarButtonItem = rightBarButton
+    activityIndicator.startAnimating()
    }
   //MARK: Naive binding
   private func bindViewModel() {

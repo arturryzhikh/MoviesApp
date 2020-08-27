@@ -86,7 +86,7 @@ extension SearchMovieViewController {
   
    private func setupNavigationBar() {
     navigationController?.navigationBar.isTranslucent = false
-    navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)  //TODO:- make global color management
+    navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)
     navigationController?.navigationBar.tintColor = .white  //color of bar button items
     let attrs = [ //color and font of title
       NSAttributedString.Key.foregroundColor: UIColor.white,
@@ -103,14 +103,14 @@ extension SearchMovieViewController {
    }
   //MARK: Naive binding
   private func bindViewModel() {
-//    viewModel.showAlertClosure = { [weak self] in
-//          DispatchQueue.main.async {
-//              if let message = self?.viewModel.alertMessage {
-//                  self?.showAlert( message )
-//              }
-//          }
-//      }
-//
+    viewModel.showAlertClosure = { [weak self] in
+          DispatchQueue.main.async {
+              if let message = self?.viewModel.alertMessage {
+                  self?.showAlert( message )
+              }
+          }
+      }
+
       viewModel.updateLoadingStatus = { [weak self] () in
           DispatchQueue.main.async {
               let isLoading = self?.viewModel.isLoading ?? false
@@ -134,6 +134,12 @@ extension SearchMovieViewController {
           }
       }
     
+  }
+  //MARK: Alert
+  func showAlert( _ message: String ) {
+      let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+      alert.addAction( UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+      self.present(alert, animated: true, completion: nil)
   }
   
 }
@@ -163,18 +169,23 @@ extension SearchMovieViewController {
       return viewModel.numberOfItemsInSection
     }
   }
+ 
   override func collectionView(_ collectionView: UICollectionView,
                                cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     switch indexPath.section {
     case 0:
-      let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: TrendingsCell.reuseID,
-                                                     for: indexPath) as! TrendingsCell
+      let cell =  collectionView
+        .dequeueReusableCell(
+          withReuseIdentifier: TrendingsCell.reuseID,for: indexPath) as! TrendingsCell
+      
       cell.cellDelegate = self
       return cell
     default:
-      let cell = collectionView.dequeueReusableCell(
+      let cell = collectionView
+        .dequeueReusableCell(
           withReuseIdentifier: SearchMovieCell.reuseID, for: indexPath) as! SearchMovieCell
       let cellViewModel = viewModel.cellViewModel(for: indexPath)
+      
       cell.viewModel = cellViewModel
       return cell
     }
@@ -184,12 +195,10 @@ extension SearchMovieViewController {
   override func collectionView(_ collectionView: UICollectionView,
                                didSelectItemAt indexPath: IndexPath) {
     let searchMovieCellVM = viewModel.cellViewModel(for: indexPath)
+    
     coordinator?.movieDetail(searchMovieCellVM)
-    
-
-    
-    
   }
+  
   func collectionView(_ collectionView: UICollectionView,
                       layout collectionViewLayout: UICollectionViewLayout,
                       insetForSectionAt section: Int) -> UIEdgeInsets {

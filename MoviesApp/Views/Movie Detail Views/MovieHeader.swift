@@ -12,7 +12,7 @@ class MovieHeader: UICollectionReusableView {
   static var reuseID: String {
     return self.description()
   }
-  var movieVM: MovieVM? {
+  var movieVM: SearchMovieCellViewModel? {
     didSet {
       posterIV.setImage(from: movieVM?.posterPath)
     }

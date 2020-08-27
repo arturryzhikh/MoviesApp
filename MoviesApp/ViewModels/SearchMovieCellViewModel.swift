@@ -1,14 +1,13 @@
 //
-//  MovieViewModel.swift
+//  SearchMovieCellViewModel.swift
 //  MoviesApp
 //
-//  Created by Artur R on 17.05.2020.
+//  Created by Artur Ryzhikh on 27.08.2020.
 //  Copyright © 2020 Artur Ryzhikh. All rights reserved.
 //
 
 import UIKit
-
-struct MovieVM {
+struct SearchMovieCellViewModel {
   let title: String?
   let releaseDate: String?
   let overview: String?
@@ -17,18 +16,10 @@ struct MovieVM {
     return String(releaseDate?.prefix(4) ?? "Year")
   }
   //Initialization
- init(from result: Movie) {
-  self.title = result.title
-  self.releaseDate = result.releaseDate
-  self.overview = result.overview
-  self.posterPath = result.posterPath
+ init(movie : Movie) {
+  self.title = movie.title
+  self.releaseDate = movie.releaseDate
+  self.overview = movie.overview
+  self.posterPath = movie.posterPath
   }
 }
-
-
-
-
-
-
-
-

@@ -11,7 +11,6 @@ import UIKit
 final class NetworkService {
   
   static let shared = NetworkService()
-  
   private let session = URLSession.shared
   private let imageChache = NSCache<NSString,UIImage>()
   private let api = TMDbApi(key: "be0534e846d5abd01a6b93c899d51676")

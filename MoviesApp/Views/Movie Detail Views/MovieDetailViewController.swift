@@ -12,7 +12,7 @@ import UIKit
 
 class MovieDetailViewController: UICollectionViewController {
 //MARK: instance properties
-  var movieVM: MovieVM?
+  var movieVM: SearchMovieCellViewModel?
   var trendingMovieVM: TrendingMovieVM?
   private let reuseID = "cell" // create custom cells
   private let padding: CGFloat = 8

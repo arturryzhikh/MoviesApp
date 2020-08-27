@@ -10,18 +10,19 @@ import UIKit
 
 
 //MARK: Horizontal Cell
-class MovieCell: UICollectionViewCell {
+class SearchMovieCell: UICollectionViewCell {
   
   static var reuseID: String {
     return self.description()
   }
   //MARK: instance properties
-  var movieViewModel: MovieVM! {
+  
+  var viewModel: SearchMovieCellViewModel! {
     didSet {
-      titleLabel.text = movieViewModel.title
-      yearLabel.text = movieViewModel.year
-      overviewLabel.text = movieViewModel.overview
-      posterImageView.setImage(from: movieViewModel.posterPath)
+      titleLabel.text = viewModel.title
+      yearLabel.text = viewModel.year
+      overviewLabel.text = viewModel.overview
+      posterImageView.setImage(from: viewModel.posterPath)
       }
    }
   

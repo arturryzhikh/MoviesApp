@@ -8,12 +8,13 @@
 
 import UIKit
 
-class MoviesViewController: UICollectionViewController{
+class SearchMovieViewController: UICollectionViewController{
  
  //MARK: Instance properties
   weak var coordinator: AppCoordinator?
   private var searchBar: UISearchBar!
-  private var movieViewModels = [MovieVM]()
+  private var timer: Timer?
+  private var viewModel = SearchMovieViewModel()
   //MARK: life cycle
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -26,10 +27,11 @@ class MoviesViewController: UICollectionViewController{
     setupCollectionView()
     
   }
+
 }
 
 //MARK: Subviews
-extension MoviesViewController {
+extension SearchMovieViewController {
   private func setupCollectionView() {
     collectionView.translatesAutoresizingMaskIntoConstraints = false
     NSLayoutConstraint.activate([
@@ -40,7 +42,7 @@ extension MoviesViewController {
      ])
     collectionView.backgroundColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)
     collectionView.register(TrendingsCell.self, forCellWithReuseIdentifier: TrendingsCell.reuseID)
-    collectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.reuseID)
+    collectionView.register(SearchMovieCell.self, forCellWithReuseIdentifier: SearchMovieCell.reuseID)
     collectionView.delegate = self
     collectionView.dataSource = self
     self.automaticallyAdjustsScrollViewInsets = false
@@ -89,11 +91,46 @@ extension MoviesViewController {
     navigationController?.navigationBar.titleTextAttributes = attrs
     navigationItem.title = "TMDb"
    }
+  //MARK: Naive binding
+  private func initVM() {
+    viewModel.showAlertClosure = { [weak self] in
+          DispatchQueue.main.async {
+              if let message = self?.viewModel.alertMessage {
+//                  self?.showAlert( message )
+              }
+          }
+      }
+      
+      viewModel.updateLoadingStatus = { [weak self] () in
+          DispatchQueue.main.async {
+              let isLoading = self?.viewModel.isLoading ?? false
+              if isLoading {
+//                  self?.activityIndicator.startAnimating()
+//                  UIView.animate(withDuration: 0.2, animations: {
+//                      self?.tableView.alpha = 0.0
+//                  })
+              } else {
+//                  self?.activityIndicator.stopAnimating()
+//                  UIView.animate(withDuration: 0.2, animations: {
+//                      self?.tableView.alpha = 1.0
+//                  })
+              }
+          }
+      }
+      
+      viewModel.reloadTableViewClosure = { [weak self] () in
+//          DispatchQueue.main.async {
+//              self?.tableView.reloadData()
+//          }
+      }
+    
+  }
+  
 }
 
 //MARK: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 
-extension MoviesViewController: UICollectionViewDelegateFlowLayout {
+extension SearchMovieViewController: UICollectionViewDelegateFlowLayout {
  func collectionView(_ collectionView: UICollectionView,
                      layout collectionViewLayout: UICollectionViewLayout,
                      sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -103,7 +140,7 @@ extension MoviesViewController: UICollectionViewDelegateFlowLayout {
 }
 //MARK: UICollectionViewDataSource
 
-extension MoviesViewController {
+extension SearchMovieViewController {
   override func numberOfSections(in collectionView: UICollectionView) -> Int {
     return 2
   }
@@ -113,7 +150,7 @@ extension MoviesViewController {
     case 0:
       return 1
     default:
-      return movieViewModels.count
+      return viewModel.numberOfItemsInSection
     }
   }
   override func collectionView(_ collectionView: UICollectionView,
@@ -126,9 +163,9 @@ extension MoviesViewController {
       return cell
     default:
       let cell = collectionView.dequeueReusableCell(
-          withReuseIdentifier: MovieCell.reuseID, for: indexPath) as! MovieCell
-      let movieViewModel = movieViewModels[indexPath.row]
-      cell.movieViewModel = movieViewModel
+          withReuseIdentifier: SearchMovieCell.reuseID, for: indexPath) as! SearchMovieCell
+      let cellViewModel = viewModel.cellViewModel(for: indexPath)
+      cell.viewModel = cellViewModel
       return cell
     }
   }
@@ -136,10 +173,10 @@ extension MoviesViewController {
   
   override func collectionView(_ collectionView: UICollectionView,
                                didSelectItemAt indexPath: IndexPath) {
-    let movie = movieViewModels[indexPath.row]
-    coordinator?.movieDetail(movie)
+//    let movie = movieViewModels[indexPath.row]
+//    coordinator?.movieDetail(movie)
     
-    //send movie object here
+
     
     
   }
@@ -152,27 +189,18 @@ extension MoviesViewController {
   
 }
 //MARK: UISearchBar Delegate
-extension MoviesViewController: UISearchBarDelegate {
-  private func fetchMovies(text: String) {
-    NetworkService.shared.searchMovies(query: text) { (result, error) in
-      if let error = error {
-        print("error searching courses,\(error)")
-      }
-      if let results = result?.results {
-        self.movieViewModels = results.map { MovieVM(from: $0) }
-        self.collectionView.reloadData()
-      }
-    }
-  }
-  
-  
+extension SearchMovieViewController: UISearchBarDelegate {
+
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-   
-    fetchMovies(text: searchText + " ")
+    viewModel.searchMovies(searchText: searchText)
+      collectionView.reloadData()
   }
 }
+
+
+
 //MARK: CollectionView Cell Delegate
-extension MoviesViewController: CollectionViewCellDelegate {
+extension SearchMovieViewController: CollectionViewCellDelegate {
   func collectionView(didSelectItemWith model: TrendingMovieVM) {
     coordinator?.trendingMovieDetail(model)
   }

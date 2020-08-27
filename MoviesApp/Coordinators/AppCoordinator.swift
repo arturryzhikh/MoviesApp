@@ -13,7 +13,7 @@ class AppCoordinator: Coordinator {
   var navigation = UINavigationController()
   
   func start() {
-    let moviesVC = MoviesViewController(
+    let moviesVC = SearchMovieViewController (
       collectionViewLayout: UICollectionViewFlowLayout())
     moviesVC.coordinator = self
     navigation.pushViewController(moviesVC, animated: false)
@@ -21,7 +21,7 @@ class AppCoordinator: Coordinator {
     window?.makeKeyAndVisible()
   }
   
-  func movieDetail(_ movieViewModel: MovieVM) {
+  func movieDetail(_ movieViewModel: SearchMovieCellViewModel) {
     let movieDetailVC = MovieDetailViewController(collectionViewLayout: MovieDetailFlowLayout())
     movieDetailVC.movieVM = movieViewModel
     navigation.show(movieDetailVC, sender: nil)

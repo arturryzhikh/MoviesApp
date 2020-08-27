@@ -9,6 +9,7 @@
 import UIKit
 
 class SearchMovieViewModel {
+  
   //MARK: TODO: add reachibility service
   private var cellViewModels  = [SearchMovieCellViewModel]() {
         didSet {
@@ -59,19 +60,3 @@ class SearchMovieViewModel {
   }
     
 }
-
-
-//extension SearchMovieViewModel {
-//    func userPressed( at indexPath: IndexPath ) {
-//        let photo = self.photos[indexPath.row]
-//        if photo.for_sale {
-//            self.isAllowSegue = true
-//            self.selectedPhoto = photo
-//        }else {
-//            self.isAllowSegue = false
-//            self.selectedPhoto = nil
-//            self.alertMessage = "This item is not for sale"
-//        }
-//
-//    }
-//}

@@ -183,8 +183,8 @@ extension SearchMovieViewController {
   
   override func collectionView(_ collectionView: UICollectionView,
                                didSelectItemAt indexPath: IndexPath) {
-//    let movie = movieViewModels[indexPath.row]
-//    coordinator?.movieDetail(movie)
+    let searchMovieCellVM = viewModel.cellViewModel(for: indexPath)
+    coordinator?.movieDetail(searchMovieCellVM)
     
 
     

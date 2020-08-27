@@ -8,13 +8,14 @@
 
 
 struct Movies: Decodable {
+  
   let results: [Movie]?
   ///uncomment lines to retrieve other properties
 //  let page: Int?
 //  let totalResults: Int?
 //  let totalPages: Int?
-  
 }
+
 struct Movie: Decodable {
   let title : String?
   let releaseDate: String?

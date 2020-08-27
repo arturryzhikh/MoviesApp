@@ -13,7 +13,10 @@ extension UIImageView {
       guard let image = image else {
         return
       }
-      self?.image = image
+      DispatchQueue.main.async {
+         self?.image = image
+      }
+     
       }
     }
 }

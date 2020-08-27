@@ -10,7 +10,6 @@ import UIKit
 
 class SearchMovieViewModel {
   //MARK: TODO: add reachibility service
-  //    private var photos: [Photo] = [Photo]()
   private var cellViewModels  = [SearchMovieCellViewModel]() {
         didSet {
             self.reloadDataClosure?()
@@ -47,8 +46,7 @@ class SearchMovieViewModel {
         
       } else {
         if let movies = movies?.results {
-          self?.cellViewModels = movies.map { SearchMovieCellViewModel(movie: $0)}
-          
+          self?.cellViewModels = movies.map { SearchMovieCellViewModel(movie: $0) }
         }
       }
       
@@ -58,7 +56,6 @@ class SearchMovieViewModel {
 
     func cellViewModel( for indexPath: IndexPath ) -> SearchMovieCellViewModel {
         return cellViewModels[indexPath.row]
-      
   }
     
 }

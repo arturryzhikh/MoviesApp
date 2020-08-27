@@ -6,14 +6,14 @@
 //  Copyright © 2020 Artur Ryzhikh. All rights reserved.
 //
 
-struct SearchMoviesResult: Decodable {
-  let results: [MovieListResult]?
+struct Movies: Decodable {
+  let results: [Movie]?
 //  let page: Int?
 //  let totalResults: Int?
 //  let totalPages: Int?
   
 }
-struct MovieListResult: Decodable {
+struct Movie: Decodable {
   let title : String?
   let releaseDate: String?
   let overview: String?

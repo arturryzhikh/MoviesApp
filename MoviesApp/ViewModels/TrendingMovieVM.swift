@@ -17,7 +17,7 @@ struct TrendingMovieVM {
   let overview: String?
   let backdropPath: String?
   //Initialization
- init(from result: MovieListResult) {
+ init(from result: Movie) {
   self.title = result.title
   self.releaseDate = result.releaseDate
   self.overview = result.overview

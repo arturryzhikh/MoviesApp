@@ -46,7 +46,7 @@ final class NetworkService {
       }
   func getTrending(for mediaType: String = "movie",
                    timeWindow: String = "week",
-                   completion: @escaping (_ searchMoviesResult: SearchMoviesResult?, _ error: Error?) -> Void  ) {
+                   completion: @escaping (_ searchMoviesResult: Movies?, _ error: Error?) -> Void  ) {
     
     
     var urlComponents = URLComponents(string: api.trendingBaseUrl)
@@ -68,14 +68,14 @@ final class NetworkService {
               completion(nil, error)
               return
           }
-          let translations =  self.decodeJSON(from: data, into: SearchMoviesResult.self)
-          completion(translations,nil)
+          let movies =  self.decodeJSON(from: data, into: Movies.self)
+          completion(movies,nil)
         }
       }
       task.resume()
     }
   func searchMovies(query: String,
-                    completion: @escaping (_ searchMoviesResult: SearchMoviesResult?, _ error: Error?) -> Void ) {
+                    completion: @escaping (_ searchMoviesResult: Movies?, _ error: Error?) -> Void ) {
     var urlComponents = URLComponents(string: api.searchMovies)
     var queryItems = [URLQueryItem]()
     queryItems.append(URLQueryItem(name: "api_key", value: api.apiKey))
@@ -99,8 +99,8 @@ final class NetworkService {
             completion(nil, error)
             return
         }
-        let translations =  self.decodeJSON(from: data, into: SearchMoviesResult.self)
-        completion(translations,nil)
+        let movies =  self.decodeJSON(from: data, into: Movies.self)
+        completion(movies,nil)
       }
     }
     task.resume()

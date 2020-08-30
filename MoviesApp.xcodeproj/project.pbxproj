@@ -154,8 +154,8 @@
 		7579823B2452DA460059BFA0 /* MoviesApp */ = {
 			isa = PBXGroup;
 			children = (
-				75CA954E24EABD1F00356F0E /* Coordinators */,
 				757982582452E2F50059BFA0 /* Application */,
+				75CA954E24EABD1F00356F0E /* Coordinators */,
 				7519243524533B6500472CD5 /* Networking */,
 				757982592452E3110059BFA0 /* Models */,
 				7579825A2452E3270059BFA0 /* Modules */,

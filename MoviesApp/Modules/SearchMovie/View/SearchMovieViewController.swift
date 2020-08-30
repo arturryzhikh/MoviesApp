@@ -45,7 +45,7 @@ extension SearchMovieViewController {
      ])
     collectionView.backgroundColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)
     collectionView
-      .register(TrendingsCell.self, forCellWithReuseIdentifier: TrendingsCell.reuseID)
+      .register(TrendingCell.self, forCellWithReuseIdentifier: TrendingCell.reuseID)
     collectionView
       .register(SearchMovieCell.self, forCellWithReuseIdentifier: SearchMovieCell.reuseID)
     collectionView.delegate = self
@@ -102,40 +102,7 @@ extension SearchMovieViewController {
     self.navigationItem.rightBarButtonItem = rightBarButton
     
    }
-  //MARK: Naive binding
-  private func bindViewModel() {
-    viewModel.showAlertClosure = { [weak self] in
-          DispatchQueue.main.async {
-              if let message = self?.viewModel.alertMessage {
-                  self?.showAlert( message )
-              }
-          }
-      }
-
-      viewModel.updateLoadingClousure = { [weak self] () in
-          DispatchQueue.main.async {
-              let isLoading = self?.viewModel.isLoading ?? false
-              if isLoading {
-                  self?.activityIndicator.startAnimating()
-                  UIView.animate(withDuration: 0.2, animations: {
-                      self?.collectionView.alpha = 0.0
-                })
-              } else {
-                  self?.activityIndicator.stopAnimating()
-                  UIView.animate(withDuration: 0.2, animations: {
-                      self?.collectionView.alpha = 1.0
-                  })
-              }
-          }
-      }
-      
-      viewModel.reloadDataClosure = { [weak self] () in
-          DispatchQueue.main.async {
-              self?.collectionView.reloadData()
-          }
-      }
-    
-  }
+  
   //MARK: Alert
   func showAlert( _ message: String ) {
       let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
@@ -177,7 +144,7 @@ extension SearchMovieViewController {
     case 0:
       let cell =  collectionView
         .dequeueReusableCell(
-          withReuseIdentifier: TrendingsCell.reuseID,for: indexPath) as! TrendingsCell
+          withReuseIdentifier: TrendingCell.reuseID,for: indexPath) as! TrendingCell
       
       cell.cellDelegate = self
       return cell
@@ -226,4 +193,43 @@ extension SearchMovieViewController: CollectionViewCellDelegate {
   
  
   
+}
+
+
+//MARK: Bind View Model
+extension SearchMovieViewController {
+  //MARK: Naive binding
+  private func bindViewModel() {
+    viewModel.showAlertClosure = { [weak self] in
+          DispatchQueue.main.async {
+              if let message = self?.viewModel.alertMessage {
+                  self?.showAlert( message )
+              }
+          }
+      }
+
+      viewModel.updateLoadingClousure = { [weak self] () in
+          DispatchQueue.main.async {
+              let isLoading = self?.viewModel.isLoading ?? false
+              if isLoading {
+                  self?.activityIndicator.startAnimating()
+                  UIView.animate(withDuration: 0.2, animations: {
+                      self?.collectionView.alpha = 0.0
+                })
+              } else {
+                  self?.activityIndicator.stopAnimating()
+                  UIView.animate(withDuration: 0.2, animations: {
+                      self?.collectionView.alpha = 1.0
+                  })
+              }
+          }
+      }
+      
+      viewModel.reloadDataClosure = { [weak self] () in
+          DispatchQueue.main.async {
+              self?.collectionView.reloadData()
+          }
+      }
+    
+  }
 }

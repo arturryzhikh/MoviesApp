@@ -15,7 +15,7 @@ protocol CollectionViewCellDelegate: class {
 
 
 
-class TrendingsCell: UICollectionViewCell {
+class TrendingCell: UICollectionViewCell {
   
   weak var cellDelegate: CollectionViewCellDelegate?
   static var reuseID : String {
@@ -57,43 +57,12 @@ class TrendingsCell: UICollectionViewCell {
       collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
      ])
     }
-  //MARK: Naive binding
-  private func bindViewModel() {
-    viewModel.showAlertClosure = { [weak self] in
-          DispatchQueue.main.async {
-              if let message = self?.viewModel.alertMessage {
-                self?.cellDelegate?.showAlert( message )
-              }
-          }
-      }
-
-      viewModel.updateLoadingClousure = { [weak self] () in
-          DispatchQueue.main.async {
-              let isLoading = self?.viewModel.isLoading ?? false
-              if isLoading {
-                UIView.animate(withDuration: 0.2, animations: {
-                      self?.collectionView.alpha = 0.0
-                })
-              } else {
-                UIView.animate(withDuration: 0.2, animations: {
-                      self?.collectionView.alpha = 1.0
-                  })
-              }
-          }
-      }
-      
-      viewModel.reloadDataClosure = { [weak self] () in
-          DispatchQueue.main.async {
-              self?.collectionView.reloadData()
-          }
-      }
-    
-  }
+ 
  }
 
 
 //MARK: Collection View Delegate & DataSource
-extension TrendingsCell: UICollectionViewDelegate, UICollectionViewDataSource {
+extension TrendingCell: UICollectionViewDelegate, UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     let selectedViewModel = viewModel.cellViewModel(for: indexPath)
     cellDelegate?.collectionView(didSelectItemWith: selectedViewModel)
@@ -115,10 +84,46 @@ extension TrendingsCell: UICollectionViewDelegate, UICollectionViewDataSource {
   
  }
 //MARK: Collection View Delegate Flow Layout
-extension TrendingsCell: UICollectionViewDelegateFlowLayout {
+extension TrendingCell: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
     return CGSize(width: (self.frame.width / 2) , height: frame.height )
   }
+}
+
+//MARK: Bind View Model
+
+extension TrendingCell {
+  private func bindViewModel() {
+     viewModel.showAlertClosure = { [weak self] in
+           DispatchQueue.main.async {
+               if let message = self?.viewModel.alertMessage {
+                 self?.cellDelegate?.showAlert( message )
+               }
+           }
+       }
+
+       viewModel.updateLoadingClousure = { [weak self] () in
+           DispatchQueue.main.async {
+               let isLoading = self?.viewModel.isLoading ?? false
+               if isLoading {
+                 UIView.animate(withDuration: 0.2, animations: {
+                       self?.collectionView.alpha = 0.0
+                 })
+               } else {
+                 UIView.animate(withDuration: 0.2, animations: {
+                       self?.collectionView.alpha = 1.0
+                   })
+               }
+           }
+       }
+       
+       viewModel.reloadDataClosure = { [weak self] () in
+           DispatchQueue.main.async {
+               self?.collectionView.reloadData()
+           }
+       }
+     
+   }
 }

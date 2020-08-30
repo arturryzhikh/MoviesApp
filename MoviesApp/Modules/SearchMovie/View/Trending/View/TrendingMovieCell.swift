@@ -37,8 +37,6 @@ class TrendingMovieCell: UICollectionViewCell {
   }()
   //MARK: Initial settings
   private func setupView() {
-    self.layer.cornerRadius = 4
-    self.clipsToBounds = true
     //add subviews
     self.setSubviewsForAutoLayout(backdropImageView)
     //fill super view with backdrop

@@ -43,6 +43,7 @@ class SearchMovieCell: UICollectionViewCell {
     iv.backgroundColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)
     iv.image = #imageLiteral(resourceName: "TMBdLogo")
     iv.clipsToBounds = true
+    iv.layer.cornerRadius = 4
     return iv
   }()
   private let titleLabel: UILabel = {

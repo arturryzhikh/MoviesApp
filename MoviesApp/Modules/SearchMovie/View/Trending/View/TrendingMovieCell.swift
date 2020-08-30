@@ -30,7 +30,7 @@ class TrendingMovieCell: UICollectionViewCell {
   private let backdropImageView: UIImageView = {
     let iv = UIImageView()
     iv.contentMode = .scaleAspectFill
-    iv.backgroundColor = #colorLiteral(red: 0.003921568627, green: 0.7058823529, blue: 0.8941176471, alpha: 1)
+    iv.backgroundColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)
     iv.clipsToBounds = true
     iv.layer.cornerRadius = 4
     return iv

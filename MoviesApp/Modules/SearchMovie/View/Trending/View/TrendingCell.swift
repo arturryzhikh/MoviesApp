@@ -10,6 +10,7 @@ import UIKit
 
 protocol CollectionViewCellDelegate: class {
   func collectionView(didSelectItemWith viewModel: TrendingCellViewModel)
+  func showAlert(_ message: String)
   }
 
 
@@ -60,9 +61,9 @@ class TrendingsCell: UICollectionViewCell {
   private func bindViewModel() {
     viewModel.showAlertClosure = { [weak self] in
           DispatchQueue.main.async {
-//              if let message = self?.viewModel.alertMessage {
-//                  self?.showAlert( message )
-//              }
+              if let message = self?.viewModel.alertMessage {
+                self?.cellDelegate?.showAlert( message )
+              }
           }
       }
 

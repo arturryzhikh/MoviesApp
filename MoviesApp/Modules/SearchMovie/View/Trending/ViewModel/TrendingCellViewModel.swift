@@ -11,7 +11,7 @@
 import UIKit
 
 
-struct TrendingMovieVM {
+struct TrendingCellViewModel {
   let title: String?
   let releaseDate: String?
   let overview: String?

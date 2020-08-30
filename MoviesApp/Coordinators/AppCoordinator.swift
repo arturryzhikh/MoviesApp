@@ -21,12 +21,12 @@ class AppCoordinator: Coordinator {
     window?.makeKeyAndVisible()
   }
   
-  func movieDetail(_ movieViewModel: SearchMovieCellViewModel) {
+  func movieDetail(_ movieViewModel: SearchMovieCellVM) {
     let movieDetailVC = MovieDetailViewController(collectionViewLayout: MovieDetailFlowLayout())
     movieDetailVC.movieVM = movieViewModel
     navigation.show(movieDetailVC, sender: nil)
   }
-  func trendingMovieDetail(_ trendingMovieVM: TrendingMovieVM) {
+  func trendingMovieDetail(_ trendingMovieVM: TrendingCellViewModel) {
     let movieDetailVC = MovieDetailViewController(collectionViewLayout: MovieDetailFlowLayout())
     movieDetailVC.trendingMovieVM = trendingMovieVM
     navigation.show(movieDetailVC, sender: nil)

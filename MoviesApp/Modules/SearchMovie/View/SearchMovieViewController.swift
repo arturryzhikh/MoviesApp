@@ -112,7 +112,7 @@ extension SearchMovieViewController {
           }
       }
 
-      viewModel.updateLoadingStatus = { [weak self] () in
+      viewModel.updateLoadingClousure = { [weak self] () in
           DispatchQueue.main.async {
               let isLoading = self?.viewModel.isLoading ?? false
               if isLoading {
@@ -220,7 +220,7 @@ extension SearchMovieViewController: UISearchBarDelegate {
 
 //MARK: CollectionView Cell Delegate
 extension SearchMovieViewController: CollectionViewCellDelegate {
-  func collectionView(didSelectItemWith model: TrendingMovieVM) {
+  func collectionView(didSelectItemWith model: TrendingCellViewModel) {
     coordinator?.trendingMovieDetail(model)
   }
   

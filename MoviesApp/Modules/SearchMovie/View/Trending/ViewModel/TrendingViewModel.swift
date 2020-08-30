@@ -1,24 +1,21 @@
 //
-//  MovieViewModel.swift
+//  TrendingViewModel.swift
 //  MoviesApp
 //
-//  Created by Artur R on 17.05.2020.
+//  Created by Artur Ryzhikh on 30.08.2020.
 //  Copyright © 2020 Artur Ryzhikh. All rights reserved.
 //
-
 import UIKit
-
-
-class SearchMovieViewModel {
+class TrendingViewModel {
   
-  private var cellViewModels  = [SearchMovieCellViewModel]() {
+  private var cellViewModels  = [TrendingCellViewModel]() {
         didSet {
             self.reloadDataClosure?()
         }
     }
   var isLoading: Bool = false {
         didSet {
-            self.updateLoadingStatus?()
+            self.updateLoadingClousure?()
         }
     }
   var numberOfItemsInSection: Int {
@@ -32,14 +29,16 @@ class SearchMovieViewModel {
     
 
   var reloadDataClosure: (()-> Void)?
-  var updateLoadingStatus: (()-> Void)?
+  var updateLoadingClousure: (()-> Void)?
   var showAlertClosure: (() -> Void)?
   
-  init() { }
+  init() {
+    getTrending()
+  }
     
-  func searchMovies(searchText: String) {
+  func getTrending() {
     self.isLoading = true
-    NetworkService.shared.searchMovies(query: searchText) { [ weak self ] (movies, error) in
+    NetworkService.shared.getTrending() { [ weak self ] (movies, error) in
       self?.isLoading = false
       if let error = error {
         print(error.localizedDescription)
@@ -47,7 +46,7 @@ class SearchMovieViewModel {
         
       } else {
         if let movies = movies?.results {
-          self?.cellViewModels = movies.map { SearchMovieCellViewModel(movie: $0) }
+          self?.cellViewModels = movies.map { TrendingCellViewModel(from: $0) }
         }
       }
       
@@ -55,8 +54,7 @@ class SearchMovieViewModel {
     
   }
 
-    func cellViewModel( for indexPath: IndexPath ) -> SearchMovieCellViewModel {
+    func cellViewModel( for indexPath: IndexPath ) -> TrendingCellViewModel {
         return cellViewModels[indexPath.row]
   }
-    
 }

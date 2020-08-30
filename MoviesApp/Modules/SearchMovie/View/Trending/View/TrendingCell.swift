@@ -9,27 +9,30 @@
 import UIKit
 
 protocol CollectionViewCellDelegate: class {
-  func collectionView(didSelectItemWith viewModel: TrendingMovieVM)
+  func collectionView(didSelectItemWith viewModel: TrendingCellViewModel)
   }
 
+
+
 class TrendingsCell: UICollectionViewCell {
+  
   weak var cellDelegate: CollectionViewCellDelegate?
   static var reuseID : String {
     return self.description()
   }
   //MARK: Instance properties
-  private var trendingMovieViewModels = [TrendingMovieVM]()
+  private var viewModel = TrendingViewModel()
   //MARK: life cycle
   override init(frame: CGRect) {
     super.init(frame: frame)
     setupView()
-    fetchTrendingMovies()
+    bindViewModel()
   }
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   //MARK: Subviews
-  let trendingCollectionView: UICollectionView = {
+  let collectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
     layout.minimumLineSpacing = 16
     layout.scrollDirection = .horizontal
@@ -39,40 +42,73 @@ class TrendingsCell: UICollectionViewCell {
     return cv
   }()
   private func setupView() {
-    setSubviewsForAutoLayout(trendingCollectionView)
-    trendingCollectionView.register(TrendingMovieCell.self,
+    setSubviewsForAutoLayout(collectionView)
+    collectionView.register(TrendingMovieCell.self,
                                     forCellWithReuseIdentifier: TrendingMovieCell.reuseID)
-    trendingCollectionView.delegate = self
-    trendingCollectionView.dataSource = self
-    trendingCollectionView.backgroundColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)
+    collectionView.delegate = self
+    collectionView.dataSource = self
+    collectionView.backgroundColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)
     //Constraint Collection View
     NSLayoutConstraint.activate([
-      trendingCollectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-      trendingCollectionView.topAnchor.constraint(equalTo: self.topAnchor),
-      trendingCollectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-      trendingCollectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+      collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+      collectionView.topAnchor.constraint(equalTo: self.topAnchor),
+      collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+      collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
      ])
     }
+  //MARK: Naive binding
+  private func bindViewModel() {
+    viewModel.showAlertClosure = { [weak self] in
+          DispatchQueue.main.async {
+//              if let message = self?.viewModel.alertMessage {
+//                  self?.showAlert( message )
+//              }
+          }
+      }
+
+      viewModel.updateLoadingClousure = { [weak self] () in
+          DispatchQueue.main.async {
+              let isLoading = self?.viewModel.isLoading ?? false
+              if isLoading {
+                UIView.animate(withDuration: 0.2, animations: {
+                      self?.collectionView.alpha = 0.0
+                })
+              } else {
+                UIView.animate(withDuration: 0.2, animations: {
+                      self?.collectionView.alpha = 1.0
+                  })
+              }
+          }
+      }
+      
+      viewModel.reloadDataClosure = { [weak self] () in
+          DispatchQueue.main.async {
+              self?.collectionView.reloadData()
+          }
+      }
+    
+  }
  }
 
 
 //MARK: Collection View Delegate & DataSource
 extension TrendingsCell: UICollectionViewDelegate, UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    cellDelegate?.collectionView(didSelectItemWith: trendingMovieViewModels[indexPath.row])
+    let selectedViewModel = viewModel.cellViewModel(for: indexPath)
+    cellDelegate?.collectionView(didSelectItemWith: selectedViewModel)
     
   }
  
  func collectionView(_ collectionView: UICollectionView,
                      numberOfItemsInSection section: Int) -> Int {
-    return trendingMovieViewModels.count
+    return viewModel.numberOfItemsInSection
   }
   func collectionView(_ collectionView: UICollectionView,
                       cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrendingMovieCell.reuseID,
                                                   for: indexPath) as! TrendingMovieCell
-    let trendingMoviewViewModel = trendingMovieViewModels[indexPath.row]
-    cell.trendingMovieVM = trendingMoviewViewModel
+    let cellViewModel = viewModel.cellViewModel(for: indexPath)
+    cell.viewModel = cellViewModel
     return cell
    }
   
@@ -83,19 +119,5 @@ extension TrendingsCell: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
     return CGSize(width: (self.frame.width / 2) , height: frame.height )
-  }
-}
-
-//MARK: Networking
-extension TrendingsCell {
-  private func fetchTrendingMovies() {
-    NetworkService.shared.getTrending { [ weak self ] (result, error) in
-      if let error = error {
-        print("error getting trending movies \(error)")
-      }
-      guard let results = result?.results else { return }
-      self?.trendingMovieViewModels = results.map { TrendingMovieVM(from: $0)}
-      self?.trendingCollectionView.reloadData()
-    }
   }
 }

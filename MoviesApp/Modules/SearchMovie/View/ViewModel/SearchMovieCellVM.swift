@@ -7,11 +7,13 @@
 //
 
 import UIKit
-struct SearchMovieCellViewModel {
+
+struct SearchMovieCellVM {
   let title: String?
   let releaseDate: String?
   let overview: String?
   let posterPath: String?
+  let backdropPath: String? = nil
   var year: String? {
     return String(releaseDate?.prefix(4) ?? "Year")
   }
@@ -22,4 +24,5 @@ struct SearchMovieCellViewModel {
   self.overview = movie.overview
   self.posterPath = movie.posterPath
   }
+ 
 }

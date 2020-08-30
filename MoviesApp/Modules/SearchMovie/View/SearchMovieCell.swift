@@ -17,7 +17,7 @@ class SearchMovieCell: UICollectionViewCell {
   }
   //MARK: instance properties
   
-  var viewModel: SearchMovieCellViewModel! {
+  var viewModel: SearchMovieCellVM! {
     didSet {
       titleLabel.text = viewModel.title
       yearLabel.text = viewModel.year

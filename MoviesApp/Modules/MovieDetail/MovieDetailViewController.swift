@@ -13,8 +13,8 @@ import UIKit
 class MovieDetailViewController: UIViewController {
   //MARK: instance properties
   
-  private var activityIndicator: UIActivityIndicatorView!
-  
+//  private var activityIndicator: UIActivityIndicatorView!
+//  
   var movieViewModel: MovieViewModel! {
     didSet {
       backdropImageView.setImage(from: movieViewModel.backdropPath)
@@ -71,9 +71,9 @@ class MovieDetailViewController: UIViewController {
   private let overviewTextView: UITextView = {
     let lbl = UITextView()
     lbl.translatesAutoresizingMaskIntoConstraints = false
-    lbl.font = UIFont.systemFont(ofSize: 16)
+    lbl.font = UIFont.systemFont(ofSize: 20)
     lbl.textColor = .white
-    lbl.backgroundColor = .red
+    lbl.backgroundColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)
     return lbl
   }()
   private func setupView() {
@@ -83,20 +83,20 @@ class MovieDetailViewController: UIViewController {
     view.addSubview(titleLabel)
     view.addSubview(yearLabel)
     view.addSubview(overviewTextView)
-    activityIndicator = UIActivityIndicatorView(style: .white)
-    activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-    activityIndicator.hidesWhenStopped = true
-    activityIndicator.startAnimating()
-    view.addSubview(activityIndicator)
+//    activityIndicator = UIActivityIndicatorView(style: .white)
+//    activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+//    activityIndicator.hidesWhenStopped = true
+//    activityIndicator.startAnimating()
+//    view.addSubview(activityIndicator)
     NSLayoutConstraint.activate([
 
     backdropImageView.topAnchor.constraint(equalTo: self.view.topAnchor),
     backdropImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
     backdropImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
     backdropImageView.heightAnchor.constraint(equalTo: view.heightAnchor,multiplier: 0.3),
-    
-    activityIndicator.centerXAnchor.constraint(equalTo: backdropImageView.centerXAnchor),
-    activityIndicator.centerYAnchor.constraint(equalTo: backdropImageView.centerYAnchor),
+//
+//    activityIndicator.centerXAnchor.constraint(equalTo: backdropImageView.centerXAnchor),
+//    activityIndicator.centerYAnchor.constraint(equalTo: backdropImageView.centerYAnchor),
  
     titleLabel.leadingAnchor.constraint(equalTo: backdropImageView.leadingAnchor, constant: 6),
     titleLabel.trailingAnchor.constraint(equalTo: backdropImageView.trailingAnchor, constant: -6),

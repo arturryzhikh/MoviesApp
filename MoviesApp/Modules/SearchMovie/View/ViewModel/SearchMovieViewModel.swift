@@ -11,7 +11,7 @@ import UIKit
 
 class SearchMovieViewModel {
   
-  private var cellViewModels  = [SearchMovieCellVM]() {
+  private var cellViewModels  = [MovieViewModel]() {
         didSet {
             self.reloadDataClosure?()
         }
@@ -47,7 +47,7 @@ class SearchMovieViewModel {
         
       } else {
         if let movies = movies?.results {
-          self?.cellViewModels = movies.map { SearchMovieCellVM(movie: $0) }
+          self?.cellViewModels = movies.map { MovieViewModel(movie: $0) }
         }
       }
       
@@ -55,7 +55,7 @@ class SearchMovieViewModel {
     
   }
 
-    func cellViewModel( for indexPath: IndexPath ) -> SearchMovieCellVM {
+    func cellViewModel( for indexPath: IndexPath ) -> MovieViewModel {
         return cellViewModels[indexPath.row]
   }
     

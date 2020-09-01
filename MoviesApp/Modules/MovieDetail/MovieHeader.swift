@@ -12,12 +12,12 @@ class MovieHeader: UICollectionReusableView {
   static var reuseID: String {
     return self.description()
   }
-  var movieVM: SearchMovieCellVM? {
+  var movieVM: MovieViewModel? {
     didSet {
       posterIV.setImage(from: movieVM?.backdropPath)
     }
   }
-  var trendingMovieVM: TrendingCellViewModel? {
+  var trendingMovieVM: MovieViewModel? {
     didSet {
       posterIV.setImage(from: trendingMovieVM?.backdropPath)
     }

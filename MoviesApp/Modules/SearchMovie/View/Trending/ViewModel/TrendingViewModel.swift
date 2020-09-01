@@ -8,7 +8,7 @@
 import UIKit
 class TrendingViewModel {
   
-  private var cellViewModels  = [TrendingCellViewModel]() {
+  private var cellViewModels  = [MovieViewModel]() {
         didSet {
             self.reloadDataClosure?()
         }
@@ -46,7 +46,7 @@ class TrendingViewModel {
         
       } else {
         if let movies = movies?.results {
-          self?.cellViewModels = movies.map { TrendingCellViewModel(from: $0) }
+          self?.cellViewModels = movies.map { MovieViewModel(movie: $0) }
         }
       }
       
@@ -54,7 +54,7 @@ class TrendingViewModel {
     
   }
 
-    func cellViewModel( for indexPath: IndexPath ) -> TrendingCellViewModel {
+    func cellViewModel( for indexPath: IndexPath ) -> MovieViewModel {
         return cellViewModels[indexPath.row]
   }
 }

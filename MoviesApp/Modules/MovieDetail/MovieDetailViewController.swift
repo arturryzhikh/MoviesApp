@@ -12,9 +12,7 @@ import UIKit
 
 class MovieDetailViewController: UIViewController {
 //MARK: instance properties
-  var movieVM: SearchMovieCellVM?
-  var trendingMovieVM: TrendingCellViewModel?
-  var coordinator: AppCoordinator?
+  var movieViewModel: MovieViewModel?
 //MARK: life cycle
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -23,7 +21,6 @@ class MovieDetailViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     setupNavigationBar()
-    
   }
   
   

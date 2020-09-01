@@ -10,7 +10,7 @@ import UIKit
 
 class TrendingMovieCell: UICollectionViewCell {
   
-  var viewModel: TrendingCellViewModel! {
+  var viewModel: MovieViewModel! {
     didSet {
       backdropImageView.setImage(from: viewModel.backdropPath)
     }

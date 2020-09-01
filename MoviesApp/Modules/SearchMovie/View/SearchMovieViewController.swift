@@ -182,8 +182,8 @@ extension SearchMovieViewController: UISearchBarDelegate {
 
 //MARK: CollectionView Cell Delegate
 extension SearchMovieViewController: CollectionViewCellDelegate {
-  func collectionView(didSelectItemWith model: TrendingCellViewModel) {
-    coordinator?.trendingMovieDetail(model)
+  func collectionView(didSelectItemWith moviewViewModel: MovieViewModel) {
+    coordinator?.movieDetail(moviewViewModel)
   }
   
  

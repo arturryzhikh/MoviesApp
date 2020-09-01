@@ -22,17 +22,12 @@ class AppCoordinator: Coordinator {
     window?.makeKeyAndVisible()
   }
   
-  func movieDetail(_ movieViewModel: SearchMovieCellVM) {
+  func movieDetail(_ movieViewModel: MovieViewModel) {
     let movieDetailVC = MovieDetailViewController()
-    movieDetailVC.movieVM = movieViewModel
+    movieDetailVC.movieViewModel = movieViewModel
     navigation.show(movieDetailVC, sender: nil)
   }
-  func trendingMovieDetail(_ trendingMovieVM: TrendingCellViewModel) {
-    let movieDetailVC = MovieDetailViewController()
-    movieDetailVC.trendingMovieVM = trendingMovieVM
-    navigation.pushViewController(movieDetailVC, animated: true)
-  }
-  
+ 
   init(_ window: UIWindow) {
     self.window = window
   }

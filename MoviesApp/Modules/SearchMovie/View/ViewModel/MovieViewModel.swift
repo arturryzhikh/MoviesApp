@@ -8,21 +8,21 @@
 
 import UIKit
 
-struct SearchMovieCellVM {
+struct MovieViewModel {
   let title: String?
   let releaseDate: String?
   let overview: String?
   let posterPath: String?
-  let backdropPath: String? = nil
-  var year: String? {
+  let backdropPath: String?
+  var year: String {
     return String(releaseDate?.prefix(4) ?? "Year")
   }
-  //Initialization
- init(movie : Movie) {
+  init(movie : Movie) {
   self.title = movie.title
   self.releaseDate = movie.releaseDate
   self.overview = movie.overview
   self.posterPath = movie.posterPath
+  self.backdropPath = movie.backdropPath
   }
  
 }

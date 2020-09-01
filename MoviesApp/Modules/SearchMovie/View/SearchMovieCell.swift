@@ -9,7 +9,7 @@
 import UIKit
 
 
-//MARK: Horizontal Cell
+
 class SearchMovieCell: UICollectionViewCell {
   
   static var reuseID: String {

@@ -23,18 +23,14 @@ class AppCoordinator: Coordinator {
   }
   
   func movieDetail(_ movieViewModel: SearchMovieCellVM) {
-    let movieDetailVC = MovieDetailViewController(
-      collectionViewLayout: MovieDetailFlowLayout()
-    )
+    let movieDetailVC = MovieDetailViewController()
     movieDetailVC.movieVM = movieViewModel
     navigation.show(movieDetailVC, sender: nil)
   }
   func trendingMovieDetail(_ trendingMovieVM: TrendingCellViewModel) {
-    let movieDetailVC = MovieDetailViewController(
-      collectionViewLayout: MovieDetailFlowLayout()
-    )
+    let movieDetailVC = MovieDetailViewController()
     movieDetailVC.trendingMovieVM = trendingMovieVM
-    navigation.show(movieDetailVC, sender: nil)
+    navigation.pushViewController(movieDetailVC, animated: true)
   }
   
   init(_ window: UIWindow) {

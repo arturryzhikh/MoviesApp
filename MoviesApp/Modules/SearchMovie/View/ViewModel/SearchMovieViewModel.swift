@@ -11,6 +11,7 @@ import UIKit
 
 class SearchMovieViewModel {
   
+  private let apiService : ApiService
   private var cellViewModels  = [MovieViewModel]() {
         didSet {
             self.reloadDataClosure?()
@@ -35,11 +36,13 @@ class SearchMovieViewModel {
   var updateLoadingClousure: (()-> Void)?
   var showAlertClosure: (() -> Void)?
   
-  init() { }
+  init(apiService: ApiService = ApiService()) {
+    self.apiService = apiService
+  }
     
   func searchMovies(searchText: String) {
     self.isLoading = true
-    NetworkService.shared.searchMovies(query: searchText) { [ weak self ] (movies, error) in
+    apiService.searchMovies(query: searchText) { [ weak self ] (movies, error) in
       self?.isLoading = false
       if let error = error {
         print(error.localizedDescription)

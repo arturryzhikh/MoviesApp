@@ -7,6 +7,7 @@
 //
 import UIKit
 class TrendingViewModel {
+  private let apiService: ApiService
   
   private var cellViewModels  = [MovieViewModel]() {
         didSet {
@@ -27,18 +28,20 @@ class TrendingViewModel {
       }
   }
     
-
+  //MARK: Binding Closures
   var reloadDataClosure: (()-> Void)?
   var updateLoadingClousure: (()-> Void)?
   var showAlertClosure: (() -> Void)?
   
-  init() {
+  init(apiService: ApiService = ApiService()) {
+    self.apiService = apiService
     getTrending()
-  }
+   }
+  
     
-  func getTrending() {
+  private func getTrending() {
     self.isLoading = true
-    NetworkService.shared.getTrending() { [ weak self ] (movies, error) in
+    apiService.getTrending() { [ weak self ] (movies, error) in
       self?.isLoading = false
       if let error = error {
         print(error.localizedDescription)

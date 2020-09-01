@@ -8,9 +8,8 @@
 
 import UIKit
 
-final class NetworkService {
+final class ApiService {
   
-  static let shared = NetworkService()
   private let session = URLSession.shared
   private let imageChache = NSCache<NSString,UIImage>()
   private let api = TMDbApi(key: "be0534e846d5abd01a6b93c899d51676")
@@ -103,9 +102,17 @@ final class NetworkService {
     }
     task.resume()
   }
+  
+  init() {
+    print("NetworkService Initialized")
+  }
+  deinit {
+    print("NetworkService Deinitialized")
+  }
+  
 }
 
-private extension NetworkService {
+private extension ApiService {
   func decodeJSON<T:Decodable>(from data: Data?, into model: T.Type) -> T? {
     guard
       let data = data

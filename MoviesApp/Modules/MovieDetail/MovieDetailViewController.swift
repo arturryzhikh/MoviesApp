@@ -11,8 +11,10 @@ import UIKit
 
 
 class MovieDetailViewController: UIViewController {
+  //MARK: instance properties
   
-//MARK: instance properties
+  private var activityIndicator: UIActivityIndicatorView!
+  
   var movieViewModel: MovieViewModel! {
     didSet {
       backdropImageView.setImage(from: movieViewModel.backdropPath)
@@ -44,6 +46,7 @@ class MovieDetailViewController: UIViewController {
     iv.clipsToBounds = true
     return iv
   }()
+
   private let titleLabel: UILabel = {
      let lbl = UILabel()
     lbl.translatesAutoresizingMaskIntoConstraints = false
@@ -80,12 +83,20 @@ class MovieDetailViewController: UIViewController {
     view.addSubview(titleLabel)
     view.addSubview(yearLabel)
     view.addSubview(overviewTextView)
+    activityIndicator = UIActivityIndicatorView(style: .white)
+    activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+    activityIndicator.hidesWhenStopped = true
+    activityIndicator.startAnimating()
+    view.addSubview(activityIndicator)
     NSLayoutConstraint.activate([
 
     backdropImageView.topAnchor.constraint(equalTo: self.view.topAnchor),
     backdropImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
     backdropImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
     backdropImageView.heightAnchor.constraint(equalTo: view.heightAnchor,multiplier: 0.3),
+    
+    activityIndicator.centerXAnchor.constraint(equalTo: backdropImageView.centerXAnchor),
+    activityIndicator.centerYAnchor.constraint(equalTo: backdropImageView.centerYAnchor),
  
     titleLabel.leadingAnchor.constraint(equalTo: backdropImageView.leadingAnchor, constant: 6),
     titleLabel.trailingAnchor.constraint(equalTo: backdropImageView.trailingAnchor, constant: -6),

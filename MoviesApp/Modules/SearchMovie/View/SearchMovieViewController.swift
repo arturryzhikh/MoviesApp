@@ -167,12 +167,7 @@ extension SearchMovieViewController {
     coordinator?.movieDetail(searchMovieCellVM)
   }
   
-  func collectionView(_ collectionView: UICollectionView,
-                      layout collectionViewLayout: UICollectionViewLayout,
-                      insetForSectionAt section: Int) -> UIEdgeInsets {
-    return UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
-  }
-  
+
   
 }
 //MARK: UISearchBar Delegate

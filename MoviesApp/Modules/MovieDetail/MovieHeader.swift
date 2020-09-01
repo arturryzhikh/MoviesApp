@@ -14,7 +14,7 @@ class MovieHeader: UICollectionReusableView {
   }
   var movieVM: SearchMovieCellVM? {
     didSet {
-      posterIV.setImage(from: movieVM?.posterPath)
+      posterIV.setImage(from: movieVM?.backdropPath)
     }
   }
   var trendingMovieVM: TrendingCellViewModel? {

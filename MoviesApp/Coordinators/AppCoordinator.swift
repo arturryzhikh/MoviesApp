@@ -14,7 +14,8 @@ class AppCoordinator: Coordinator {
   
   func start() {
     let moviesVC = SearchMovieViewController (
-      collectionViewLayout: UICollectionViewFlowLayout())
+      collectionViewLayout: UICollectionViewFlowLayout()
+    )
     moviesVC.coordinator = self
     navigation.pushViewController(moviesVC, animated: false)
     window?.rootViewController = navigation
@@ -22,12 +23,16 @@ class AppCoordinator: Coordinator {
   }
   
   func movieDetail(_ movieViewModel: SearchMovieCellVM) {
-    let movieDetailVC = MovieDetailViewController(collectionViewLayout: MovieDetailFlowLayout())
+    let movieDetailVC = MovieDetailViewController(
+      collectionViewLayout: MovieDetailFlowLayout()
+    )
     movieDetailVC.movieVM = movieViewModel
     navigation.show(movieDetailVC, sender: nil)
   }
   func trendingMovieDetail(_ trendingMovieVM: TrendingCellViewModel) {
-    let movieDetailVC = MovieDetailViewController(collectionViewLayout: MovieDetailFlowLayout())
+    let movieDetailVC = MovieDetailViewController(
+      collectionViewLayout: MovieDetailFlowLayout()
+    )
     movieDetailVC.trendingMovieVM = trendingMovieVM
     navigation.show(movieDetailVC, sender: nil)
   }

@@ -41,46 +41,45 @@ class SearchMovieCell: UICollectionViewCell {
     let iv = UIImageView()
     iv.contentMode = .scaleAspectFill
     iv.backgroundColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)
-    iv.image = #imageLiteral(resourceName: "TMBdLogo")
     iv.clipsToBounds = true
     iv.layer.cornerRadius = 4
     return iv
   }()
   private let titleLabel: UILabel = {
     let lbl = UILabel()
-    lbl.backgroundColor = #colorLiteral(red: 0.003921568627, green: 0.7058823529, blue: 0.8941176471, alpha: 1)
+    lbl.backgroundColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)
     lbl.numberOfLines = 0
     lbl.textAlignment = .natural
     lbl.lineBreakMode = .byWordWrapping
-    lbl.font = UIFont.boldSystemFont(ofSize: 12)
-    lbl.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    lbl.text = "Загадочная история Бенжамина Баттона"
+    lbl.font = UIFont.boldSystemFont(ofSize: 16)
+    lbl.textColor = .white
     return lbl
   }()
   private let yearLabel: UILabel = {
     let lbl = UILabel()
-    lbl.backgroundColor = #colorLiteral(red: 0.003921568627, green: 0.7058823529, blue: 0.8941176471, alpha: 1)
+    lbl.backgroundColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)
     lbl.numberOfLines = 0
     lbl.textAlignment = .left
-    lbl.font = UIFont.systemFont(ofSize: 10)
-    lbl.textColor = .black
-    lbl.text = "1998"
+    lbl.font = UIFont.systemFont(ofSize: 12)
+    lbl.textColor = .white
     return lbl
   }()
   private let overviewLabel: UILabel = {
     let tv = UILabel()
-    tv.font = UIFont.systemFont(ofSize: 10)
-    tv.textColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)
+    tv.font = UIFont.systemFont(ofSize: 14)
+    tv.textColor = .white
     tv.numberOfLines = 0
     tv.lineBreakMode = .byWordWrapping
-    tv.backgroundColor = #colorLiteral(red: 0.003921568627, green: 0.7058823529, blue: 0.8941176471, alpha: 1)
+    tv.backgroundColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)
     return tv
   }()
   private func setupView() {
-    self.layer.cornerRadius = 4 
-    self.backgroundColor = #colorLiteral(red: 0.003921568627, green: 0.7058823529, blue: 0.8941176471, alpha: 1)
+    self.backgroundColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)
    //add subviews
-   self.setSubviewsForAutoLayout(posterImageView,titleLabel,yearLabel,overviewLabel)
+   self.setSubviewsForAutoLayout(posterImageView,
+                                 titleLabel,
+                                 yearLabel,
+                                 overviewLabel)
    NSLayoutConstraint.activate([
     //constraint poster image view
      posterImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor,constant: 5),
@@ -93,7 +92,7 @@ class SearchMovieCell: UICollectionViewCell {
      titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5),
      titleLabel.heightAnchor.constraint(equalTo: self.heightAnchor,multiplier: 0.25),
      //constraint year label
-    yearLabel.heightAnchor.constraint(equalTo: titleLabel.heightAnchor,multiplier: 0.27),
+    yearLabel.heightAnchor.constraint(equalTo: titleLabel.heightAnchor,multiplier: 0.3),
     yearLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 2),
     yearLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
     yearLabel.widthAnchor.constraint(equalTo: titleLabel.widthAnchor,multiplier: 0.15),

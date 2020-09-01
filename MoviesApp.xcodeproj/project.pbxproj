@@ -110,7 +110,6 @@
 			isa = PBXGroup;
 			children = (
 				755D35062471446400FD13E3 /* SearchMovieViewModel.swift */,
-				7524771224F823A400393C93 /* MovieViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -151,11 +150,11 @@
 		7579823B2452DA460059BFA0 /* MoviesApp */ = {
 			isa = PBXGroup;
 			children = (
-				75EDCCD724FE66A200A8ABDE /* New Group */,
 				757982582452E2F50059BFA0 /* Application */,
 				75CA954E24EABD1F00356F0E /* Coordinators */,
-				7519243524533B6500472CD5 /* Networking */,
 				757982592452E3110059BFA0 /* Models */,
+				75EDCCD724FE66A200A8ABDE /* ViewModels */,
+				7519243524533B6500472CD5 /* Networking */,
 				7579825A2452E3270059BFA0 /* Modules */,
 				7519242C2453154500472CD5 /* Extensions */,
 				757982532452E0C00059BFA0 /* Resources */,
@@ -226,11 +225,12 @@
 			path = Coordinators;
 			sourceTree = "<group>";
 		};
-		75EDCCD724FE66A200A8ABDE /* New Group */ = {
+		75EDCCD724FE66A200A8ABDE /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				7524771224F823A400393C93 /* MovieViewModel.swift */,
 			);
-			path = "New Group";
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

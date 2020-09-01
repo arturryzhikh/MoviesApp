@@ -22,10 +22,10 @@ struct Movie: Decodable {
   let overview: String?
   let backdropPath: String?
   let posterPath: String?
-  ///uncomment lines to retrieve other properties
-//  let popularity: Double?
+  let popularity: Double?
+///uncomment lines to retrieve other properties
 //  let voteAvarage: Double?
-//  let voteCount: Int?
+
 //  let id: Int?
 //  let video: Bool?
 //  let adult: Bool?

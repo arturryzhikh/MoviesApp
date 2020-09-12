@@ -6,6 +6,7 @@
 //  Copyright © 2020 Artur Ryzhikh. All rights reserved.
 //
 import UIKit
+
 extension UIImageView {
   func setImage(from path: String?) {
     guard let path = path else { return  }

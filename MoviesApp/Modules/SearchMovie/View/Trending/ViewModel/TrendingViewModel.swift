@@ -41,7 +41,13 @@ class TrendingViewModel {
     
   private func getTrending() {
     self.isLoading = true
-    apiService.getTrending() { [ weak self ] (movies, error) in
+    apiService.trending(with: TrendingRequest.trending) { [unowned self] result in
+      self.isLoading = false
+      switch result {
+      
+      }
+    }
+    
       self?.isLoading = false
       if let error = error {
         print(error.localizedDescription)

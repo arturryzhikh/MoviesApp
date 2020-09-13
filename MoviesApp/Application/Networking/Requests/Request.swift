@@ -10,7 +10,6 @@ import Foundation
 
 protocol APIRequest: Encodable {
   associatedtype Response: Decodable
-  associatedtype Parameters: Encodable
   var endPoint: String { get }
   func url() -> URL
 }

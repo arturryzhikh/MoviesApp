@@ -41,6 +41,9 @@ class SearchMovieViewModel {
   }
     
   func searchMovies(searchText: String) {
+    guard !isLoading else {
+      return
+    }
     self.isLoading = true
     let request = SearchMovieRequest(query: searchText)
     apiService.send(request) { [unowned self ] result in
@@ -58,21 +61,6 @@ class SearchMovieViewModel {
       }
     }
 
-//    self.isLoading = true
-//    apiService.searchMovies(query: searchText) { [ weak self ] (movies, error) in
-//      self?.isLoading = false
-//      if let error = error {
-//        print(error.localizedDescription)
-//        self?.alertMessage = "Error"
-//
-//      } else {
-//        if let movies = movies?.results {
-//          self?.cellViewModels = movies.map { MovieViewModel(movie: $0) }
-//        }
-//      }
-//
-//    }
-//
   }
 
     func cellViewModel( for indexPath: IndexPath ) -> MovieViewModel {

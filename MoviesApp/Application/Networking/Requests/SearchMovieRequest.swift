@@ -16,7 +16,7 @@ struct SearchMovieRequest: APIRequest {
   }
   let query: String
   let page: Int
-  typealias Response = Movies
+  typealias Response = MoviesResponse
   
   init(query: String, page: Int = 1) {
     self.query = query

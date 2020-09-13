@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		75017A4824700C1D00C51CCE /* Movies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75017A4724700C1D00C51CCE /* Movies.swift */; };
+		75017A4824700C1D00C51CCE /* MoviesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75017A4724700C1D00C51CCE /* MoviesResponse.swift */; };
 		750EBC3B246571B7004E032E /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750EBC3A246571B7004E032E /* MovieDetailViewController.swift */; };
 		751924322453329300472CD5 /* TrendingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751924312453329300472CD5 /* TrendingCell.swift */; };
 		751A790024FEA54E00876D20 /* MovieDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751A78FF24FEA54E00876D20 /* MovieDetailCell.swift */; };
@@ -36,7 +36,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		75017A4724700C1D00C51CCE /* Movies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movies.swift; sourceTree = "<group>"; };
+		75017A4724700C1D00C51CCE /* MoviesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesResponse.swift; sourceTree = "<group>"; };
 		750EBC3A246571B7004E032E /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
 		751924312453329300472CD5 /* TrendingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingCell.swift; sourceTree = "<group>"; };
 		751A78FF24FEA54E00876D20 /* MovieDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailCell.swift; sourceTree = "<group>"; };
@@ -232,7 +232,7 @@
 		757982592452E3110059BFA0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				75017A4724700C1D00C51CCE /* Movies.swift */,
+				75017A4724700C1D00C51CCE /* MoviesResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -370,7 +370,7 @@
 				75A4C52A246173EB00504026 /* UIView+Extensions.swift in Sources */,
 				75C51A8E246BF868006A0685 /* ImageFetcher.swift in Sources */,
 				751A790024FEA54E00876D20 /* MovieDetailCell.swift in Sources */,
-				75017A4824700C1D00C51CCE /* Movies.swift in Sources */,
+				75017A4824700C1D00C51CCE /* MoviesResponse.swift in Sources */,
 				752CE33524FB5E0A00D7A8A7 /* TrendingViewModel.swift in Sources */,
 				7558A55A2471EAC900A7183A /* API.swift in Sources */,
 				7568E20E250E559F001E44D5 /* ApiClient.swift in Sources */,

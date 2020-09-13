@@ -10,7 +10,7 @@ import Foundation
 struct TrendingRequest: APIRequest {
 
   var parameters: [String : String] = [:]
-  typealias Response = Movies
+  typealias Response = MoviesResponse
   var endPoint: String {
     return "https://api.themoviedb.org/3/trending/movie/week"
   }

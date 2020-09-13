@@ -40,6 +40,9 @@ class TrendingViewModel {
   
     
   private func getTrending() {
+    guard !isLoading else {
+       return
+     }
     self.isLoading = true
     apiService.send(TrendingRequest()) { [unowned self] result in
       self.isLoading = false

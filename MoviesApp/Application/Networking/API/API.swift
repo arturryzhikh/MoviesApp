@@ -8,8 +8,8 @@
 
 
 
-struct TMDbApi {
-  
+struct API {
+  static let apiKeyStatic = "be0534e846d5abd01a6b93c899d51676"
   let apiKey: String
   private let baseURL = "https://api.themoviedb.org/3"
   private let searchMoviesEndpoint = "/search/movie"

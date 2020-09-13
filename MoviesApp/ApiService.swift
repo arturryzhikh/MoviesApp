@@ -12,7 +12,7 @@ final class ApiService {
   
   private let session = URLSession.shared
   private let imageChache = NSCache<NSString,UIImage>()
-  private let api = TMDbApi(key: "be0534e846d5abd01a6b93c899d51676")
+  private let api = API(key: "be0534e846d5abd01a6b93c899d51676")
   func fetchImage(from path: String, completion : @escaping (_ image: UIImage?, _ error: Error?) -> Void) {
    guard
     let url = URL(string: api.imageBaseUrl + path) else {

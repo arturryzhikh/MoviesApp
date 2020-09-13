@@ -24,6 +24,7 @@
 		75A4C5242461568100504026 /* SearchMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A4C5232461568100504026 /* SearchMovieCell.swift */; };
 		75A4C52A246173EB00504026 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A4C529246173EB00504026 /* UIView+Extensions.swift */; };
 		75B453C12461DA24006AFFC8 /* TrendingMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B453C02461DA24006AFFC8 /* TrendingMovieCell.swift */; };
+		75C4B2D9250E248900156FAC /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C4B2D8250E248900156FAC /* Networking.swift */; };
 		75C51A8E246BF868006A0685 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C51A8D246BF868006A0685 /* ApiService.swift */; };
 		75CA955024EABD4B00356F0E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CA954F24EABD4B00356F0E /* Coordinator.swift */; };
 		75CA955224EABEE000356F0E /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CA955124EABEE000356F0E /* AppCoordinator.swift */; };
@@ -49,6 +50,7 @@
 		75A4C5232461568100504026 /* SearchMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMovieCell.swift; sourceTree = "<group>"; };
 		75A4C529246173EB00504026 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		75B453C02461DA24006AFFC8 /* TrendingMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingMovieCell.swift; sourceTree = "<group>"; };
+		75C4B2D8250E248900156FAC /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		75C51A8D246BF868006A0685 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ApiService.swift; path = MoviesApp/ApiService.swift; sourceTree = SOURCE_ROOT; };
 		75CA954F24EABD4B00356F0E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		75CA955124EABEE000356F0E /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 			children = (
 				75C51A8D246BF868006A0685 /* ApiService.swift */,
 				7558A5592471EAC900A7183A /* TMDbApi.swift */,
+				75C4B2D8250E248900156FAC /* Networking.swift */,
 			);
 			name = Networking;
 			path = Application/Networking;
@@ -300,6 +303,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75C4B2D9250E248900156FAC /* Networking.swift in Sources */,
 				757982412452DA460059BFA0 /* SearchMovieViewController.swift in Sources */,
 				7579823D2452DA460059BFA0 /* AppDelegate.swift in Sources */,
 				75B453C12461DA24006AFFC8 /* TrendingMovieCell.swift in Sources */,

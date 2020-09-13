@@ -27,7 +27,15 @@ class SearchMovieViewController: UICollectionViewController{
     searchBar = makeSearchBar()
     setupCollectionView()
     bindViewModel()
-    
+    let client = Client()
+    client.send(TrendingRequest(mediaType: .tv, timeWindow: .week)) { (response) in
+      switch response {
+      case .failure(let error):
+        print(error)
+      case .success(let movies):
+        print(movies.results?.count)
+      }
+    }
     
   }
 

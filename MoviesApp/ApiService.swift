@@ -49,10 +49,14 @@ final class ApiService {
     var urlComponents = URLComponents(string: api.trendingBaseUrl)
     var queryItems = [URLQueryItem]()
     queryItems.append(URLQueryItem(name: "api_key", value: api.apiKey))
+    queryItems.append(URLQueryItem(name: "time_window", value: "week"))
+    queryItems.append(URLQueryItem(name: "media_type", value: "tv"))
     urlComponents?.queryItems = queryItems
     guard
       let url = urlComponents?.url else { return }
+
       var request = URLRequest(url: url)
+    
       request.httpMethod = "GET"
       let task = self.session.dataTask(with: request) { (data, response , error) in
         DispatchQueue.main.async {

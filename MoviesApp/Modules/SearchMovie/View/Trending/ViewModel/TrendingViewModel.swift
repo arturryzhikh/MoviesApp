@@ -44,14 +44,15 @@ class TrendingViewModel {
        return
      }
     self.isLoading = true
-    apiService.send(TrendingRequest()) { [unowned self] result in
-      self.isLoading = false
+    apiService.send(TrendingRequest()) { [weak self] result in
       switch result {
       case .failure(let error):
-        self.alertMessage = error.localizedDescription
+        self?.isLoading = false
+        self?.alertMessage = error.localizedDescription
       case.success(let response):
+        self?.isLoading = false
         if let movies = response.results {
-          self.cellViewModels = movies.map { movie in
+          self?.cellViewModels = movies.map { movie in
             MovieViewModel (movie: movie)
           }
         }

@@ -46,15 +46,15 @@ class SearchMovieViewModel {
     }
     self.isLoading = true
     let request = SearchMovieRequest(query: searchText)
-    apiService.send(request) { [unowned self ] result in
-      self.isLoading = false
+    apiService.send(request) { [weak self ] result in
       switch result {
       case .failure(let error):
-        self.alertMessage = error.localizedDescription
+        self?.isLoading = false
+        self?.alertMessage = error.localizedDescription
       case .success(let response):
+        self?.isLoading = false
         if let movies = response.results {
-          print(movies)
-          self.cellViewModels = movies.map { movie in
+          self?.cellViewModels = movies.map { movie in
             MovieViewModel(movie: movie)}
         }
         

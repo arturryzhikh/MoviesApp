@@ -28,18 +28,17 @@ protocol APIClient {
 final class Client: APIClient {
   //FIXME: remove force unwrap
   func url(endPoint: String, parameters: [String : String]) -> URL {
+    
     var urlComponents = URLComponents(string: endPoint)
     let queryItems = [URLQueryItem(name: "api_key", value: API.apiKeyStatic)]
     urlComponents?.queryItems = queryItems
     if parameters.isEmpty {
-      let url = urlComponents?.url
-      return url!
+      return urlComponents?.url ?? URL(string: "https://developers.themoviedb.org/3/getting-started/introduction")!
     }
-    let newQueryItems = parameters.map {URLQueryItem(name: $0, value: $1)}
-    urlComponents?.queryItems?.append(contentsOf: newQueryItems)
+    let additionalQueryItems = parameters.map { URLQueryItem(name: $0, value: $1) }
+    urlComponents?.queryItems?.append(contentsOf: additionalQueryItems)
     let url = urlComponents?.url
-    return url!
-    
+    return url ?? URL(string: "https://developers.themoviedb.org/3/getting-started/introduction")!
   }
   //Download Image
   func getImage<T>(_ request: T,

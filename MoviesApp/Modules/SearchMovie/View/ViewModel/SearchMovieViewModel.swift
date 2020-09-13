@@ -11,7 +11,7 @@ import UIKit
 
 class SearchMovieViewModel {
   
-  private let apiService : ApiService
+  private let apiService : APIClient
   private var cellViewModels  = [MovieViewModel]() {
         didSet {
             self.reloadDataClosure?()
@@ -36,26 +36,43 @@ class SearchMovieViewModel {
   var updateLoadingClousure: (()-> Void)?
   var showAlertClosure: (() -> Void)?
   
-  init(apiService: ApiService = ApiService()) {
+  init(apiService: APIClient = Client()) {
     self.apiService = apiService
   }
     
   func searchMovies(searchText: String) {
     self.isLoading = true
-    apiService.searchMovies(query: searchText) { [ weak self ] (movies, error) in
-      self?.isLoading = false
-      if let error = error {
-        print(error.localizedDescription)
-        self?.alertMessage = "Error"
-        
-      } else {
-        if let movies = movies?.results {
-          self?.cellViewModels = movies.map { MovieViewModel(movie: $0) }
+    let request = SearchMovieRequest(query: searchText)
+    apiService.send(request) { [unowned self ] result in
+      self.isLoading = false
+      switch result {
+      case .failure(let error):
+        self.alertMessage = error.localizedDescription
+      case .success(let response):
+        if let movies = response.results {
+          print(movies)
+          self.cellViewModels = movies.map { movie in
+            MovieViewModel(movie: movie)}
         }
+        
       }
-      
     }
-    
+
+//    self.isLoading = true
+//    apiService.searchMovies(query: searchText) { [ weak self ] (movies, error) in
+//      self?.isLoading = false
+//      if let error = error {
+//        print(error.localizedDescription)
+//        self?.alertMessage = "Error"
+//
+//      } else {
+//        if let movies = movies?.results {
+//          self?.cellViewModels = movies.map { MovieViewModel(movie: $0) }
+//        }
+//      }
+//
+//    }
+//
   }
 
     func cellViewModel( for indexPath: IndexPath ) -> MovieViewModel {

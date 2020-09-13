@@ -7,7 +7,7 @@
 //
 import UIKit
 class TrendingViewModel {
-  private let apiService: ApiService
+  private let apiService: APIClient
   
   private var cellViewModels  = [MovieViewModel]() {
         didSet {
@@ -33,7 +33,7 @@ class TrendingViewModel {
   var updateLoadingClousure: (()-> Void)?
   var showAlertClosure: (() -> Void)?
   
-  init(apiService: ApiService = ApiService()) {
+  init(apiService: APIClient = Client()) {
     self.apiService = apiService
     getTrending()
    }
@@ -41,20 +41,19 @@ class TrendingViewModel {
     
   private func getTrending() {
     self.isLoading = true
-    apiService.getTrending() { [ weak self ] (movies, error) in
-      self?.isLoading = false
-      if let error = error {
-        print(error.localizedDescription)
-        self?.alertMessage = "Error"
-        
-      } else {
-        if let movies = movies?.results {
-          self?.cellViewModels = movies.map { MovieViewModel(movie: $0) }
+    apiService.send(TrendingRequest()) { [unowned self] result in
+      self.isLoading = false
+      switch result {
+      case .failure(let error):
+        self.alertMessage = error.localizedDescription
+      case.success(let response):
+        if let movies = response.results {
+          self.cellViewModels = movies.map { movie in
+            MovieViewModel (movie: movie)
+          }
         }
       }
-      
     }
-    
   }
 
     func cellViewModel( for indexPath: IndexPath ) -> MovieViewModel {

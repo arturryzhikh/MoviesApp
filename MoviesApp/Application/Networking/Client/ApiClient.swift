@@ -20,10 +20,27 @@ protocol APIClient {
                            into model: T.Type) -> T?
   
   func getImage<T:APIRequest>(_ request: T, completion: @escaping ResultCallback<T.Response>)
+  
+  func url(endPoint: String, parameters: [String: String]) -> URL
 }
 
 //API Client Class
 final class Client: APIClient {
+  //FIXME: remove force unwrap
+  func url(endPoint: String, parameters: [String : String]) -> URL {
+    var urlComponents = URLComponents(string: endPoint)
+    let queryItems = [URLQueryItem(name: "api_key", value: API.apiKeyStatic)]
+    urlComponents?.queryItems = queryItems
+    if parameters.isEmpty {
+      let url = urlComponents?.url
+      return url!
+    }
+    let newQueryItems = parameters.map {URLQueryItem(name: $0, value: $1)}
+    urlComponents?.queryItems?.append(contentsOf: newQueryItems)
+    let url = urlComponents?.url
+    return url!
+    
+  }
   //Download Image
   func getImage<T>(_ request: T,
                    completion: @escaping ResultCallback<T.Response>) where T : APIRequest {
@@ -48,7 +65,7 @@ final class Client: APIClient {
       _ request: T,
       completion: @escaping ResultCallback<T.Response>) {
  
-    let urlRequest = URLRequest(url: request.url())
+    let urlRequest = URLRequest(url: url(endPoint: request.endPoint, parameters: request.parameters))
     session.dataTask(with: urlRequest , completionHandler: { data, response, error in
       guard
         let httpResponse = response as? HTTPURLResponse,

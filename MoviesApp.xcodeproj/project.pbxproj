@@ -32,6 +32,7 @@
 		75C51A8E246BF868006A0685 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C51A8D246BF868006A0685 /* ApiService.swift */; };
 		75CA955024EABD4B00356F0E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CA954F24EABD4B00356F0E /* Coordinator.swift */; };
 		75CA955224EABEE000356F0E /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CA955124EABEE000356F0E /* AppCoordinator.swift */; };
+		75DE8046250E732B001F60D0 /* SearchMovieRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DE8045250E732B001F60D0 /* SearchMovieRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		75C51A8D246BF868006A0685 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ApiService.swift; path = MoviesApp/ApiService.swift; sourceTree = SOURCE_ROOT; };
 		75CA954F24EABD4B00356F0E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		75CA955124EABEE000356F0E /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		75DE8045250E732B001F60D0 /* SearchMovieRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMovieRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +149,7 @@
 			children = (
 				7568E20F250E55E3001E44D5 /* Request.swift */,
 				7568E213250E562E001E44D5 /* TrendingRequest.swift */,
+				75DE8045250E732B001F60D0 /* SearchMovieRequest.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -357,6 +360,7 @@
 				7568E216250E5656001E44D5 /* ResponseError.swift in Sources */,
 				755D35072471446400FD13E3 /* SearchMovieViewModel.swift in Sources */,
 				75CA955224EABEE000356F0E /* AppCoordinator.swift in Sources */,
+				75DE8046250E732B001F60D0 /* SearchMovieRequest.swift in Sources */,
 				7579823F2452DA460059BFA0 /* SceneDelegate.swift in Sources */,
 				75A4C5242461568100504026 /* SearchMovieCell.swift in Sources */,
 				751924322453329300472CD5 /* TrendingCell.swift in Sources */,

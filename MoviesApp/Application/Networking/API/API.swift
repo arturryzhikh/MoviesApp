@@ -10,6 +10,7 @@
 
 struct API {
   static let apiKeyStatic = "be0534e846d5abd01a6b93c899d51676"
+  static let searchStatic = "https://api.themoviedb.org/3/search/movie"
   let apiKey: String
   private let baseURL = "https://api.themoviedb.org/3"
   private let searchMoviesEndpoint = "/search/movie"

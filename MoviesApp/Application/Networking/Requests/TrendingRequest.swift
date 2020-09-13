@@ -8,34 +8,12 @@
 
 import Foundation
 struct TrendingRequest: APIRequest {
+
+  var parameters: [String : String] = [:]
   typealias Response = Movies
   var endPoint: String {
     return "https://api.themoviedb.org/3/trending/movie/week"
   }
- 
-  func url() -> URL {
-    var urlComponents = URLComponents(string: endPoint)
-    let queryItems = [URLQueryItem(name: "api_key", value: API.apiKeyStatic)]
-    urlComponents?.queryItems = queryItems
-    let url = urlComponents?.url
-    return url!
-  }
- 
 }
 
-extension APIRequest {
-  func url() -> URL {
-    var urlComponents = URLComponents(string: endPoint)
-    let queryItems = [URLQueryItem(name: "api_key", value: API.apiKeyStatic)]
-    urlComponents?.queryItems = queryItems
-    let url = urlComponents?.url
-    return url!
-  }
-}
 
-struct OGm: APIRequest {
-  var endPoint: String
-  typealias Response = Movies
-  
-  
-}

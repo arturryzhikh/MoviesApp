@@ -6,11 +6,12 @@
 //  Copyright © 2020 Artur Ryzhikh. All rights reserved.
 //
 
-import Foundation
+import UIKit
 //Protocols
 typealias ResultCallback<Value> = (Result<Value, Error>) -> Void
 
 protocol APIClient {
+  
   var session: URLSession { get }
   
   func send<T:APIRequest>(_ request: T,
@@ -19,18 +20,18 @@ protocol APIClient {
   func decode<T:Decodable>(data : Data,
                            into model: T.Type) -> T?
   
-  func getImage<T:APIRequest>(_ request: T, completion: @escaping ResultCallback<T.Response>)
   
-  func url(endPoint: String, parameters: [String: String]) -> URL
+  
+  func makeURL(endPoint: String, parameters: [String: String]) -> URL
 }
 
 //API Client Class
 final class Client: APIClient {
+
   //FIXME: remove force unwrap
-  func url(endPoint: String, parameters: [String : String]) -> URL {
-    
+  func makeURL(endPoint: String, parameters: [String : String]) -> URL {
     var urlComponents = URLComponents(string: endPoint)
-    let queryItems = [URLQueryItem(name: "api_key", value: API.apiKeyStatic)]
+    let queryItems = [URLQueryItem(name: "api_key", value: API.apiKey)]
     urlComponents?.queryItems = queryItems
     if parameters.isEmpty {
       return urlComponents?.url ?? URL(string: "https://developers.themoviedb.org/3/getting-started/introduction")!
@@ -40,11 +41,7 @@ final class Client: APIClient {
     let url = urlComponents?.url
     return url ?? URL(string: "https://developers.themoviedb.org/3/getting-started/introduction")!
   }
-  //Download Image
-  func getImage<T>(_ request: T,
-                   completion: @escaping ResultCallback<T.Response>) where T : APIRequest {
-    
-  }
+ 
   //Shared Session
   let session: URLSession
   //Initialization
@@ -64,7 +61,7 @@ final class Client: APIClient {
       _ request: T,
       completion: @escaping ResultCallback<T.Response>) {
  
-    let urlRequest = URLRequest(url: url(endPoint: request.endPoint, parameters: request.parameters))
+    let urlRequest = URLRequest(url: makeURL(endPoint: request.endPoint, parameters: request.parameters))
     session.dataTask(with: urlRequest , completionHandler: { data, response, error in
       guard
         let httpResponse = response as? HTTPURLResponse,

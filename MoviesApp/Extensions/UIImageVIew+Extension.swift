@@ -9,7 +9,7 @@ import UIKit
 extension UIImageView {
   func setImage(from path: String?) {
     guard let path = path else { return  }
-    let apiService = ApiService()
+    let apiService = ImageFetcher.shared
     apiService.fetchImage(from : path) { [ weak self ] (image, error) in
       guard let image = image else {
         return

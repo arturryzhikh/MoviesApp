@@ -31,6 +31,7 @@
 		75B453C12461DA24006AFFC8 /* TrendingMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B453C02461DA24006AFFC8 /* TrendingMovieCell.swift */; };
 		75C4B2D9250E248900156FAC /* HTTPURLResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C4B2D8250E248900156FAC /* HTTPURLResponse.swift */; };
 		75C51A8E246BF868006A0685 /* ImageFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C51A8D246BF868006A0685 /* ImageFetcher.swift */; };
+		75C5248C25137F0100559C72 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C5248B25137F0100559C72 /* Movie.swift */; };
 		75CA955024EABD4B00356F0E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CA954F24EABD4B00356F0E /* Coordinator.swift */; };
 		75CA955224EABEE000356F0E /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CA955124EABEE000356F0E /* AppCoordinator.swift */; };
 		75DE8046250E732B001F60D0 /* SearchMovieRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DE8045250E732B001F60D0 /* SearchMovieRequest.swift */; };
@@ -63,6 +64,7 @@
 		75B453C02461DA24006AFFC8 /* TrendingMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingMovieCell.swift; sourceTree = "<group>"; };
 		75C4B2D8250E248900156FAC /* HTTPURLResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPURLResponse.swift; sourceTree = "<group>"; };
 		75C51A8D246BF868006A0685 /* ImageFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ImageFetcher.swift; path = MoviesApp/Application/Networking/Client/ImageFetcher.swift; sourceTree = SOURCE_ROOT; };
+		75C5248B25137F0100559C72 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		75CA954F24EABD4B00356F0E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		75CA955124EABEE000356F0E /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		75DE8045250E732B001F60D0 /* SearchMovieRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMovieRequest.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				75017A4724700C1D00C51CCE /* MoviesResponse.swift */,
+				75C5248B25137F0100559C72 /* Movie.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -310,7 +313,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1140;
-				LastUpgradeCheck = 1140;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Artur Ryzhikh";
 				TargetAttributes = {
 					757982382452DA460059BFA0 = {
@@ -361,6 +364,7 @@
 				75B453C12461DA24006AFFC8 /* TrendingMovieCell.swift in Sources */,
 				7568E210250E55E3001E44D5 /* APIRequest.swift in Sources */,
 				7524771324F823A400393C93 /* MovieViewModel.swift in Sources */,
+				75C5248C25137F0100559C72 /* Movie.swift in Sources */,
 				7568E216250E5656001E44D5 /* ResponseError.swift in Sources */,
 				755D35072471446400FD13E3 /* SearchMovieViewModel.swift in Sources */,
 				75CA955224EABEE000356F0E /* AppCoordinator.swift in Sources */,
@@ -421,6 +425,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -445,7 +450,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -481,6 +486,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -499,7 +505,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -516,7 +522,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RQ73VT998M;
 				INFOPLIST_FILE = MoviesApp/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -535,7 +541,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RQ73VT998M;
 				INFOPLIST_FILE = MoviesApp/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

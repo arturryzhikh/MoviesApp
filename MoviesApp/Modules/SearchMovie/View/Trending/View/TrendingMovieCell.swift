@@ -15,6 +15,7 @@ class TrendingMovieCell: UICollectionViewCell {
       backdropImageView.setImage(from: viewModel.backdropPath)
     }
    }
+  
   static var reuseID : String {
     return self.description()
   }

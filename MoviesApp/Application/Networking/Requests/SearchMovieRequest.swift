@@ -9,7 +9,6 @@
 import Foundation
 
 struct SearchMovieRequest: APIRequest {
-  
   var parameters: [String : String] = [:]
   var endPoint: String {
     return API.searchEndpoint
@@ -23,6 +22,4 @@ struct SearchMovieRequest: APIRequest {
     parameters["query"] = query
     parameters["page"] =  "\(page)"
   }
-  
-  
 }

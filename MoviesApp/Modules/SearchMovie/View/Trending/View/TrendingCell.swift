@@ -97,6 +97,7 @@ extension TrendingCell: UICollectionViewDelegateFlowLayout {
 extension TrendingCell {
   private func bindViewModel() {
      viewModel.showAlertClosure = { [weak self] in
+      
            DispatchQueue.main.async {
                if let message = self?.viewModel.alertMessage {
                  self?.cellDelegate?.showAlert( message )

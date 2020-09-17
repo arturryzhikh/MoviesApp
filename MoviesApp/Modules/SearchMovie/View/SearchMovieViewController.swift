@@ -30,6 +30,7 @@ class SearchMovieViewController: UICollectionViewController{
 
 //MARK: Subviews
 extension SearchMovieViewController {
+  
  private func setupCollectionView() {
     collectionView.translatesAutoresizingMaskIntoConstraints = false
     NSLayoutConstraint.activate([
@@ -45,8 +46,8 @@ extension SearchMovieViewController {
       .register(SearchMovieCell.self, forCellWithReuseIdentifier: SearchMovieCell.reuseID)
     collectionView.delegate = self
     collectionView.dataSource = self
-    self.automaticallyAdjustsScrollViewInsets = false
-  }
+  
+ }
   private func makeSearchBar() -> UISearchBar {
     let sb = UISearchBar(frame: .zero)
     sb.delegate = self //DELEGATE

@@ -23,10 +23,10 @@ final class ImageFetcher {
    }
   
   func fetchImage(from path: String,
-                  completion : @escaping (_ image: UIImage?, _ error: Error?) -> Void) {
+                  completion : @escaping (_ image: UIImage?, _ error: ResponseError?) -> Void) {
     guard
       let url = URL(string: API.imageEndpoint + path) else {
-        completion(nil,nil)
+        completion(nil,.network)
         return
         
     }
@@ -45,7 +45,7 @@ final class ImageFetcher {
           error == nil,
           let image = UIImage(data: data)
           else {
-            completion(nil, error)
+            completion(nil, .network)
             print("Error downloading image \(String(describing: error))")
             return
             

@@ -12,17 +12,16 @@ struct SearchMovieRequest: APIRequest {
   
   var parameters: [String : String] = [:]
   var endPoint: String {
-    return "https://api.themoviedb.org/3/search/movie"
+    return API.searchEndpoint
   }
   let query: String
   let page: Int
   typealias Response = MoviesResponse
-  
   init(query: String, page: Int = 1) {
     self.query = query
     self.page = page
-    parameters.updateValue(query, forKey: "query")
-    parameters.updateValue("\(page)", forKey: "page")
+    parameters["query"] = query
+    parameters["page"] =  "\(page)"
   }
   
   

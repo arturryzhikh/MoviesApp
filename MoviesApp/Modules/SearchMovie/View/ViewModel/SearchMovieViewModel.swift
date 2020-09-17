@@ -46,7 +46,7 @@ class SearchMovieViewModel {
     }
     self.isLoading = true
     let request = SearchMovieRequest(query: searchText)
-    apiService.send(request) { [weak self ] result in
+    apiService.request(request) { [weak self ] result in
       switch result {
       case .failure(let error):
         self?.isLoading = false

@@ -10,7 +10,6 @@ import Foundation
 
 protocol APIRequest: Encodable {
   associatedtype Response: Decodable
-  
   var endPoint: String { get }
   var parameters: [String : String] { get set }
 

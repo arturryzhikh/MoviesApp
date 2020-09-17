@@ -44,7 +44,7 @@ class TrendingViewModel {
        return
      }
     self.isLoading = true
-    apiService.send(TrendingRequest()) { [weak self] result in
+    apiService.request(TrendingRequest()) { [weak self] result in
       switch result {
       case .failure(let error):
         self?.isLoading = false

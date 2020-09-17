@@ -139,16 +139,18 @@ extension SearchMovieViewController {
     case 0:
       let cell =  collectionView
         .dequeueReusableCell(
-          withReuseIdentifier: TrendingCell.reuseID,for: indexPath) as! TrendingCell
+          withReuseIdentifier: TrendingCell.reuseID,
+          for: indexPath) as! TrendingCell
       
       cell.cellDelegate = self
       return cell
     default:
       let cell = collectionView
         .dequeueReusableCell(
-          withReuseIdentifier: SearchMovieCell.reuseID, for: indexPath) as! SearchMovieCell
-      let cellViewModel = viewModel.cellViewModel(for: indexPath)
+          withReuseIdentifier: SearchMovieCell.reuseID,
+          for: indexPath) as! SearchMovieCell
       
+      let cellViewModel = viewModel.cellViewModel(for: indexPath)
       cell.viewModel = cellViewModel
       return cell
     }
@@ -158,7 +160,6 @@ extension SearchMovieViewController {
   override func collectionView(_ collectionView: UICollectionView,
                                didSelectItemAt indexPath: IndexPath) {
     let searchMovieCellVM = viewModel.cellViewModel(for: indexPath)
-    
     coordinator?.movieDetail(searchMovieCellVM)
   }
   
@@ -188,36 +189,36 @@ extension SearchMovieViewController: CollectionViewCellDelegate {
 
 //MARK: Bind View Model
 extension SearchMovieViewController {
-  //MARK: Naive binding
+  //MARK:  binding
   private func bindViewModel() {
-    viewModel.showAlertClosure = { [weak self] in
+    viewModel.showAlertClosure = { [unowned self] in
           DispatchQueue.main.async {
-              if let message = self?.viewModel.alertMessage {
-                  self?.showAlert( message )
+              if let message = self.viewModel.alertMessage {
+                  self.showAlert( message )
               }
           }
       }
 
-      viewModel.updateLoadingClousure = { [weak self] () in
+      viewModel.updateLoadingClousure = { [unowned self] () in
           DispatchQueue.main.async {
-              let isLoading = self?.viewModel.isLoading ?? false
+              let isLoading = self.viewModel.isLoading
               if isLoading {
-                  self?.activityIndicator.startAnimating()
+                  self.activityIndicator.startAnimating()
                   UIView.animate(withDuration: 0.2, animations: {
-                      self?.collectionView.alpha = 0.0
+                      self.collectionView.alpha = 0.0
                 })
               } else {
-                  self?.activityIndicator.stopAnimating()
+                  self.activityIndicator.stopAnimating()
                   UIView.animate(withDuration: 0.2, animations: {
-                      self?.collectionView.alpha = 1.0
+                      self.collectionView.alpha = 1.0
                   })
               }
           }
       }
       
-      viewModel.reloadDataClosure = { [weak self] () in
+      viewModel.reloadDataClosure = { [unowned self] () in
           DispatchQueue.main.async {
-              self?.collectionView.reloadData()
+              self.collectionView.reloadData()
           }
       }
     

@@ -114,7 +114,7 @@ extension SearchMovieViewController: UICollectionViewDelegateFlowLayout {
  func collectionView(_ collectionView: UICollectionView,
                      layout collectionViewLayout: UICollectionViewLayout,
                      sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: view.frame.width, height: view.frame.height / 6)
+    return CGSize(width: view.frame.width, height: view.frame.height / 7)
   }
   
 }
@@ -130,7 +130,7 @@ extension SearchMovieViewController {
     case 0:
       return 1
     default:
-      return viewModel.numberOfItemsInSection
+      return viewModel.currentCount
     }
   }
  

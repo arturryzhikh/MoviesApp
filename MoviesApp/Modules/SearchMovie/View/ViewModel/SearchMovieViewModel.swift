@@ -16,27 +16,24 @@ class SearchMovieViewModel {
   private var cellViewModels: [MovieViewModel] = [] {
         didSet {
             self.reloadDataClosure?()
-        }
+         }
     }
   var isLoading: Bool = false {
         didSet {
             self.updateLoadingClousure?()
         }
     }
-  var numberOfItemsInSection: Int {
-        return cellViewModels.count
+  var currentCount: Int {
+    return cellViewModels.count
     }
   var alertMessage: String? {
       didSet {
           self.showAlertClosure?()
       }
   }
-    
-
   var reloadDataClosure: (()-> Void)?
   var updateLoadingClousure: (()-> Void)?
   var showAlertClosure: (() -> Void)?
-  
   init(apiService: APIClient = Client()) {
     self.apiService = apiService
   }

@@ -45,8 +45,9 @@ extension SearchMovieViewController {
       .register(TrendingCell.self, forCellWithReuseIdentifier: TrendingCell.reuseID)
     collectionView
       .register(SearchMovieCell.self, forCellWithReuseIdentifier: SearchMovieCell.reuseID)
-    collectionView.delegate = self
-    collectionView.dataSource = self
+  collectionView.delegate = self
+  collectionView.dataSource = self
+  collectionView.prefetchDataSource = self
   
  }
   private func makeSearchBar() -> UISearchBar {
@@ -232,4 +233,12 @@ extension SearchMovieViewController {
       }
     
   }
+}
+//MARK: Prefetch Data Source
+extension SearchMovieViewController: UICollectionViewDataSourcePrefetching {
+  func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+    
+  }
+  
+  
 }

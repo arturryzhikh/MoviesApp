@@ -170,10 +170,13 @@ extension SearchMovieViewController {
 }
 //MARK: UISearchBar Delegate
 extension SearchMovieViewController: UISearchBarDelegate {
+  
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
     self.searchText = searchText
   }
+  
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    searchBar.resignFirstResponder()
     viewModel.searchMovies(searchText: searchText)
   }
   

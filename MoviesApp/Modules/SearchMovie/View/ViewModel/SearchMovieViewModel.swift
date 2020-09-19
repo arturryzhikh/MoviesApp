@@ -31,6 +31,7 @@ class SearchMovieViewModel {
           self.showAlertClosure?()
       }
   }
+  private var currentPage: Int = 1
   var reloadDataClosure: (()-> Void)?
   var updateLoadingClousure: (()-> Void)?
   var showAlertClosure: (() -> Void)?
@@ -43,13 +44,20 @@ class SearchMovieViewModel {
       return
     }
     self.isLoading = true
-    let request = SearchMovieRequest(query: searchText)
+    let request = SearchMovieRequest(query: searchText,page: currentPage)
     apiService.request(request) { [weak self ] result in
       switch result {
       case .failure(let error):
         self?.isLoading = false
         self?.alertMessage = error.localizedDescription
       case .success(let response):
+        print("""
+          Current page : \(String(describing: response.page)) /n
+          Total pages; \(String(describing: response.totalPages)) /n
+          Total results: \(String(describing: response.totalResults)) /n
+          Results count: \(String(describing: response.results?.count))
+          """)
+        self?.currentPage += 1
         self?.isLoading = false
         if let movies = response.results {
           self?.cellViewModels = movies.map { movie in

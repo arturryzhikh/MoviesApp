@@ -9,13 +9,14 @@
 import Foundation
 
 struct SearchMovieRequest: APIRequest {
+  
   var parameters: [String : String] = [:]
   var endPoint: String {
     return API.searchEndpoint
   }
   let query: String
   let page: Int
-  typealias Response = MoviesResponse
+  typealias Response = PaginatedMoviesResponse
   init(query: String, page: Int = 1) {
     self.query = query
     self.page = page

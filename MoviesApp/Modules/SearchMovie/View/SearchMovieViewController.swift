@@ -15,6 +15,7 @@ class SearchMovieViewController: UICollectionViewController{
   private var searchBar: UISearchBar!
   private var viewModel = SearchMovieViewModel()
   private var activityIndicator: UIActivityIndicatorView!
+  private var searchText: String = ""
   //MARK: life cycle
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -169,10 +170,14 @@ extension SearchMovieViewController {
 }
 //MARK: UISearchBar Delegate
 extension SearchMovieViewController: UISearchBarDelegate {
-
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-    viewModel.searchMovies(searchText: searchText + " ")
+    self.searchText = searchText
   }
+  func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    viewModel.searchMovies(searchText: searchText)
+  }
+  
+  
 }
 
 

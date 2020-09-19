@@ -8,10 +8,14 @@
 
 
 
-struct API {
-  static let apiKey = "be0534e846d5abd01a6b93c899d51676"
-  static let searchEndpoint = "https://api.themoviedb.org/3/search/movie"
-  static let imageEndpoint = "https://image.tmdb.org/t/p/w780"
-  static let trendingMovieEndpoint = "https://api.themoviedb.org/3/trending/movie/week"
+enum API {
+  static let
+    apiKey = "be0534e846d5abd01a6b93c899d51676"
+  static let
+    searchEndpoint = "https://api.themoviedb.org/3/search/movie"
+  static let
+    imageEndpoint = "https://image.tmdb.org/t/p/w780"
+  static let
+    trendingMovieEndpoint = "https://api.themoviedb.org/3/trending/movie/week"
 }
 

@@ -12,7 +12,8 @@ import UIKit
 class SearchMovieViewModel {
   
   private let apiService : APIClient
-  private var cellViewModels  = [MovieViewModel]() {
+  
+  private var cellViewModels: [MovieViewModel] = [] {
         didSet {
             self.reloadDataClosure?()
         }

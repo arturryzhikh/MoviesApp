@@ -65,13 +65,13 @@ class SearchMovieCell: UICollectionViewCell {
     return lbl
   }()
   private let overviewLabel: UILabel = {
-    let tv = UILabel()
-    tv.font = UIFont.systemFont(ofSize: 14)
-    tv.textColor = .white
-    tv.numberOfLines = 0
-    tv.lineBreakMode = .byWordWrapping
-    tv.backgroundColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)
-    return tv
+    let lbl = UILabel()
+    lbl.font = UIFont.systemFont(ofSize: 14)
+    lbl.textColor = .white
+    lbl.numberOfLines = 0
+    lbl.lineBreakMode = .byWordWrapping
+    lbl.backgroundColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)
+    return lbl
   }()
   private func setupView() {
     self.backgroundColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)

@@ -14,6 +14,7 @@ struct TrendingRequest: APIRequest {
   var endPoint: String {
     return API.trendingMovieEndpoint
   }
+  
 }
 
 

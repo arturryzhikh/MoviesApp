@@ -8,11 +8,10 @@
 import UIKit
 
 extension UIImageView {
-  
   func setImage(from path: String?) {
-    
-    guard let path = path else { return  }
-    
+    guard let path = path else {
+      return
+    }
     ImageFetcher.shared.fetchImage(from : path) { [ weak self ] (image, error) in
       guard let image = image else {
         return
@@ -21,8 +20,6 @@ extension UIImageView {
         self?.image = image
       }
     }
-    
   }
-
 }
 

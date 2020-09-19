@@ -10,30 +10,20 @@ import UIKit
 
 final class ImageFetcher {
   //properties
-  private let session: URLSession
   static let shared = ImageFetcher()
   private let imageChache = NSCache<NSString,UIImage>()
-  //init with session
-  init(session: URLSession = URLSession.shared) {
-     self.session = session
-     print("NetworkService Initialized")
-   }
-   deinit {
-     print("NetworkService Deinitialized")
-   }
-  
-  //get image
+  private let session = URLSession.shared
+  //get image from path
   func fetchImage(from path: String,
-                  completion : @escaping (_ image: UIImage?, _ error: ResponseError?) -> Void) {
+                  completion : @escaping (_ image: UIImage?,
+                                          _ error: ResponseError?) -> Void) {
     guard
       let url = URL(string: API.imageEndpoint + path) else {
         completion(nil,.network)
         return
-        
     }
     //first try to get from cache
     let imageKey = url.absoluteString as NSString
-   
     if let cachedImage = imageChache.object(forKey: imageKey) {
       print(cachedImage)
       completion(cachedImage,nil)
@@ -49,19 +39,13 @@ final class ImageFetcher {
             completion(nil, .network)
             print("Error downloading image \(String(describing: error))")
             return
-            
         }
         self.imageChache.setObject(image, forKey: imageKey)
         completion(image,nil)
-        
       }
       task.resume()
     }
     
   }
-
-  
- 
-  
 }
 

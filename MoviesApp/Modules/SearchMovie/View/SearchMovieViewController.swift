@@ -49,9 +49,9 @@ extension SearchMovieViewController {
   
  }
   private func makeSearchBar() -> UISearchBar {
+    
     let sb = UISearchBar(frame: .zero)
-    sb.delegate = self //DELEGATE
-    //TODO:- make global color management
+    sb.delegate = self
     sb.barTintColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)
     if #available(iOS 13.0, *) {
       sb.searchTextField.backgroundColor = #colorLiteral(red: 0.0967803864, green: 0.2796525564, blue: 0.4792720376, alpha: 1)

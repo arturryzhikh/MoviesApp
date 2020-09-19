@@ -11,7 +11,6 @@ import Foundation
 final class Client: APIClient {
 
   func makeURL(endPoint: String, parameters: [String : String]) -> URL {
-    
     var urlComponents = URLComponents(string: endPoint)
     let queryItems = [URLQueryItem(name: "api_key", value: API.apiKey)]
     urlComponents?.queryItems = queryItems
@@ -24,7 +23,6 @@ final class Client: APIClient {
     return url ?? URL(string: "https://developers.themoviedb.org/3/getting-started/introduction")!
     
   }
- 
   //Shared Session
   let session: URLSession
   //Initialization
@@ -32,8 +30,8 @@ final class Client: APIClient {
     self.session = session
   }
   //Decoding JSON
-  func decode<T>(data: Data,
-                 into model: T.Type) -> T? where T : Decodable {
+  func decode<T: Decodable>(data: Data,
+                 into model: T.Type) -> T?  {
     let decoder = JSONDecoder()
     decoder.keyDecodingStrategy = .convertFromSnakeCase
     return try? decoder.decode(model.self, from: data)

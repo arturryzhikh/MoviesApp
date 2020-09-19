@@ -73,7 +73,7 @@ class MovieDetailViewController: UIViewController {
     lbl.translatesAutoresizingMaskIntoConstraints = false
     lbl.font = UIFont.systemFont(ofSize: 16)
     lbl.textColor = .white
-    lbl.backgroundColor = .red
+    lbl.backgroundColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)
     return lbl
   }()
   private func setupView() {

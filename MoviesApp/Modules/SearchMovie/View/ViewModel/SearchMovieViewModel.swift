@@ -46,31 +46,42 @@ class SearchMovieViewModel {
     self.isLoading = true
     let request = SearchMovieRequest(query: searchText,page: currentPage)
     apiService.request(request) { [weak self ] result in
+      guard let self = self else {
+        return
+      }
       switch result {
       case .failure(let error):
-        self?.isLoading = false
-        self?.alertMessage = error.localizedDescription
+        self.isLoading = false
+        self.alertMessage = error.localizedDescription
       case .success(let response):
-        print("""
-          Current page : \(String(describing: response.page)) /n
-          Total pages; \(String(describing: response.totalPages)) /n
-          Total results: \(String(describing: response.totalResults)) /n
-          Results count: \(String(describing: response.results?.count))
-          """)
-        self?.currentPage += 1
-        self?.isLoading = false
+        self.currentPage += 1
+        self.isLoading = false
         if let movies = response.results {
-          self?.cellViewModels = movies.map { movie in
-            MovieViewModel(movie: movie)}
-        }
+          let newCellViewModels = movies.map { MovieViewModel(movie: $0) }
+          self.cellViewModels.append(contentsOf: newCellViewModels)
+          print("""
+              Current page : \(String(describing: response.page)) /n
+              Total pages; \(String(describing: response.totalPages)) /n
+              Total results: \(String(describing: response.totalResults)) /n
+              Results count: \(String(describing: response.results?.count)) /n
+              Cell View Models Count: \(String(describing: self.cellViewModels.count))
+              """)
+          let newIndexPaths = self.calculateIndexPathsToReload(from: newCellViewModels)
+          
+          }
         
       }
     }
 
   }
-
+  private func calculateIndexPathsToReload(from newCellViewModels: [MovieViewModel]) -> [IndexPath] {
+    let startIndex = cellViewModels.count - newCellViewModels.count
+    let endIndex = startIndex + newCellViewModels.count
+    return (startIndex..<endIndex).map { IndexPath(row: $0, section: 0) }
+  }
     func cellViewModel( for indexPath: IndexPath ) -> MovieViewModel {
         return cellViewModels[indexPath.row]
   }
     
 }
+

@@ -225,7 +225,7 @@ extension SearchMovieViewController {
           }
       }
       
-      viewModel.reloadDataClosure = { [unowned self] () in
+      viewModel.reloadData = { [unowned self] () in
           DispatchQueue.main.async {
               self.collectionView.reloadData()
           }

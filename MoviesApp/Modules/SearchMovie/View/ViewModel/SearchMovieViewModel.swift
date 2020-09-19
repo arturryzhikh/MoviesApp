@@ -15,7 +15,7 @@ class SearchMovieViewModel {
   
   private var cellViewModels: [MovieViewModel] = [] {
         didSet {
-            self.reloadDataClosure?()
+            self.reloadData?()
          }
     }
   var isLoading: Bool = false {
@@ -31,14 +31,20 @@ class SearchMovieViewModel {
           self.showAlertClosure?()
       }
   }
+  var newIndexPaths: [IndexPath] = [] {
+    didSet {
+      reloadDataOnIndexPaths?(newIndexPaths)
+    }
+  }
   private var currentPage: Int = 1
-  var reloadDataClosure: (()-> Void)?
-  var updateLoadingClousure: (()-> Void)?
+  var reloadData: (()-> Void)?
+  var updateLoadingClousure: (() -> Void)?
   var showAlertClosure: (() -> Void)?
+  var reloadDataOnIndexPaths: (([IndexPath]) -> Void)?
   init(apiService: APIClient = Client()) {
     self.apiService = apiService
   }
-    
+ 
   func searchMovies(searchText: String) {
     guard !isLoading else {
       return
@@ -66,7 +72,10 @@ class SearchMovieViewModel {
               Results count: \(String(describing: response.results?.count)) /n
               Cell View Models Count: \(String(describing: self.cellViewModels.count))
               """)
-          let newIndexPaths = self.calculateIndexPathsToReload(from: newCellViewModels)
+          if self.currentPage > 1 {
+            self.newIndexPaths = self.calculateIndexPathsToReload(from: newCellViewModels)
+            
+          }
           
           }
         
@@ -74,7 +83,7 @@ class SearchMovieViewModel {
     }
 
   }
-  private func calculateIndexPathsToReload(from newCellViewModels: [MovieViewModel]) -> [IndexPath] {
+  private func calculateIndexPathsToReload(from newCellViewModels: [MovieViewModel])  -> [IndexPath] {
     let startIndex = cellViewModels.count - newCellViewModels.count
     let endIndex = startIndex + newCellViewModels.count
     return (startIndex..<endIndex).map { IndexPath(row: $0, section: 0) }

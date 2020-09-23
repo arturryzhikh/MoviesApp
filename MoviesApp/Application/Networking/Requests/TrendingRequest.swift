@@ -10,7 +10,7 @@ import Foundation
 struct TrendingRequest: APIRequest {
 
   var parameters: [String : String] = [:]
-  typealias Response = PaginatedMoviesResponse
+  typealias Response = MoviesResponse
   var endPoint: String {
     return API.trendingMovieEndpoint
   }

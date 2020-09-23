@@ -9,7 +9,7 @@
 import UIKit
 
 //Protocols
-typealias ResultClosure<Value> = (Result<Value, Error>) -> Void
+typealias ResultClosure<Value> = (Result<Value, ResponseError>) -> Void
 
 protocol APIClient {
   

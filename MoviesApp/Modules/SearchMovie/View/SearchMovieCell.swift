@@ -16,17 +16,12 @@ class SearchMovieCell: UICollectionViewCell {
     return self.description()
   }
   //MARK: instance properties
-  
-  var viewModel: MovieViewModel! {
-    didSet {
-      titleLabel.text = viewModel.title
-      yearLabel.text = viewModel.year
-      overviewLabel.text = viewModel.overview
-      posterImageView.setImage(from: viewModel.posterPath)
-      }
-   }
-  
+  var viewModel: MovieViewModel?
   //MARK: Life cycle
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    populate(with: viewModel)
+  }
   override init(frame: CGRect) {
     super.init(frame: frame)
     setupView()
@@ -37,6 +32,12 @@ class SearchMovieCell: UICollectionViewCell {
   }
   
    //MARK:Subviews
+  private let indicatorView: UIActivityIndicatorView = {
+    let v = UIActivityIndicatorView(style: .white)
+    v.hidesWhenStopped = true
+    v.isHidden = false
+    return v
+  }()
   private let posterImageView: UIImageView = {
     let iv = UIImageView()
     iv.contentMode = .scaleAspectFill
@@ -73,19 +74,34 @@ class SearchMovieCell: UICollectionViewCell {
     lbl.backgroundColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)
     return lbl
   }()
+  func populate(with viewModel: MovieViewModel?) {
+    if var viewModel = viewModel {
+      titleLabel.text = viewModel.title
+      yearLabel.text = viewModel.year
+      overviewLabel.text = viewModel.overview
+      posterImageView.setImage(from: viewModel.posterPath)
+      indicatorView.stopAnimating()
+    } else {
+      
+      indicatorView.startAnimating()
+    }
+  }
   private func setupView() {
     self.backgroundColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)
    //add subviews
    self.setSubviewsForAutoLayout(posterImageView,
                                  titleLabel,
                                  yearLabel,
-                                 overviewLabel)
+                                 overviewLabel,indicatorView)
    NSLayoutConstraint.activate([
     //constraint poster image view
      posterImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor,constant: 5),
      posterImageView.topAnchor.constraint(equalTo: self.topAnchor,constant: 5),
      posterImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.2),
      posterImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor,constant:  -5),
+    //inidicator
+    indicatorView.centerXAnchor.constraint(equalTo: posterImageView.centerXAnchor),
+    indicatorView.centerYAnchor.constraint(equalTo: posterImageView.centerYAnchor),
     //constraint title
      titleLabel.topAnchor.constraint(equalTo: self.topAnchor,constant: 5),
      titleLabel.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor,constant: 8),

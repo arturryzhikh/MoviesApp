@@ -7,7 +7,7 @@
 //
 
 
-struct PaginatedMoviesResponse: Decodable {
+struct MoviesResponse: Decodable {
   let results: [Movie]?
   let page: Int?
   let totalResults: Int?

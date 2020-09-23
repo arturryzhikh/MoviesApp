@@ -13,12 +13,12 @@ final class SearchMovieViewController: UICollectionViewController {
  //MARK: Instance properties
   weak var coordinator: AppCoordinator?
   private var searchBar: UISearchBar!
-  private var viewModel : SearchMovieViewModel?
+  private var viewModel : SearchMovieDataSource?
   private var activityIndicator: UIActivityIndicatorView!
   private var searchText: String = "" {
     willSet {
       let request = SearchMovieRequest(query: newValue)
-      viewModel = SearchMovieViewModel(request: request, delegate: self)
+      viewModel = SearchMovieDataSource(request: request, delegate: self)
     }
   }
   //MARK: life cycle
@@ -78,7 +78,7 @@ extension SearchMovieViewController {
       if isLoadingCell(for: indexPath) {
         cell.populate(with: .none)
       } else {
-        let cellVM = viewModel?.movieViewModel(at: indexPath)
+        let cellVM = viewModel?.cellViewModel(at: indexPath)
         cell.populate(with: cellVM)
       }
       return cell
@@ -92,7 +92,7 @@ extension SearchMovieViewController {
   override func collectionView(_ collectionView: UICollectionView,
                                didSelectItemAt indexPath: IndexPath) {
   
-    guard let searchMovieCellVM = viewModel?.movieViewModel(at: indexPath) else {
+    guard let searchMovieCellVM = viewModel?.cellViewModel(at: indexPath) else {
       return
     }
     coordinator?.movieDetail(searchMovieCellVM) 
@@ -107,7 +107,7 @@ extension SearchMovieViewController: UISearchBarDelegate {
   
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
     searchBar.resignFirstResponder()
-    viewModel?.fetchMovies()
+    viewModel?.fetch()
   }
   
 }
@@ -139,7 +139,7 @@ private extension SearchMovieViewController {
 }
 
 
-extension SearchMovieViewController : SearchMovieViewModelDelegate {
+extension SearchMovieViewController : DataSourceDelegate {
   func isFetching() {
     DispatchQueue.main.async {
       self.activityIndicator.isHidden = false
@@ -173,7 +173,7 @@ extension SearchMovieViewController: UICollectionViewDataSourcePrefetching {
       return
     }
     if indexPaths.contains(where: isLoadingCell) {
-        viewModel.fetchMovies()
+        viewModel.fetch()
       }
   }
   

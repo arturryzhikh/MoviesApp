@@ -27,7 +27,13 @@ final class SearchMovieViewModel {
       }
     }
   }
+  var totalCount: Int {
+    return total
+  }
   
+  var currentCount: Int {
+    return movieViewModels.count
+  }
   private let apiService : APIClient
   let request: SearchMovieRequest
   
@@ -38,13 +44,7 @@ final class SearchMovieViewModel {
     self.apiService = apiService
   }
   
-  var totalCount: Int {
-    return total
-  }
-  
-  var currentCount: Int {
-    return movieViewModels.count
-  }
+ 
   
   func movieViewModel(at indexPath: IndexPath) -> MovieViewModel {
     return movieViewModels[indexPath.row]

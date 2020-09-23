@@ -12,7 +12,7 @@ class TrendingMovieCell: UICollectionViewCell {
   
   var viewModel: MovieViewModel! {
     didSet {
-      backdropImageView.setImage(from: viewModel.backdropPath)
+//      backdropImageView.setImage(from: viewModel.backdropPath)
     }
    }
   

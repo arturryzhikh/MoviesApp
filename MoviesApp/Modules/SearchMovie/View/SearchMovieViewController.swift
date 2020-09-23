@@ -106,6 +106,7 @@ extension SearchMovieViewController: UISearchBarDelegate {
     searchBar.resignFirstResponder()
     viewModel?.fetchMovies()
   }
+  
 }
 
 //MARK: CollectionView Cell Delegate
@@ -136,6 +137,14 @@ private extension SearchMovieViewController {
 
 
 extension SearchMovieViewController : SearchMovieViewModelDelegate {
+  func isFetching() {
+    DispatchQueue.main.async {
+      self.activityIndicator.isHidden = false
+      self.activityIndicator.startAnimating()
+    }
+    
+  }
+  
   func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?) {
     guard let newIndexPathsToReload = newIndexPathsToReload else {
       activityIndicator.stopAnimating()

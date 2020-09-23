@@ -20,7 +20,7 @@ class SearchMovieCell: UICollectionViewCell {
   //MARK: Life cycle
   override func prepareForReuse() {
     super.prepareForReuse()
-    populate(with: viewModel)
+    populate(with: .none)
   }
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -38,8 +38,8 @@ class SearchMovieCell: UICollectionViewCell {
     v.isHidden = false
     return v
   }()
-  private let posterImageView: UIImageView = {
-    let iv = UIImageView()
+  private let posterImageView: CustomImageView = {
+    let iv = CustomImageView()
     iv.contentMode = .scaleAspectFill
     iv.backgroundColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)
     iv.clipsToBounds = true
@@ -79,11 +79,9 @@ class SearchMovieCell: UICollectionViewCell {
       titleLabel.text = viewModel.title
       yearLabel.text = viewModel.year
       overviewLabel.text = viewModel.overview
-      posterImageView.setImage(from: viewModel.posterPath)
-      indicatorView.stopAnimating()
-    } else {
-      
-      indicatorView.startAnimating()
+      if let urlString = viewModel.posterURLString {
+        posterImageView.loadImage(urlStr: urlString)
+      }
     }
   }
   private func setupView() {

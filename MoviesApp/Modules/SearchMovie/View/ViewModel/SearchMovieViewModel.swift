@@ -10,6 +10,7 @@ import UIKit
 protocol SearchMovieViewModelDelegate: class {
   func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?)
   func onFetchFailed(with reason: String)
+  func isFetching()
 }
 
 final class SearchMovieViewModel {
@@ -19,7 +20,13 @@ final class SearchMovieViewModel {
   private var movieViewModels : [MovieViewModel] = []
   private var currentPage = 1
   private var total = 0
-  private var isFetching = false
+  private var isFetching = false {
+    didSet {
+      if isFetching {
+        delegate?.isFetching()
+      }
+    }
+  }
   
   private let apiService : APIClient
   let request: SearchMovieRequest

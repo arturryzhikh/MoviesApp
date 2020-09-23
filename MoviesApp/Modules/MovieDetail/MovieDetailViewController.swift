@@ -17,7 +17,7 @@ class MovieDetailViewController: UIViewController {
   
   var movieViewModel: MovieViewModel! {
     didSet {
-      backdropImageView.setImage(from: movieViewModel.backdropPath)
+//      backdropImageView.setImage(from: movieViewModel.backdropPath)
       titleLabel.text = movieViewModel.title
       yearLabel.text = movieViewModel.year
       overviewTextView.text = movieViewModel.overview

@@ -13,7 +13,7 @@ class TrendingMovieCell: UICollectionViewCell {
   var viewModel: MovieViewModel! {
     didSet {
       if let backDropURLString = viewModel.backdropURLString {
-        backdropImageView.loadImage(urlStr: backDropURLString)
+        backdropImageView.loadImage(urlString: backDropURLString)
       }
     }
    }

@@ -48,7 +48,7 @@ class TrendingViewModel {
       switch result {
       case .failure(let error):
         self?.isLoading = false
-        self?.alertMessage = error.localizedDescription
+        self?.alertMessage = error.reason
       case.success(let response):
         self?.isLoading = false
         if let movies = response.results {

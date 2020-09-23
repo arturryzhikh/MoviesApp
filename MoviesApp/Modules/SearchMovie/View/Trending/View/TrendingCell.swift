@@ -9,7 +9,8 @@
 import UIKit
 
 protocol CollectionViewCellDelegate: class {
-  func collectionView(didSelectItemWith viewModel: MovieViewModel)
+  func collectionView(didSelectItemWith
+                        viewModel: MovieViewModel)
   func showAlert(_ message: String)
   }
 

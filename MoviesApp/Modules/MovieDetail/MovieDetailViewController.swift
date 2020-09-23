@@ -20,6 +20,10 @@ final class MovieDetailViewController: UIViewController {
       titleLabel.text = movieViewModel.title
       yearLabel.text = movieViewModel.year
       overviewTextView.text = movieViewModel.overview
+      if let urlString = movieViewModel.backdropURLString {
+        backdropImageView.loadImage(urlString: urlString)
+      }
+      
     }
     
   }
@@ -37,8 +41,8 @@ final class MovieDetailViewController: UIViewController {
     }
     
   //MARK:Subviews
- private let backdropImageView: UIImageView = {
-    let iv = UIImageView()
+ private let backdropImageView: CustomImageView = {
+    let iv = CustomImageView()
     iv.translatesAutoresizingMaskIntoConstraints = false
     iv.contentMode = .scaleAspectFill
     iv.backgroundColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)

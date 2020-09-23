@@ -74,7 +74,7 @@ class SearchMovieCell: UICollectionViewCell {
       yearLabel.text = viewModel.year
       overviewLabel.text = viewModel.overview
       if let urlString = viewModel.posterURLString {
-        posterImageView.loadImage(urlStr: urlString)
+        posterImageView.loadImage(urlString: urlString)
       }
     }
   }

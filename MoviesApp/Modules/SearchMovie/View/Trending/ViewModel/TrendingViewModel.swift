@@ -19,7 +19,7 @@ class TrendingViewModel {
             self.updateLoadingClousure?()
         }
     }
-  var numberOfItemsInSection: Int {
+  var count: Int {
         return cellViewModels.count
     }
   var alertMessage: String? {

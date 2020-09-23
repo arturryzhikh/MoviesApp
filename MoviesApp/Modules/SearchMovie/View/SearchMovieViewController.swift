@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchMovieViewController: UICollectionViewController {
+final class SearchMovieViewController: UICollectionViewController {
  
  //MARK: Instance properties
   weak var coordinator: AppCoordinator?

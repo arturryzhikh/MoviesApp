@@ -10,14 +10,13 @@ import UIKit
 
 
 
-class MovieDetailViewController: UIViewController {
+final class MovieDetailViewController: UIViewController {
   //MARK: instance properties
   
   private var activityIndicator: UIActivityIndicatorView!
   
   var movieViewModel: MovieViewModel! {
     didSet {
-//      backdropImageView.setImage(from: movieViewModel.backdropPath)
       titleLabel.text = movieViewModel.title
       yearLabel.text = movieViewModel.year
       overviewTextView.text = movieViewModel.overview

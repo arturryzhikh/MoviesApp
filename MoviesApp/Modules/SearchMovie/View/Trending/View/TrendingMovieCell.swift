@@ -12,7 +12,9 @@ class TrendingMovieCell: UICollectionViewCell {
   
   var viewModel: MovieViewModel! {
     didSet {
-//      backdropImageView.setImage(from: viewModel.backdropPath)
+      if let backDropURLString = viewModel.backdropURLString {
+        backdropImageView.loadImage(urlStr: backDropURLString)
+      }
     }
    }
   
@@ -28,8 +30,8 @@ class TrendingMovieCell: UICollectionViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   //MARK: Subviews
-  private let backdropImageView: UIImageView = {
-    let iv = UIImageView()
+  private let backdropImageView: CustomImageView = {
+    let iv = CustomImageView()
     iv.contentMode = .scaleAspectFill
     iv.backgroundColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)
     iv.clipsToBounds = true

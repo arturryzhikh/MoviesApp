@@ -32,13 +32,7 @@ class SearchMovieCell: UICollectionViewCell {
   }
   
    //MARK:Subviews
-  private let indicatorView: UIActivityIndicatorView = {
-    let v = UIActivityIndicatorView(style: .white)
-    v.hidesWhenStopped = true
-    v.isHidden = false
-    return v
-  }()
-  private let posterImageView: CustomImageView = {
+ private let posterImageView: CustomImageView = {
     let iv = CustomImageView()
     iv.contentMode = .scaleAspectFill
     iv.backgroundColor = #colorLiteral(red: 0.05098039216, green: 0.1450980392, blue: 0.2470588235, alpha: 1)
@@ -90,17 +84,14 @@ class SearchMovieCell: UICollectionViewCell {
    self.setSubviewsForAutoLayout(posterImageView,
                                  titleLabel,
                                  yearLabel,
-                                 overviewLabel,indicatorView)
+                                 overviewLabel)
    NSLayoutConstraint.activate([
     //constraint poster image view
      posterImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor,constant: 5),
      posterImageView.topAnchor.constraint(equalTo: self.topAnchor,constant: 5),
      posterImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.2),
      posterImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor,constant:  -5),
-    //inidicator
-    indicatorView.centerXAnchor.constraint(equalTo: posterImageView.centerXAnchor),
-    indicatorView.centerYAnchor.constraint(equalTo: posterImageView.centerYAnchor),
-    //constraint title
+  //constraint title
      titleLabel.topAnchor.constraint(equalTo: self.topAnchor,constant: 5),
      titleLabel.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor,constant: 8),
      titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5),

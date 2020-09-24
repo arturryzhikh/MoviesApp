@@ -7,7 +7,7 @@
 //
 import UIKit
 
-
+//FIXME: remove exclamation marks
 let imageCache = NSCache<NSString, UIImage>()
 final class CustomImageView: UIImageView {
     private var imageUrl: String?

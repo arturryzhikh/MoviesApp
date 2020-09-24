@@ -9,8 +9,10 @@
 import Foundation
 
 protocol APIRequest: Encodable {
+  
+  typealias Parameters = [String:String]
   associatedtype Response: Decodable
   var endPoint: String { get }
-  var parameters: [String : String] { get set }
+  var parameters: Parameters { get set }
 
 }

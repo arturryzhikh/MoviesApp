@@ -8,11 +8,13 @@
 
 import Foundation
 protocol DataSourceDelegate: class {
-  func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?)
+  func onFetchCompleted(with indexPathsToReload: [IndexPath]?)
   func onFetchFailed(with reason: String)
   func isFetching()
 }
+
  protocol DataSource {
+  
   associatedtype Request: APIRequest
   var delegate: DataSourceDelegate? { get }
   var apiClient: APIClient { get }
@@ -23,10 +25,18 @@ protocol DataSourceDelegate: class {
   var total: Int { get }
   var totalCount: Int { get }
   var currentCount: Int { get }
+  
+  
   func cellViewModel(at IndexPath: IndexPath) -> MovieViewModel
-  func calculateIndexPathsToReload(from newCellViewModels: [MovieViewModel], section: Int) -> [IndexPath]
+  func calculateIndexPathsToReload(from newCellViewModels: [MovieViewModel],
+                                   section: Int) -> [IndexPath]
   func fetch()
-  init(apiClient: APIClient,request: Request, delegate: DataSourceDelegate)
+  
+  
+  init(apiClient: APIClient,
+       request: Request,
+       delegate: DataSourceDelegate)
 }
+
 
 

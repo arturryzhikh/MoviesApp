@@ -14,21 +14,21 @@ struct MovieViewModel {
   let overview: String?
   private let posterPath: String?
   private let backdropPath: String?
-  var backdropURLString: String? {
+  lazy var backdropURLString: String?  = {
     if let backdropPath = backdropPath {
       return API.imageEndpoint + backdropPath
     } else {
       return nil
     }
-  }
+  }()
   
-  var posterURLString: String? {
+  lazy var posterURLString: String? =  {
     if let posterPath = posterPath {
       return API.imageEndpoint + posterPath
     } else {
       return nil
     }
-  }
+  }()
   
   
   lazy var year: String = {

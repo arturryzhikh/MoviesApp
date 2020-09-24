@@ -21,6 +21,7 @@ protocol APIClient {
   func decode<T:Decodable>(data : Data,
                            into model: T.Type) -> T?
   
-  func makeURL(endPoint: String, parameters: [String: String]) -> URL
+  func makeURL(endPoint: String,
+               parameters: [String: String]) -> URL
 }
 

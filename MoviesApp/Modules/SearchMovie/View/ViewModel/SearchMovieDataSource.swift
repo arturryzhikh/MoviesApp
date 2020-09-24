@@ -27,23 +27,21 @@ final class SearchMovieDataSource: DataSource {
     return cellViewModels[IndexPath.row]
   }
   
-  func calculateIndexPathsToReload(from newCellViewModels: [MovieViewModel]) -> [IndexPath] {
+  func calculateIndexPathsToReload(from newCellViewModels: [MovieViewModel], section: Int) -> [IndexPath] {
     let startIndex = cellViewModels.count - newCellViewModels.count
     let endIndex = startIndex + newCellViewModels.count
-    return (startIndex..<endIndex).map { IndexPath(row: $0, section: 1) }
+    return (startIndex..<endIndex).map { IndexPath(row: $0, section: section) }
   }
   
-  init(apiClient: APIClient = Client(), request: SearchMovieRequest, delegate: DataSourceDelegate) {
+  init(apiClient: APIClient = Client(),
+       request: SearchMovieRequest,
+       delegate: DataSourceDelegate) {
     self.apiClient = apiClient
     self.request = request
     self.delegate = delegate
   }
   
- 
-    
-  
-  
-}
+ }
 
 extension SearchMovieDataSource {
   func fetch() {
@@ -51,7 +49,7 @@ extension SearchMovieDataSource {
         return
       }
       isFetching = true
-    apiClient.request(request) { (result) in
+    apiClient.request(request) { result in
         switch result {
         case .failure(let error):
           DispatchQueue.main.async {
@@ -70,7 +68,7 @@ extension SearchMovieDataSource {
               self.cellViewModels.append(contentsOf: newCellViewModels)
               if let page = response.page,
                  page > 1 {
-                let indexPathsToReload = self.calculateIndexPathsToReload(from: newCellViewModels)
+                let indexPathsToReload = self.calculateIndexPathsToReload(from: newCellViewModels,section:  1)
                 self.delegate?.onFetchCompleted(with: indexPathsToReload)
               } else {
                 self.delegate?.onFetchCompleted(with: .none)

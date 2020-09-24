@@ -24,7 +24,7 @@ protocol DataSourceDelegate: class {
   var totalCount: Int { get }
   var currentCount: Int { get }
   func cellViewModel(at IndexPath: IndexPath) -> MovieViewModel
-  func calculateIndexPathsToReload(from newCellViewModels: [MovieViewModel]) -> [IndexPath]
+  func calculateIndexPathsToReload(from newCellViewModels: [MovieViewModel], section: Int) -> [IndexPath]
   func fetch()
   init(apiClient: APIClient,request: Request, delegate: DataSourceDelegate)
 }

@@ -10,7 +10,8 @@ import Foundation
 
 extension HTTPURLResponse {
   var statusOK: Bool {
-    return (200...299).contains(statusCode)
+    return (200...299)
+        .contains(self.statusCode)
   }
 }
 
